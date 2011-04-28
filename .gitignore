@@ -10,3 +10,4 @@ Debug*
 *.opensdf
 dist
 /selftest/reyoung/PcapConsole/build
+/selftest/reyoung/PcapConsole/nbproject/private
