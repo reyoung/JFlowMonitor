@@ -1,0 +1,10 @@
+bin*
+obj*
+*obj
+*.depend
+*.layout
+Debug*
+*.sdf
+*.suo
+*.user
+*.opensdf
