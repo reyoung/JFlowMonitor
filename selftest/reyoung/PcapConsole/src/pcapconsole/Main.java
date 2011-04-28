@@ -3,6 +3,9 @@
  */
 
 package pcapconsole;
+import java.util.Iterator;
+import java.util.List;
+import org.jnetpcap.*;
 
 /**
  *
@@ -15,7 +18,14 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.print("Hello world\n");
+        List<PcapIf> devList = null;
+        StringBuilder buffer = null;
+        Pcap.findAllDevs(devList, buffer);
+        Iterator<PcapIf> it = devList.iterator();
+        while(it.hasNext()){
+            PcapIf n = it.next();
+            System.out.print(n.getDescription());
+        }
     }
 
 }

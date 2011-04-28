@@ -8,3 +8,5 @@ Debug*
 *.suo
 *.user
 *.opensdf
+dist
+/selftest/reyoung/PcapConsole/build
