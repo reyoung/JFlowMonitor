@@ -5,15 +5,18 @@
  *
  * @author Reyoung
  */
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import org.jnetpcap.*;
 import org.jnetpcap.nio.JBuffer;
+import org.jnetpcap.nio.JBufferInputStream;
+import org.jnetpcap.packet.JPacket;
 import org.jnetpcap.packet.PcapPacket;
 class Tcpdump  {
 
-	public static void main(String[] args){
+	public static void main(String[] args) throws IOException{
             List< PcapIf > devices = new ArrayList<PcapIf>() {};
             StringBuilder buf = new StringBuilder();
             if(Pcap.findAllDevs(devices, buf)!=0){
@@ -23,10 +26,12 @@ class Tcpdump  {
             while(it.hasNext()){
                 System.out.printf("Device %s\n",it.next().getDescription());
             }
-            Pcap cap = Pcap.openLive( devices.listIterator().next().getName(),
-                        65536,
+            it= devices.listIterator();
+            it.next();
+            Pcap cap = Pcap.openLive( it.next().getName(),
+                        1024,
                         Pcap.MODE_PROMISCUOUS,
-                        1000,
+                        1000*30,
                         buf);
             if(cap==null){
                 System.out.printf("Capture Error\n");
@@ -36,7 +41,15 @@ class Tcpdump  {
             JBuffer retv =  cap.next(header, buffer);
             System.out.printf("OK!\n");
             if(retv == null){
-                System.err.printf("No Packet Captured\n");
+                System.err.printf("No Packet Captured\n"); 
+            }else{
+                if(retv instanceof JPacket){
+                    JPacket pack = (JPacket) retv;
+                }else{
+                    JBufferInputStream bin = new JBufferInputStream(retv);
+                    System.out.printf("Packet Size = %d\n", bin.available());
+                    
+                }
             }
 	}
 }
