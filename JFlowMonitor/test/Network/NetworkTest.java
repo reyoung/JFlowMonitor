@@ -5,6 +5,8 @@
 package Network;
 
 import java.io.File;
+import java.net.Inet4Address;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +18,7 @@ import org.jnetpcap.*;
 import org.jnetpcap.nio.JBuffer;
 import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
+import org.jnetpcap.protocol.network.Ip4;
 
 /**
  *
@@ -77,12 +80,14 @@ public class NetworkTest {
     public void testLoop(){
         PcapPacketHandler<String> jpacketHandler = new PcapPacketHandler<String>() {
 			public void nextPacket(PcapPacket packet, String user) {
-				System.out.printf("Received packet at %s caplen=%-4d len=%-4d %s\n",
-				    new Date(packet.getCaptureHeader().timestampInMillis()),
-				    packet.getCaptureHeader().caplen(),  // Length actually captured
-				    packet.getCaptureHeader().wirelen(), // Original length
-				    user                                 // User supplied object
-				    );
+				Ip4 ip = new Ip4();
+                                if(packet.hasHeader(ip,0)){
+                                    int s = ip.sourceToInt();
+                                    int d = ip.destinationToInt();
+                                    
+                                    System.out.printf("SIP = %h DIP = %h IPHeader String = %s\n", s, d,ip.toString());
+                                    // Expect DIP = ca710f02 or ca710f01 , as 202.113.15.1 or 202.113.15.2
+                                }
 			}
 	};
         cap.loop(10, jpacketHandler, "Loop");

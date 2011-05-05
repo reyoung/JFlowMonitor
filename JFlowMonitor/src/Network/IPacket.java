@@ -3,15 +3,20 @@
  */
 
 package Network;
-import java.net.InetSocketAddress;
 import java.util.Date;
 /**
  *
  * @author Reyoung
  */
 public interface IPacket {
-    public InetSocketAddress getSourceAddress();
-    public InetSocketAddress getTargetAddress();
+    
+    public int getSourceAddress();
+    public int getTargetAddress();
+    
+    public int getSourcePort();
+    public int getTargetPort();
+
     public int getPacketLength();
+
     public Date getPacketRecvTime();
 }
