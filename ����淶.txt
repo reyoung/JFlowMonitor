@@ -1,0 +1,72 @@
+所有的代码均应该按照编码规范完成。具体编码规范如下：
+	1、所有的interface名称应该以I开头
+		例：
+		应该像：
+			public interface IServer{
+			}
+		而不应该：
+			public interface AServer{
+			}
+	2、所有的public下的成员函数，应该以小写字母开头，骆驼法命名
+		例：
+		应该像：
+			public interface IServer{
+				public boolean listenTo();
+			}
+		而不应该：
+			public interface IServer{
+				public boolean ListenTo();
+			}
+		或者
+			public interface IServer{
+				public boolean listen_to();
+			}
+	3、所有的private下的变量，应该以m_开头，再以小写字母开头，骆驼法命名
+		例：
+		应该像：
+			private byte[] m_currentDir;
+		而不应该:
+			private byte[] _CurrentDir;
+		或者：
+			private byte[] m_CurrentDir;
+	4、所有的public下的静态函数，应该以大写字母开头，骆驼法命名
+		例：
+		应该像：
+			public static void SayHelloWorld();
+		而不应该：
+			public static void sayHelloWorld();
+		或则：
+			public static void gSayHelloWorld();
+	5、函数的参数应该具有意义，最好以a开头
+		例：
+		应该像：
+			public void setWidth(int aWidth);
+			public void setWidth(int w);
+			public void setWidth(int width);
+		而不应该:
+			public void setWidth(int a);
+			public void setWidth(int b);
+	6、用getXXX表示返回一个属性，用setXXX表示设置一个属性，用isXXX返回boolean属性
+		例：
+		应该像：
+			public int 		getWidth();
+			public void 	setWidth(int aWidth);
+			public boolean 	isHuman();
+			public int width();			//如果有相应的实现也可以，但是必须有get实现
+		而不应该：
+			public int findWidth();
+			public void widthSet(int aWidth);
+			public boolean amAHuman();
+	7、每个人的每个类均要有相应的代码测试程序，用JUnit4.X来写。
+		例：
+			netbeans，在你的类中，按下Ctrl+Shift+U，即可创建测试类
+			所有标记为@Test的方法，均会在测试中执行。
+			在测试用，使用JUnit系列方法，例如assertTrue,assertEquals，可以在测试的时候表现是否成功
+			写完测试类后，按下Alt+F6，可以执行所有测试(包括别人写的)
+		注意：
+			每次Commit的程序，必须可以通过所有测试。
+	7、永远不要使用匈牙利命名法
+		例：
+		不要出现：
+			boolean bFlag;
+			int     iValue;
