@@ -4,12 +4,8 @@
 
 package Network;
 
-import java.io.File;
-import java.net.Inet4Address;
-import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -114,5 +110,11 @@ public class NetworkTest {
 			}
 	};
         cap.loop(10, jpacketHandler, "Loop");
+    }
+
+    @Test
+    public void testNetwork(){
+        INetwork nt = Network.Instance();
+        assertNotSame(nt.deviceCount(), 0);
     }
 }
