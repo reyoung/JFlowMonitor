@@ -4,10 +4,12 @@
 
 package Database;
 
+import Network.IPacket;
+
 /**
  *
  * @author Reyoung
  */
 public interface IDatabaseProxy {
-
+    public void savePacket(IPacket p);
 }

@@ -19,6 +19,8 @@ import org.jnetpcap.nio.JBuffer;
 import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
 import org.jnetpcap.protocol.network.Ip4;
+import org.jnetpcap.protocol.tcpip.Tcp;
+import org.jnetpcap.protocol.tcpip.Udp;
 
 /**
  *
@@ -81,12 +83,33 @@ public class NetworkTest {
         PcapPacketHandler<String> jpacketHandler = new PcapPacketHandler<String>() {
 			public void nextPacket(PcapPacket packet, String user) {
 				Ip4 ip = new Ip4();
+                                long t = packet.getCaptureHeader().timestampInMillis();
+                                Tcp tcp = new Tcp();
+                                Udp udp = new Udp();
+                                int s=0;int d=0;
+                                int sp=0;int tp=0;
+                                int okcount=0;
+                                Date arriveTime = new Date(t);
                                 if(packet.hasHeader(ip,0)){
-                                    int s = ip.sourceToInt();
-                                    int d = ip.destinationToInt();
-                                    
-                                    System.out.printf("SIP = %h DIP = %h IPHeader String = %s\n", s, d,ip.toString());
+                                    s = ip.sourceToInt();
+                                    d = ip.destinationToInt();
+                                    ++okcount;
                                     // Expect DIP = ca710f02 or ca710f01 , as 202.113.15.1 or 202.113.15.2
+                                }
+                                if(packet.hasHeader(tcp)){
+                                    sp = tcp.source();
+                                    tp = tcp.destination();
+                                    ++okcount;
+                                }
+                                if(packet.hasHeader(udp)){
+                                    sp = udp.source();
+                                    tp = udp.destination();
+                                    ++okcount;
+                                }
+                                if(okcount!=2){
+                                    System.out.printf("No Tcp/Ip Capture\n");
+                                }else{
+                                    System.out.printf("SIP %d:%d DIP %d:%d Arrive Time: %s\n", s,sp,d,tp,arriveTime.toString());
                                 }
 			}
 	};
