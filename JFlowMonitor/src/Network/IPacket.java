@@ -17,6 +17,6 @@ public interface IPacket {
     public int getTargetPort();
 
     public int getPacketLength();
-
+    
     public Date getPacketRecvTime();
 }
