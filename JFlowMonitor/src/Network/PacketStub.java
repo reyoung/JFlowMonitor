@@ -4,6 +4,7 @@
 
 package Network;
 
+import Network.IPacket;
 import java.net.InetSocketAddress;
 import java.util.Date;
 
