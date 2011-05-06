@@ -77,8 +77,8 @@ public class DatabaseTest {
      */
     @Test
     public void testCheckDatetoDate() throws Exception {
-        Date from = new Date(211,4,5);
-        Date to = new Date(211,4,7);
+        Date from = new Date(111,5,5);
+        Date to = new Date(111,5,7);
         Database instance = new Database();
         List result = instance.checkDatetoDate(from, to);
         assertNotNull(result);
@@ -90,11 +90,40 @@ public class DatabaseTest {
      */
     @Test
     public void testCheckDate() throws Exception {
-        Date cdata = new Date(211,4,6);;
+        Date cdata = new Date(111,5,6);;
         Database instance = new Database();
-        List result = instance.CheckDate(cdata);
+        List result = instance.checkDate(cdata);
         assertNotNull(result);
         instance.Closedb();
+    }
+
+    /**
+     * Test of checkFlowDtD method, of class Database.
+     */
+    @Test
+    public void testCheckFlowDtD() throws Exception {
+        Date from = new Date(111,5,4);
+        Date to = new Date(111,5,5);
+        Database instance = new Database();
+        List result = instance.checkFlowDtD(from, to);
+        assertEquals(2, result.size());
+    }
+
+    /**
+     * Test of checkFlow method, of class Database.
+     */
+    @Test
+    public void testCheckFlow() throws Exception {
+        Date cdate = new Date(111,5,5);
+        Database instance = new Database();
+        SimpleDate expResult = new SimpleDate();
+        expResult.sDate = cdate;
+        expResult.innerSize = 200000;
+        expResult.outerSize = 10000;
+        SimpleDate result = instance.checkFlow(cdate);
+        assertEquals(expResult.sDate, result.sDate);
+        assertEquals(expResult.innerSize, result.innerSize);
+        assertEquals(expResult.outerSize, result.outerSize);
     }
 
 }

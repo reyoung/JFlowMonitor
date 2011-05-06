@@ -137,4 +137,33 @@ public class Database implements IDatabaseProxy{
         conn.close();
     }
     private static Connection conn;
+
+    public List<SimpleDate> checkFlowDtD(Date from, Date to) throws SQLException
+    {
+        List<SimpleDate> sDate = new ArrayList<SimpleDate>();
+        Statement stat = conn.createStatement();
+        int fromYear = from.getYear()+1900;
+        int fromMonth = from.getMonth();
+        int fromDay = from.getDate();
+        String fromD = "'"+Integer.toString(fromYear) + "-"+Integer.toString(fromMonth) +"-"+Integer.toString(fromDay)+"'";
+        int toYear = to.getYear()+1900;
+        int toMonth = to.getMonth();
+        int toDay = to.getDate();
+        String toD = "'"+Integer.toString(toYear) + "-"+Integer.toString(toMonth) +"-"+Integer.toString(toDay)+"'";
+        String sqlQuery = "select * from Simple where PDate >= " +fromD + " and PDate <= " + toD;
+        ResultSet rs = stat.executeQuery(sqlQuery);
+        while(rs.next())
+        {
+            SimpleDate sp = new SimpleDate();
+            
+            sp.outerSize = rs.getInt(2);
+            sp.innerSize = rs.getInt(3);
+            sDate.add(sp);
+        }
+        return sDate;
+    }
+
+    public SimpleDate checkFlow(Date cdate) throws SQLException {
+        return checkFlowDtD(cdate, cdate).get(0);
+    }
 }
