@@ -25,7 +25,7 @@ public class PacketStub implements IPacket {
         return 0xde1e19a9;
     }
 
-    public int getTargetAddress() {
+    public int getDestAddress() {
         return 0xca710f02;
     }
 
@@ -33,8 +33,12 @@ public class PacketStub implements IPacket {
         return 3149;
     }
 
-    public int getTargetPort() {
+    public int getDestPort() {
         return 23;
+    }
+
+    public boolean isUpload() {
+        return false;
     }
 
 }

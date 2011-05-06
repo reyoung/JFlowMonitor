@@ -11,12 +11,15 @@ import java.util.Date;
 public interface IPacket {
     
     public int getSourceAddress();
-    public int getTargetAddress();
+    public int getDestAddress();
     
     public int getSourcePort();
-    public int getTargetPort();
+    public int getDestPort();
 
     public int getPacketLength();
     
     public Date getPacketRecvTime();
+
+    public boolean isUpload();
+    
 }
