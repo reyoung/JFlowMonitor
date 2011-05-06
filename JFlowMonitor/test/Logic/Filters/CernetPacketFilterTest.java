@@ -45,15 +45,15 @@ public class CernetPacketFilterTest {
      */
     @Test
     public void testCheck() {
-//        System.out.println("check");
-//        IPacket packet = new PacketStub();
-//        ICernetReader cernetReader = new CernetReaderStub();
-//        CernetPacketFilter instance = new CernetPacketFilter();
-//        boolean expResult = false;
-//        boolean result = instance.check(packet, cernetReader);
-//        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("check");
+        IPacket packet = new PacketStub();
+        CernetPacketFilter.Initialize("filename");
+        IPacketFilter instance =CernetPacketFilter.Instance();
+        boolean expResult = false;
+        boolean result = instance.check(packet);
+        assertEquals(expResult, result);
+         //TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
     }
 
 }
