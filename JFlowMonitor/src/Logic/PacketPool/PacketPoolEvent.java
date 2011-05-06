@@ -4,8 +4,11 @@
 
 package Logic.PacketPool;
 
+import Logic.Filters.CernetPacketFilter;
+import Logic.Filters.IPacketFilter;
 import Network.IPacket;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  *
@@ -44,7 +47,11 @@ public class PacketPoolEvent implements IPacketPoolEvent {
     }
 
     private void process(){
-        
+        ListIterator<IPacket > it = m_packets.listIterator();
+        while(it.hasNext()){
+            IPacket p = it.next();
+            IPacketFilter cernet = CernetPacketFilter.Instance();
+        }
     }
     
     private List<IPacket> m_packets;
