@@ -2,7 +2,7 @@
  * This file is written by reyoung, reyoung@126.com.
  */
 
-package Logic;
+package Logic.Filters;
 import Network.IPacket;
 /**
  *

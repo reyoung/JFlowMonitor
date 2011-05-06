@@ -11,8 +11,10 @@ import java.util.Date;
  */
 public interface IPacket {
 
-    final static int PacketFlag_TCP = 0;
-    final static int PacketFlag_UDP = 1;
+    final static int PacketFlag_TCP = 1;
+    final static int PacketFlag_UDP = 2;
+    final static int PacketFlag_HTTP = 4;
+    final static int PacketFlag_Ethernet = 8;
 
     public int getPacketFlag();
 

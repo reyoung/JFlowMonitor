@@ -12,7 +12,9 @@ import org.jnetpcap.PcapIf;
 import org.jnetpcap.PcapSockAddr;
 import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
+import org.jnetpcap.protocol.lan.Ethernet;
 import org.jnetpcap.protocol.network.Ip4;
+import org.jnetpcap.protocol.tcpip.Http;
 import org.jnetpcap.protocol.tcpip.Tcp;
 import org.jnetpcap.protocol.tcpip.Udp;
 
@@ -69,6 +71,13 @@ public class ListenThread extends Thread {
                     flag |= IPacket.PacketFlag_UDP;
                     ++okcount;
                 }
+                if (packet.hasHeader(Http.ID)){
+                    flag|=IPacket.PacketFlag_HTTP;
+                }
+                if (packet.hasHeader(Ethernet.ID)){
+                    flag|=IPacket.PacketFlag_Ethernet;
+                }
+
                 if (okcount != 2) {
 //                    System.out.printf("No Tcp/Ip Capture\n");
                 } else {

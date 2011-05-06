@@ -3,8 +3,11 @@
  * and open the template in the editor.
  */
 
-package Logic;
+package Logic.Filters;
 
+import Logic.Filters.CernetPacketFilter;
+import Logic.Filters.ICernetReader;
+import Logic.Filters.CernetReaderStub;
 import Network.IPacket;
 import Network.PacketStub;
 import org.junit.After;
