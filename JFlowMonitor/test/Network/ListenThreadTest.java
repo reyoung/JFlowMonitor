@@ -29,8 +29,8 @@ public class ListenThreadTest {
     @Test
     public void testSomeMethod() throws InterruptedException {
         INetwork nw = Network.Instance();
+        nw.addPacketListener(new PacketListenerStub());
         nw.startListenThreads();
-        
 //        nw.joinAllListenThreads();
     }
 

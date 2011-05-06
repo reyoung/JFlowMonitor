@@ -39,5 +39,5 @@ public class PacketStub extends AbstractPacket {
     public boolean isUpload() {
         return false;
     }
-
+    
 }

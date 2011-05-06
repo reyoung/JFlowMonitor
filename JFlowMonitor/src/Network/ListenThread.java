@@ -67,7 +67,7 @@ public class ListenThread extends Thread {
                     ++okcount;
                 }
                 if (okcount != 2) {
-                    System.out.printf("No Tcp/Ip Capture\n");
+//                    System.out.printf("No Tcp/Ip Capture\n");
                 } else {
                     Packet p = new Packet();
                     p.DIP = d;
