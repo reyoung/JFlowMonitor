@@ -12,7 +12,11 @@ import java.util.List;
  *
  * @author YQ
  */
-public class CernetReaderStub implements ICernetReader{
+public class CernetReader {
+    private String m_fileName =null;
+    public CernetReader(String fileName){
+        this.m_fileName=fileName;
+    }
     public List<CernetAttribute<String, String>> getCernetAttribute(){
         List<CernetAttribute<String, String>> retv =new ArrayList<CernetAttribute<String, String>>();
         CernetAttribute<String, String> ca=new CernetAttribute<String, String>();
