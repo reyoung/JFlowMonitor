@@ -2,9 +2,8 @@
  * This file is written by reyoung, reyoung@126.com.
  */
 
-package Network;
+package Logic.Filters;
 
-import java.util.Date;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,14 +13,13 @@ import static org.junit.Assert.*;
  *
  * @author Reyoung
  */
-public class ListenThreadTest {
+public class HttpFilterTest {
 
-    public ListenThreadTest() {
+    public HttpFilterTest() {
     }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        
     }
 
     @AfterClass
@@ -29,11 +27,8 @@ public class ListenThreadTest {
     }
 
     @Test
-    public void testSomeMethod() throws InterruptedException {
-//        INetwork nw = Network.Instance();
-//        nw.addPacketListener(new PacketListenerStub());
-//        nw.startListenThreads();
-//        nw.joinAllListenThreads();
+    public void testSomeMethod() {
+        System.out.printf("Class Name = %s\n", HttpFilter.class.getSimpleName());
     }
 
 }

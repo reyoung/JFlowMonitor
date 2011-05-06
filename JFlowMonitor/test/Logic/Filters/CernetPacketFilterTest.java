@@ -3,8 +3,11 @@
  * and open the template in the editor.
  */
 
-package Logic;
+package Logic.Filters;
 
+import Logic.Filters.CernetPacketFilter;
+import Logic.Filters.ICernetReader;
+import Logic.Filters.CernetReaderStub;
 import Network.IPacket;
 import Network.PacketStub;
 import org.junit.After;
@@ -44,15 +47,15 @@ public class CernetPacketFilterTest {
      */
     @Test
     public void testCheck() {
-        System.out.println("check");
-        IPacket packet = new PacketStub();
-        ICernetReader cernetReader = new CernetReaderStub();
-        CernetPacketFilter instance = new CernetPacketFilter();
-        boolean expResult = false;
-        boolean result = instance.check(packet, cernetReader);
-        assertEquals(expResult, result);
+//        System.out.println("check");
+//        IPacket packet = new PacketStub();
+//        ICernetReader cernetReader = new CernetReaderStub();
+//        CernetPacketFilter instance = new CernetPacketFilter();
+//        boolean expResult = false;
+//        boolean result = instance.check(packet, cernetReader);
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        fail("The test case is a prototype.");
     }
 
 }

@@ -3,8 +3,9 @@
  * and open the template in the editor.
  */
 
-package Logic;
+package Logic.Filters;
 
+import Logic.Filters.AbstractPacketFilter;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logic;
+package Logic.Filters;
 
 import Network.*;
 import java.util.List;
@@ -12,7 +12,16 @@ import java.util.List;
  * @author YQ
  */
 public class CernetPacketFilter extends AbstractPacketFilter {
-
+    private CernetPacketFilter(){
+        
+    }
+    private static CernetPacketFilter instance = null;
+    public static IPacketFilter Instance(){
+        if(instance == null){
+            instance = new CernetPacketFilter();
+        }
+        return instance;
+    }
     public boolean check(IPacket packet, ICernetReader cernetReader) {
         boolean isInCernet = false;
         int targetAddress = packet.getDestAddress();
@@ -29,5 +38,12 @@ public class CernetPacketFilter extends AbstractPacketFilter {
             }
         }
         return isInCernet;
+    }
+
+    public boolean check(IPacket packet) {
+        if(((int)System.currentTimeMillis()&1)==0)
+            return true;
+        else
+            return false;
     }
 }
