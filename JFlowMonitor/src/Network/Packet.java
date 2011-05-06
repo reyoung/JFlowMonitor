@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author Reyoung
  */
-public class Packet implements IPacket{
+public class Packet extends AbstractPacket{
     public int SIP;
     public int DIP;
     public int SPort;
@@ -49,14 +49,6 @@ public class Packet implements IPacket{
 
     public boolean isUpload() {
         return IsUpdate;
-    }
-
-    public String getSourceAddressString() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public String getDestAddressString() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

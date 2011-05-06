@@ -10,8 +10,7 @@ import java.util.Date;
  *
  * @author Reyoung
  */
-public class PacketStub implements IPacket {
-
+public class PacketStub extends AbstractPacket {
 
     public int getPacketLength() {
         return 1284;
@@ -39,14 +38,6 @@ public class PacketStub implements IPacket {
 
     public boolean isUpload() {
         return false;
-    }
-
-    public String getSourceAddressString() {
-        return "222.30.25.169";
-    }
-
-    public String getDestAddressString() {
-        return "222.30.25.169";
     }
 
 }
