@@ -11,14 +11,19 @@ package Network;
 public class PacketListenerStub implements IPacketListener{
 
     public void onPacketRecv(IPacket p) {
-        System.out.printf("%s: Recv %d bytes From %s:%d To %s:%d\n",
-                p.getPacketRecvTime().toString(),
-                p.getPacketLength(),
-                p.getSourceAddressString(),
-                p.getSourcePort(),
-                p.getDestAddressString(),
-                p.getDestPort()
-                );
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("m_packets.add(CreatePacket(new Date(");
+        sb.append("System.currentTimeMillis()");
+        sb.append("),");
+        sb.append(p.getSourceAddress()).append(',');
+        sb.append(p.getSourcePort()).append(',');
+        sb.append(p.getDestAddress()).append(',');
+        sb.append(p.getDestPort()).append(',');
+        sb.append(p.getPacketFlag()).append(',');
+        sb.append(p.getPacketLength()).append(',');
+        sb.append(p.isUpload()).append("));\n");
+        System.out.print(sb.toString());
     }
     
 }

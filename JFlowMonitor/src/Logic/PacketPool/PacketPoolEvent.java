@@ -16,6 +16,7 @@ public class PacketPoolEvent implements IPacketPoolEvent {
     public PacketPoolEvent(List<IPacket > packet,int interval) {
         this.m_packets = packet;
         this.m_interval = interval;
+        process();
     }
 
     public int getCurrentInnerUploadSpeed() {
@@ -39,7 +40,11 @@ public class PacketPoolEvent implements IPacketPoolEvent {
     }
 
     public long getIntervalTime() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.m_interval;
+    }
+
+    private void process(){
+        
     }
     
     private List<IPacket> m_packets;
