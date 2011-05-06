@@ -18,6 +18,7 @@ public class Packet extends AbstractPacket{
     public Date RecvTime;
     public boolean IsUpdate;
     public int PackLen;
+    public int PacketFlag;
     public Packet(){
         RecvTime = null;
     }
@@ -49,6 +50,10 @@ public class Packet extends AbstractPacket{
 
     public boolean isUpload() {
         return IsUpdate;
+    }
+
+    public int getPacketFlag() {
+        return PacketFlag;
     }
 
 }

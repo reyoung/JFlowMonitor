@@ -49,6 +49,7 @@ public class ListenThread extends Thread {
                 int sp = 0;
                 int tp = 0;
                 int okcount = 0;
+                int flag = 0;
                 Date arriveTime = new Date(t);
                 if (packet.hasHeader(ip, 0)) {
                     s = ip.sourceToInt();
@@ -59,11 +60,13 @@ public class ListenThread extends Thread {
                 if (packet.hasHeader(tcp)) {
                     sp = tcp.source();
                     tp = tcp.destination();
+                    flag |= IPacket.PacketFlag_TCP;
                     ++okcount;
                 }
                 if (packet.hasHeader(udp)) {
                     sp = udp.source();
                     tp = udp.destination();
+                    flag |= IPacket.PacketFlag_UDP;
                     ++okcount;
                 }
                 if (okcount != 2) {
@@ -77,6 +80,7 @@ public class ListenThread extends Thread {
                     p.PackLen = packet.getCaptureHeader().caplen();
                     p.RecvTime = arriveTime;
                     p.IsUpdate = (GetDeviceIpInt(m_dev)==s);
+                    p.PacketFlag = flag;
                     synchronized(ListenThread.this){
                          List<IPacketListener> listeners = m_network.getPacketListeners();
                          ListIterator<IPacketListener> it = listeners.listIterator();
