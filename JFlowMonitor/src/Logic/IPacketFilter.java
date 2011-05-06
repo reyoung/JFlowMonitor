@@ -9,5 +9,5 @@ import Network.IPacket;
  * @author Reyoung
  */
 public interface IPacketFilter {
-    public boolean check(IPacket packet);
+    public boolean check(IPacket packet,ICernetReader cernetAddressReader);
 }

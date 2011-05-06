@@ -28,8 +28,10 @@ public class ListenThreadTest {
 
     @Test
     public void testSomeMethod() throws InterruptedException {
-        ListenThread th = new ListenThread(Network.Instance().getDeviceAt(0), Network.Instance());
-        th.start();
+        INetwork nw = Network.Instance();
+        nw.addPacketListener(new PacketListenerStub());
+        nw.startListenThreads();
+//        nw.joinAllListenThreads();
     }
 
 }
