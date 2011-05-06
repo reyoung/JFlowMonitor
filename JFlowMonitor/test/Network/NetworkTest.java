@@ -56,26 +56,26 @@ public class NetworkTest {
         assertNotNull(cap);
         System.out.printf("Capture Device Open Test Complete\n");
 
-//        cap = Pcap.openOffline("capture/cap.pcap", errorbuffer);
-//        assertNotNull(cap);
+        cap = Pcap.openOffline("../capture/cap.pcap", errorbuffer);
+        assertNotNull(cap);
     }
 
     @AfterClass
     public static void tearDownClass() throws Exception {
     }
 
-    @Test
-    public void testNext() {
-        System.out.printf("Capture Cap Packet---------------\n");
-        PcapHeader header = new PcapHeader();
-        JBuffer buffer = new JBuffer(JBuffer.Type.POINTER);
-        JBuffer retv =  cap.next(header, buffer);
-        assertNotNull(retv);
-        System.out.printf("Cap Length = %d\n",header.caplen());
-        PcapPacket pack = new PcapPacket(header, retv);
-        System.out.printf("Packet Header Count = %d\n",pack.getHeaderCount());
-        System.out.printf("Capture Cap Packet Complete------\n");
-    }
+//    @Test
+//    public void testNext() {
+//        System.out.printf("Capture Cap Packet---------------\n");
+//        PcapHeader header = new PcapHeader();
+//        JBuffer buffer = new JBuffer(JBuffer.Type.POINTER);
+//        JBuffer retv =  cap.next(header, buffer);
+//        assertNotNull(retv);
+//        System.out.printf("Cap Length = %d\n",header.caplen());
+//        PcapPacket pack = new PcapPacket(header, retv);
+//        System.out.printf("Packet Header Count = %d\n",pack.getHeaderCount());
+//        System.out.printf("Capture Cap Packet Complete------\n");
+//    }
     @Test
     public void testLoop(){
         PcapPacketHandler<String> jpacketHandler = new PcapPacketHandler<String>() {

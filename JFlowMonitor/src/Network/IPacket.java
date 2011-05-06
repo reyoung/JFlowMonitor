@@ -11,6 +11,11 @@ import java.util.Date;
  */
 public interface IPacket {
 
+    final static int PacketFlag_TCP = 0;
+    final static int PacketFlag_UDP = 1;
+
+    public int getPacketFlag();
+
     /**
      * 返回包的源地址
      * @return  IPv4地址，int型
