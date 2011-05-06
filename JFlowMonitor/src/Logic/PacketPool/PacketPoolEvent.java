@@ -18,12 +18,12 @@ public class PacketPoolEvent implements IPacketPoolEvent {
 
     public PacketPoolEvent(List<IPacket > packet,int interval) {
         this.m_packets = packet;
-        this.m_interval = interval;
+        this.m_interval = (double)(interval)/1000.0f;
         process();
     }
 
 
-    public long getIntervalTime() {
+    public double getIntervalTime() {
         return this.m_interval;
     }
 
@@ -48,7 +48,7 @@ public class PacketPoolEvent implements IPacketPoolEvent {
     }
     
     private List<IPacket> m_packets;
-    private int           m_interval;
+    private double           m_interval;
     private int           m_IU;
     private int           m_ID;
     private int           m_OU;
