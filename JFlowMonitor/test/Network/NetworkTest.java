@@ -6,6 +6,8 @@ package Network;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.ListIterator;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -116,5 +118,7 @@ public class NetworkTest {
     public void testNetwork(){
         INetwork nt = Network.Instance();
         assertNotSame(nt.deviceCount(), 0);
+        PcapIf dev = nt.getDeviceAt(0);
     }
+
 }

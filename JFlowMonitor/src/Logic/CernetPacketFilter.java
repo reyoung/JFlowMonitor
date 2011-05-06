@@ -15,7 +15,7 @@ public class CernetPacketFilter extends AbstractPacketFilter {
 
     public boolean check(IPacket packet, ICernetReader cernetReader) {
         boolean isInCernet = false;
-        int targetAddress = packet.getTargetAddress();
+        int targetAddress = packet.getDestAddress();
         int cernetAddress = 0;
         int cernerMask = 0;
         List<CernetAttribute<String, String>> cernetDataList = cernetReader.getCernetAttribute();

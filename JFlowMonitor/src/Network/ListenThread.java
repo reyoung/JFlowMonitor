@@ -4,8 +4,12 @@
 package Network;
 
 import java.util.Date;
+import java.util.List;
+import java.util.ListIterator;
 import org.jnetpcap.Pcap;
+import org.jnetpcap.PcapAddr;
 import org.jnetpcap.PcapIf;
+import org.jnetpcap.PcapSockAddr;
 import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
 import org.jnetpcap.protocol.network.Ip4;
@@ -63,13 +67,53 @@ public class ListenThread extends Thread {
                     ++okcount;
                 }
                 if (okcount != 2) {
-                    System.out.printf("No Tcp/Ip Capture\n");
+//                    System.out.printf("No Tcp/Ip Capture\n");
                 } else {
-                    System.out.printf("SIP %d:%d DIP %d:%d Arrive Time: %s\n", s, sp, d, tp, arriveTime.toString());
+                    Packet p = new Packet();
+                    p.DIP = d;
+                    p.SIP = s;
+                    p.DPort = tp;
+                    p.SPort = sp;
+                    p.PackLen = packet.getCaptureHeader().caplen();
+                    p.RecvTime = arriveTime;
+                    p.IsUpdate = (GetDeviceIpInt(m_dev)==s);
+                    synchronized(ListenThread.this){
+                         List<IPacketListener> listeners = m_network.getPacketListeners();
+                         ListIterator<IPacketListener> it = listeners.listIterator();
+                         while(it.hasNext()){
+                             it.next().onPacketRecv(p);
+                         }
+                    }
                 }
             }
         };
-        cap.loop(10, jpacketHandler, m_dev.getDescription());
+        while(true){
+            cap.loop(10, jpacketHandler, m_dev.getDescription());
+        }
+    }
+
+    static private int GetDeviceIpInt(PcapIf dev) {
+        List<PcapAddr> addrs = dev.getAddresses();
+        ListIterator<PcapAddr> it = addrs.listIterator();
+        PcapAddr ipv4 = null;
+        while (it.hasNext()) {
+            PcapAddr temp = it.next();
+            if (temp.getAddr().getFamily() == PcapSockAddr.AF_INET) {
+                ipv4 = temp;
+            }
+        }
+        if (ipv4 == null) {
+            return -1;
+        } else {
+            byte[] ipv4byte = ipv4.getAddr().getData();
+            assert (ipv4byte.length == 4);
+            int retv = 0;
+            retv = ((ipv4byte[0] << 24) & 0xff000000)
+                    | ((ipv4byte[1] << 16) & 0x00ff0000)
+                    | ((ipv4byte[2] << 8) & 0x0000ff00)
+                    | (ipv4byte[3] & 0x000000ff);
+            return retv;
+        }
     }
     private PcapIf m_dev;
     private INetwork m_network;

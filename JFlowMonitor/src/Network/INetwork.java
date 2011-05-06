@@ -36,4 +36,14 @@ public interface INetwork {
      * @return
      */
     public List<IPacketListener> getPacketListeners();
+
+    /**
+     * 开始所有的监听进程。每个网卡独立一个监听进程。
+     */
+    public void startListenThreads();
+
+    /**
+     * 
+     */
+    public void joinAllListenThreads();
 }
