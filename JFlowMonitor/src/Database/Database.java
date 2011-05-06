@@ -33,52 +33,37 @@ public class Database implements IDatabaseProxy{
     }
     public void savePacket(IPacket[] p)
     {
-        if(p.length != 10)return;
         try {
             Statement stat = conn.createStatement();
-            Date[] rdate = new Date[10];
-            int[] sip = new int[10];
-            int[] dip = new int[10];
-            int[] sport = new int[10];
-            int[] dport = new int[10];
-            int[] size = new int[10];
-            int[] flag = new int[10];
-            boolean[] UpOrDown = new boolean[10];
-            String[] insertSql = new String[10];
-            for(int i=0 ; i<10 ; ++i)
+            for(int i=0 ; i<p.length ; ++i)
             {
-                rdate[i] = p[i].getPacketRecvTime();
-                /*try {
-                    Thread.sleep(10);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-                }*/
-                sip[i] = p[i].getSourceAddress();
-                dip[i] = p[i].getDestAddress();
-                sport[i] = p[i].getSourcePort();
-                dport[i] = p[i].getDestPort();
-                size[i] = p[i].getPacketLength();
-                flag[i] = p[i].getPacketFlag();
-                UpOrDown[i] = p[i].isUpload();
-                insertSql[i] = "insert into Detail values(";
-                insertSql[i] += Long.toString(rdate[i].getTime());
-                insertSql[i] += ",";
-                insertSql[i] += Integer.toString(sip[i]);
-                insertSql[i] += ",";
-                insertSql[i] += Integer.toString(dip[i]);
-                insertSql[i] += ",";
-                insertSql[i] += Integer.toString(sport[i]);
-                insertSql[i] += ",";
-                insertSql[i] += Integer.toString(dport[i]);
-                insertSql[i] += ",";
-                insertSql[i] += Integer.toString(size[i]);
-                insertSql[i] += ",";
-                int t = ((UpOrDown[i]) ? 1 : 0);
-                insertSql[i] += Integer.toString(t);
-                insertSql[i] += ",";
-                insertSql[i] += Integer.toString(flag[i]);
-                insertSql[i] += ")";
-                stat.addBatch(insertSql[i]);
+                Date rdate= p[i].getPacketRecvTime();
+                int sip  = p[i].getSourceAddress();
+                int dip  = p[i].getDestAddress();
+                int sport = p[i].getSourcePort();
+                int dport = p[i].getDestPort();
+                int size = p[i].getPacketLength();
+                int flag = p[i].getPacketFlag();
+                boolean  UpOrDown = p[i].isUpload();
+                String insertSql = "insert into Detail values(";
+                insertSql += Long.toString(rdate.getTime());
+                insertSql += ",";
+                insertSql += Integer.toString(sip);
+                insertSql += ",";
+                insertSql += Integer.toString(dip);
+                insertSql += ",";
+                insertSql += Integer.toString(sport);
+                insertSql += ",";
+                insertSql += Integer.toString(dport);
+                insertSql += ",";
+                insertSql += Integer.toString(size);
+                insertSql += ",";
+                int t = ((UpOrDown) ? 1 : 0);
+                insertSql += Integer.toString(t);
+                insertSql += ",";
+                insertSql += Integer.toString(flag);
+                insertSql += ")";
+                stat.addBatch(insertSql);
             }
             stat.executeBatch();
         } catch (SQLException ex) {
@@ -155,7 +140,12 @@ public class Database implements IDatabaseProxy{
         while(rs.next())
         {
             SimpleDate sp = new SimpleDate();
-            
+            String ts = rs.getString(1);
+            String[] ymd = ts.split("-");
+            int yy = Integer.parseInt(ymd[0])-1900;
+            int mm = Integer.parseInt(ymd[1]);
+            int dd = Integer.parseInt(ymd[2]);
+            sp.sDate = new Date(yy,mm,dd);
             sp.outerSize = rs.getInt(2);
             sp.innerSize = rs.getInt(3);
             sDate.add(sp);
