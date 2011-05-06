@@ -22,25 +22,6 @@ public class PacketPoolEvent implements IPacketPoolEvent {
         process();
     }
 
-    public int getCurrentInnerUploadSpeed() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public int getCurrentOutterUploadSpeed() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public int getCurrentInnerDownloadSpeed() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public int getCurrentOutterDownloadSpeed() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public List<IPacket> getRawPackets() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
     public long getIntervalTime() {
         return this.m_interval;
@@ -51,10 +32,53 @@ public class PacketPoolEvent implements IPacketPoolEvent {
         while(it.hasNext()){
             IPacket p = it.next();
             IPacketFilter cernet = CernetPacketFilter.Instance();
+            boolean isInner = cernet.check(p);
+            if(isInner){
+                if(p.isUpload())
+                    m_IU += p.getPacketLength();
+                else
+                    m_ID += p.getPacketLength();
+            }else{
+                if(p.isUpload())
+                    m_OU += p.getPacketLength();
+                else
+                    m_OD += p.getPacketLength();
+            }
         }
     }
     
     private List<IPacket> m_packets;
     private int           m_interval;
+    private int           m_IU;
+    private int           m_ID;
+    private int           m_OU;
+    private int           m_OD;
+    public double getInnerUploadSpeed() {
+        return (double)m_IU/(double) m_interval;
+    }
 
+    public double getOutterUploadSpeed() {
+        return (double)m_OU/(double) m_interval;
+    }
+
+    public double getInnerDownloadSpeed() {
+        return (double)m_ID/(double) m_interval;
+    }
+
+    public double getOutterDownloadSpeed() {
+        return (double)m_OD/(double) m_interval;
+    }
+
+    public List<IPacket> getRawPackets() {
+        return this.m_packets;
+    }
+
+    public double getUploadSpeed() {
+        return this.getInnerUploadSpeed()+ this.getOutterUploadSpeed();
+    }
+
+    public double getDownloadSpeed() {
+        return this.getOutterDownloadSpeed()+this.getInnerDownloadSpeed();
+    }
+    
 }

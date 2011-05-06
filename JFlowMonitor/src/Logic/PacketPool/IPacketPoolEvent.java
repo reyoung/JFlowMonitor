@@ -13,11 +13,14 @@ import java.util.List;
  * @author Reyoung
  */
 public interface IPacketPoolEvent {
-    public int getCurrentInnerUploadSpeed();
-    public int getCurrentOutterUploadSpeed();
+    public double getInnerUploadSpeed();
+    public double getOutterUploadSpeed();
 
-    public int getCurrentInnerDownloadSpeed();
-    public int getCurrentOutterDownloadSpeed();
+    public double getInnerDownloadSpeed();
+    public double getOutterDownloadSpeed();
+
+    public double getUploadSpeed();
+    public double getDownloadSpeed();
 
     public long getIntervalTime();
 

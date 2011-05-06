@@ -163,6 +163,7 @@ public class PacketPoolEventTest {
         int interval = 1;
         IPacketPoolEvent event = new PacketPoolEvent(m_packets, interval);
         assertEquals(event.getIntervalTime(), interval);
+        System.out.printf("Current Download Speed = %f Bps\n", event.getDownloadSpeed());
     }
     public static List<IPacket> m_packets;
 }
