@@ -54,8 +54,8 @@ public class NetworkTest {
         assertNotNull(cap);
         System.out.printf("Capture Device Open Test Complete\n");
 
-        cap = Pcap.openOffline("capture/cap.pcap", errorbuffer);
-        assertNotNull(cap);
+//        cap = Pcap.openOffline("capture/cap.pcap", errorbuffer);
+//        assertNotNull(cap);
     }
 
     @AfterClass
