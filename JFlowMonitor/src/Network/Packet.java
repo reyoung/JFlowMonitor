@@ -51,4 +51,12 @@ public class Packet implements IPacket{
         return IsUpdate;
     }
 
+    public String getSourceAddressString() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public String getDestAddressString() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

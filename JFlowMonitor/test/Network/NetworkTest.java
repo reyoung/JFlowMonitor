@@ -113,12 +113,16 @@ public class NetworkTest {
 	};
         cap.loop(10, jpacketHandler, "Loop");
     }
-
+    static public String Ipv4Int2Str(int ipv4){
+        StringBuilder sb = new StringBuilder();
+        return "";
+    }
     @Test
     public void testNetwork(){
         INetwork nt = Network.Instance();
         assertNotSame(nt.deviceCount(), 0);
         PcapIf dev = nt.getDeviceAt(0);
+        System.out.printf("Ipv4 Address = %s\n", Ipv4Int2Str(0xca710f02));
     }
 
 }

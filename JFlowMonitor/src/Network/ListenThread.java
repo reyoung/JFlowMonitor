@@ -87,7 +87,9 @@ public class ListenThread extends Thread {
                 }
             }
         };
-        cap.loop(10, jpacketHandler, m_dev.getDescription());
+        while(true){
+            cap.loop(10, jpacketHandler, m_dev.getDescription());
+        }
     }
 
     static private int GetDeviceIpInt(PcapIf dev) {
