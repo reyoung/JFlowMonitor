@@ -41,7 +41,7 @@ public class PacketStub extends AbstractPacket {
     }
 
     public int getPacketFlag() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return 1;
     }
     
 }
