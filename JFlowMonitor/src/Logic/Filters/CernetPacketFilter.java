@@ -12,22 +12,23 @@ import java.util.List;
  * @author YQ
  */
 public class CernetPacketFilter extends AbstractPacketFilter {
-    private CernetPacketFilter(){
-        
-    }
-    private static CernetPacketFilter instance = null;
+    private static CernetPacketFilter m_cernetPacketFilter = null;
+    CernetReader m_cernetReader =new CernetReader();
     public static IPacketFilter Instance(){
-        if(instance == null){
-            instance = new CernetPacketFilter();
+        if(m_cernetPacketFilter == null){
+            m_cernetPacketFilter = new CernetPacketFilter();
         }
-        return instance;
+        return m_cernetPacketFilter;
     }
-    public boolean check(IPacket packet, ICernetReader cernetReader) {
+    private CernetPacketFilter(){
+
+    }
+    public boolean check(IPacket packet) {
         boolean isInCernet = false;
         int targetAddress = packet.getDestAddress();
         int cernetAddress = 0;
         int cernerMask = 0;
-        List<CernetAttribute<String, String>> cernetDataList = cernetReader.getCernetAttribute();
+        List<CernetAttribute<String, String>> cernetDataList = m_cernetReader.getCernetAttribute();
         for (int i = 0; i < cernetDataList.size(); ++i) {
             CernetAttribute<String, String> c = cernetDataList.get(i);
             cernetAddress = ipToInt(c.ip);
@@ -39,11 +40,10 @@ public class CernetPacketFilter extends AbstractPacketFilter {
         }
         return isInCernet;
     }
-
-    public boolean check(IPacket packet) {
-        if(((int)System.currentTimeMillis()&1)==0)
-            return true;
-        else
-            return false;
-    }
+//    public boolean check(IPacket packet) {
+//        if(((int)System.currentTimeMillis()&1)==0)
+//            return true;
+//        else
+//            return false;
+//    }
 }
