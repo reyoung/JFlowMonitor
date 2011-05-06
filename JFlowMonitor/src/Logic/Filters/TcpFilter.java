@@ -15,7 +15,7 @@ public class TcpFilter implements IPacketFilter{
 
     }
     private static TcpFilter instance = null;
-    public TcpFilter Instance(){
+    static public TcpFilter Instance(){
         if(instance == null){
             instance = new TcpFilter();
         }
