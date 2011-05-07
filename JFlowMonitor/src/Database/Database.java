@@ -31,61 +31,46 @@ public class Database implements IDatabaseProxy{
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void savePacket(IPacket[] p)
+    public void savePacket(List<IPacket> p)
     {
-        if(p.length != 10)return;
         try {
             Statement stat = conn.createStatement();
-            Date[] rdate = new Date[10];
-            int[] sip = new int[10];
-            int[] dip = new int[10];
-            int[] sport = new int[10];
-            int[] dport = new int[10];
-            int[] size = new int[10];
-            int[] flag = new int[10];
-            boolean[] UpOrDown = new boolean[10];
-            String[] insertSql = new String[10];
-            for(int i=0 ; i<10 ; ++i)
+            for(int i=0 ; i<p.size() ; ++i)
             {
-                rdate[i] = p[i].getPacketRecvTime();
-                /*try {
-                    Thread.sleep(10);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-                }*/
-                sip[i] = p[i].getSourceAddress();
-                dip[i] = p[i].getDestAddress();
-                sport[i] = p[i].getSourcePort();
-                dport[i] = p[i].getDestPort();
-                size[i] = p[i].getPacketLength();
-                flag[i] = p[i].getPacketFlag();
-                UpOrDown[i] = p[i].isUpload();
-                insertSql[i] = "insert into Detail values(";
-                insertSql[i] += Long.toString(rdate[i].getTime());
-                insertSql[i] += ",";
-                insertSql[i] += Integer.toString(sip[i]);
-                insertSql[i] += ",";
-                insertSql[i] += Integer.toString(dip[i]);
-                insertSql[i] += ",";
-                insertSql[i] += Integer.toString(sport[i]);
-                insertSql[i] += ",";
-                insertSql[i] += Integer.toString(dport[i]);
-                insertSql[i] += ",";
-                insertSql[i] += Integer.toString(size[i]);
-                insertSql[i] += ",";
-                int t = ((UpOrDown[i]) ? 1 : 0);
-                insertSql[i] += Integer.toString(t);
-                insertSql[i] += ",";
-                insertSql[i] += Integer.toString(flag[i]);
-                insertSql[i] += ")";
-                stat.addBatch(insertSql[i]);
+                Date rdate= p.get(i).getPacketRecvTime();
+                int sip  = p.get(i).getSourceAddress();
+                int dip  = p.get(i).getDestAddress();
+                int sport = p.get(i).getSourcePort();
+                int dport = p.get(i).getDestPort();
+                int size = p.get(i).getPacketLength();
+                int flag = p.get(i).getPacketFlag();
+                boolean  UpOrDown = p.get(i).isUpload();
+                String insertSql = "insert into Detail values(";
+                insertSql += Long.toString(rdate.getTime());
+                insertSql += ",";
+                insertSql += Integer.toString(sip);
+                insertSql += ",";
+                insertSql += Integer.toString(dip);
+                insertSql += ",";
+                insertSql += Integer.toString(sport);
+                insertSql += ",";
+                insertSql += Integer.toString(dport);
+                insertSql += ",";
+                insertSql += Integer.toString(size);
+                insertSql += ",";
+                int t = ((UpOrDown) ? 1 : 0);
+                insertSql += Integer.toString(t);
+                insertSql += ",";
+                insertSql += Integer.toString(flag);
+                insertSql += ")";
+                stat.addBatch(insertSql);
             }
             stat.executeBatch();
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public List<Packet> checkDatetoDate(Date from,Date to) throws SQLException
+    public List<Packet> getPacket(Date from,Date to) throws SQLException
     {
         Statement stat = conn.createStatement();
         Long fd = from.getTime();
@@ -114,7 +99,7 @@ public class Database implements IDatabaseProxy{
         rs.close();
         return p;
     }
-    public List<Packet> checkDate(Date cdate) throws SQLException
+    public List<Packet> getPacket(Date cdate) throws SQLException
     {
         int year = cdate.getYear();
         int month = cdate.getMonth();
@@ -122,7 +107,7 @@ public class Database implements IDatabaseProxy{
         int tday = day+1;
         Date from  = new Date(year,month,day);
         Date to = new Date(year,month,tday);
-        return checkDatetoDate(from, to);
+        return getPacket(from, to);
     }
     private static String url="org.sqlite.JDBC";
     private static String dri="jdbc:sqlite:flow.sqlite";
@@ -137,4 +122,38 @@ public class Database implements IDatabaseProxy{
         conn.close();
     }
     private static Connection conn;
+
+    public List<Flow> getFlow(Date from, Date to) throws SQLException
+    {
+        List<Flow> sDate = new ArrayList<Flow>();
+        Statement stat = conn.createStatement();
+        int fromYear = from.getYear()+1900;
+        int fromMonth = from.getMonth();
+        int fromDay = from.getDate();
+        String fromD = "'"+Integer.toString(fromYear) + "-"+Integer.toString(fromMonth) +"-"+Integer.toString(fromDay)+"'";
+        int toYear = to.getYear()+1900;
+        int toMonth = to.getMonth();
+        int toDay = to.getDate();
+        String toD = "'"+Integer.toString(toYear) + "-"+Integer.toString(toMonth) +"-"+Integer.toString(toDay)+"'";
+        String sqlQuery = "select * from Simple where PDate >= " +fromD + " and PDate <= " + toD;
+        ResultSet rs = stat.executeQuery(sqlQuery);
+        while(rs.next())
+        {
+            Flow sp = new Flow();
+            String ts = rs.getString(1);
+            String[] ymd = ts.split("-");
+            int yy = Integer.parseInt(ymd[0])-1900;
+            int mm = Integer.parseInt(ymd[1]);
+            int dd = Integer.parseInt(ymd[2]);
+            sp.sDate = new Date(yy,mm,dd);
+            sp.outerSize = rs.getInt(2);
+            sp.innerSize = rs.getInt(3);
+            sDate.add(sp);
+        }
+        return sDate;
+    }
+
+    public Flow getFlow(Date cdate) throws SQLException {
+        return getFlow(cdate, cdate).get(0);
+    }
 }
