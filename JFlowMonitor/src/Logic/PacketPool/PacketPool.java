@@ -22,7 +22,7 @@ public class PacketPool extends TimerTask implements Network.IPacketListener,IPa
         this.m_timer.schedule(this,0,this.m_interval);
     }
     private static IPacketPool instance = null;
-    static IPacketPool Instance(){
+    public static IPacketPool Instance(){
         if(instance==null){
             PacketPool temp = new PacketPool();
             Network.Network.Instance().addPacketListener(temp);

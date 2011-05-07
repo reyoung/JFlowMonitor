@@ -52,7 +52,6 @@ public class CernetPacketFilterTest {
         boolean expResult = false;
         boolean result = instance.check(packet);
         assertEquals(expResult, result);
-         //TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
 
