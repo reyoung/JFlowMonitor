@@ -48,7 +48,6 @@ public class AbstractPacketFilterTest {
 //        byte[] expResult = null;
 //        byte[] result = AbstractPacketFilter.Ipv4Int2ByteArray(ipv4);
 //        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
 
@@ -62,7 +61,6 @@ public class AbstractPacketFilterTest {
         long expResult = 0xca710f02;
         long result = AbstractPacketFilter.ipToInt(strIP);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
 
@@ -76,7 +74,6 @@ public class AbstractPacketFilterTest {
         String expResult = "202.113.15.2";
         String result = AbstractPacketFilter.intToIP(intIP);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
 

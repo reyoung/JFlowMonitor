@@ -12,17 +12,20 @@ import java.util.List;
  * @author YQ
  */
 public class CernetPacketFilter extends AbstractPacketFilter {
-    private CernetPacketFilter(){
-        
-    }
-    private static CernetPacketFilter instance = null;
-    public static IPacketFilter Instance(){
-        if(instance == null){
-            instance = new CernetPacketFilter();
+    private static CernetPacketFilter cernetPacketFilter = null;
+    private static CernetReader cernetReader = null;
+    public static void Initialize(String fn){
+        if(cernetPacketFilter == null){
+            cernetPacketFilter = new CernetPacketFilter();
+            cernetReader = new CernetReader(fn);
         }
-        return instance;
     }
-    public boolean check(IPacket packet, ICernetReader cernetReader) {
+    public static IPacketFilter Instance(){
+        return cernetPacketFilter;
+    }
+    private CernetPacketFilter(){
+    }
+    public boolean check(IPacket packet) {
         boolean isInCernet = false;
         int targetAddress = packet.getDestAddress();
         int cernetAddress = 0;
@@ -38,12 +41,5 @@ public class CernetPacketFilter extends AbstractPacketFilter {
             }
         }
         return isInCernet;
-    }
-
-    public boolean check(IPacket packet) {
-        if(((int)System.currentTimeMillis()&1)==0)
-            return true;
-        else
-            return false;
     }
 }
