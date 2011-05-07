@@ -193,7 +193,7 @@ public class Database implements IDatabaseProxy{
             p.add(pack);
         }
         rs.close();
-        //stat.execute(sqlDel);
+        stat.execute(sqlDel);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String temp = "";
         String sqlInsert = "";
