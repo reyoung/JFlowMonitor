@@ -49,7 +49,7 @@ public class PacketPool extends TimerTask implements Network.IPacketListener,IPa
         PacketPoolEvent event = new PacketPoolEvent(this.m_packets,this.m_interval);
         for(int i=0;i<m_listeners.size();++i){
             IPacketPoolEventListener temp = m_listeners.get(i);
-            if(!temp.isValid()){
+            if(!temp.isConcern()){
                 this.m_listeners.remove(i);
                 --i;
             }

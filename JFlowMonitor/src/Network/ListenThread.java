@@ -41,6 +41,7 @@ public class ListenThread extends Thread {
                 errorbuffer);
         assert (cap != null);
         PcapPacketHandler<String> jpacketHandler = new PcapPacketHandler<String>() {
+
             public void nextPacket(PcapPacket packet, String user) {
                 Ip4 ip = new Ip4();
                 long t = packet.getCaptureHeader().timestampInMillis();
@@ -71,36 +72,38 @@ public class ListenThread extends Thread {
                     flag |= IPacket.PacketFlag_UDP;
                     ++okcount;
                 }
-                if (packet.hasHeader(Http.ID)){
-                    flag|=IPacket.PacketFlag_HTTP;
+                if (packet.hasHeader(Http.ID)) {
+                    flag |= IPacket.PacketFlag_HTTP;
                 }
-                if (packet.hasHeader(Ethernet.ID)){
-                    flag|=IPacket.PacketFlag_Ethernet;
+                if (packet.hasHeader(Ethernet.ID)) {
+                    flag |= IPacket.PacketFlag_Ethernet;
                 }
 
                 if (okcount != 2) {
 //                    System.out.printf("No Tcp/Ip Capture\n");
                 } else {
                     Packet p = new Packet();
-                    p.DIP = d;
-                    p.SIP = s;
-                    p.DPort = tp;
-                    p.SPort = sp;
+                    p.DIP = s;
+                    p.SIP = d;
+                    p.DPort = sp;
+                    p.SPort = tp;
                     p.PackLen = packet.getCaptureHeader().caplen();
                     p.RecvTime = arriveTime;
-                    p.IsUpdate = (GetDeviceIpInt(m_dev)==s);
-                    p.PacketFlag = flag;
-                    synchronized(ListenThread.this){
-                         List<IPacketListener> listeners = m_network.getPacketListeners();
-                         ListIterator<IPacketListener> it = listeners.listIterator();
-                         while(it.hasNext()){
-                             it.next().onPacketRecv(p);
-                         }
+                    if (s == GetDeviceIpInt(m_dev) || d == GetDeviceIpInt(m_dev)) {
+                        p.IsUpdate = (GetDeviceIpInt(m_dev) != s); //! TODO upload download refine.
+                        p.PacketFlag = flag;
+                        synchronized (ListenThread.this) {
+                            List<IPacketListener> listeners = m_network.getPacketListeners();
+                            ListIterator<IPacketListener> it = listeners.listIterator();
+                            while (it.hasNext()) {
+                                it.next().onPacketRecv(p);
+                            }
+                        }
                     }
                 }
             }
         };
-        while(true){
+        while (true) {
             cap.loop(10, jpacketHandler, m_dev.getDescription());
         }
     }

@@ -26,5 +26,5 @@ public interface IPacketPoolEventListener {
      * 如果无效，在下次刷新时，会被删除
      * @return
      */
-    public boolean isValid();
+    public boolean isConcern();
 }
