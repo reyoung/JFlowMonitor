@@ -45,8 +45,4 @@ public class DatabaseAppender implements IPacketPoolEventListener{
     final public boolean isConcern() {
         return true;
     }
-    static{
-        IPacketPool pp = PacketPool.Instance();
-        pp.addPacketPoolListener(DatabaseAppender.Instance());
-    }
 }
