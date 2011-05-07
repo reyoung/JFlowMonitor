@@ -21,13 +21,16 @@ public class CernetPacketFilter extends AbstractPacketFilter {
         }
     }
     public static IPacketFilter Instance(){
+        if(cernetPacketFilter == null){
+            Initialize("Cernet");
+        }
         return cernetPacketFilter;
     }
     private CernetPacketFilter(){
     }
     public boolean check(IPacket packet) {
         boolean isInCernet = false;
-        int targetAddress = packet.getDestAddress();
+        int destAddress = packet.getDestAddress();
         int cernetAddress = 0;
         int cernerMask = 0;
         List<CernetAttribute<String, String>> cernetDataList = cernetReader.getCernetAttribute();
@@ -35,7 +38,7 @@ public class CernetPacketFilter extends AbstractPacketFilter {
             CernetAttribute<String, String> c = cernetDataList.get(i);
             cernetAddress = ipToInt(c.ip);
             cernerMask = ipToInt(c.mask);
-            if ((cernetAddress & cernerMask) == (targetAddress & cernerMask)) {
+            if ((cernetAddress & cernerMask) == (destAddress & cernerMask)){
                 isInCernet = true;
                 break;
             }
