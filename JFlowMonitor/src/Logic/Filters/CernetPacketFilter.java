@@ -21,6 +21,9 @@ public class CernetPacketFilter extends AbstractPacketFilter {
         }
     }
     public static IPacketFilter Instance(){
+        if(cernetPacketFilter == null){
+            Initialize("Cernet");
+        }
         return cernetPacketFilter;
     }
     private CernetPacketFilter(){
