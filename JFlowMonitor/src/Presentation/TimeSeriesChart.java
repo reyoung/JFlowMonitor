@@ -4,6 +4,9 @@
  */
 package Presentation;
 
+import Logic.PacketPool.IPacketPoolEvent;
+import Logic.PacketPool.IPacketPoolEventListener;
+import Logic.PacketPool.PacketPool;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -47,9 +50,9 @@ public class TimeSeriesChart extends JPanel {
         super(new BorderLayout());
 // create two series that automatically discard data more than 30
 // seconds old...
-        this.total = new TimeSeries("Total", Millisecond.class);
+        this.total = new TimeSeries("Upload", Millisecond.class);
         this.total.setMaximumItemAge(historyCount);
-        this.free = new TimeSeries("Free", Millisecond.class);
+        this.free = new TimeSeries("Download", Millisecond.class);
         this.free.setMaximumItemAge(historyCount);
         TimeSeriesCollection dataset = new TimeSeriesCollection();
         dataset.addSeries(this.total);
@@ -76,7 +79,7 @@ public class TimeSeriesChart extends JPanel {
         domain.setTickLabelsVisible(true);
         range.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
         JFreeChart chart = new JFreeChart(
-                "JVM Memory Usage",
+                "Flow observation",
                 new Font("SansSerif", Font.BOLD, 24),
                 plot,
                 true);
@@ -104,7 +107,7 @@ public class TimeSeriesChart extends JPanel {
     /**
      * The data generator.
      */
-    class DataGenerator extends Timer implements ActionListener {
+    class DataGenerator extends Timer implements IPacketPoolEventListener {
 
         /**
          * Constructor.
@@ -113,7 +116,8 @@ public class TimeSeriesChart extends JPanel {
          */
         DataGenerator(int interval) {
             super(interval, null);
-            addActionListener(this);
+//            addActionListener(this);
+            PacketPool.Instance().addPacketPoolListener(this);
         }
 
         /**
@@ -121,11 +125,26 @@ public class TimeSeriesChart extends JPanel {
          *
          * @param event the action event.
          */
-        public void actionPerformed(ActionEvent event) {
-            long f = Runtime.getRuntime().freeMemory();
-            long t = Runtime.getRuntime().totalMemory();
-            addTotalObservation(t);
-            addFreeObservation(f);
+//        public void actionPerformed(ActionEvent event) {
+//            long f = Runtime.getRuntime().freeMemory();
+//            long t = Runtime.getRuntime().totalMemory();
+//            addTotalObservation(t);
+//            addFreeObservation(f);
+//        }
+
+        public void onPoolRefresh(IPacketPoolEvent e) {
+            double us = e.getUploadSpeed()/1024;
+            double ds = e.getDownloadSpeed()/1024;
+            addTotalObservation(us);
+            addFreeObservation(ds);
+        }
+
+        public boolean isEnable() {
+            return true;
+        }
+
+        public boolean isConcern() {
+            return true;
         }
     }
 
