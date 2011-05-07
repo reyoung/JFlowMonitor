@@ -78,7 +78,13 @@ public class DatabaseTest {
      */
     @Test
     public void testInstance() {
-
+        Date from = new Date(111,5,5);
+        Date to = new Date(111,5,6);
+        Long fd = from.getTime();
+        Long td = to.getTime();
+        System.out.println(fd);
+        System.out.println(td);
+        System.out.println(td - fd);
     }
 
     /**

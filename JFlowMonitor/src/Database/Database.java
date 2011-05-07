@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -163,5 +164,83 @@ public class Database implements IDatabaseProxy{
 
     public Flow getFlow(Date cdate) throws SQLException {
         return getFlow(cdate, cdate).get(0);
+    }
+    public void compress(Date cdate)throws SQLException
+    {
+        Statement stat = conn.createStatement();
+        Long deadtime = cdate.getTime();
+        String sqlQuery = "select * from Detail where PRecvTime < ";
+        sqlQuery += Long.toString(deadtime);
+        ResultSet rs = stat.executeQuery(sqlQuery);
+        List< Packet > p = new ArrayList< Packet >();
+        String sqlDel = "delete from Detail where PRecvTime < ";
+        sqlDel += Long.toString(deadtime);
+        while(rs.next())
+        {
+            Packet pack = new Packet();
+            Date d = new Date();
+            d.setTime(rs.getLong(1));
+            pack.RecvTime = d;
+            pack.SIP = rs.getInt(2);
+            pack.DIP = rs.getInt(3);
+            pack.SPort = rs.getInt(4);
+            pack.DPort = rs.getInt(5);
+            pack.PackLen = rs.getInt(6);
+            pack.IsUpdate = rs.getBoolean(7);
+            pack.PacketFlag = rs.getInt(8);
+            p.add(pack);
+        }
+        rs.close();
+        stat.execute(sqlDel);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String temp = "";
+        String sqlInsert = "";
+        String sqlUpdate = "";
+        for(int i=0 ; i<p.size() ; ++i)
+        {
+            temp = sdf.format(p.get(i).RecvTime);
+            if(inStub(p.get(i)))
+            {
+                sqlQuery = "select * from Simple where PDate = '";
+                sqlQuery =  sqlQuery + temp + "'";
+                ResultSet rtemp = stat.executeQuery(sqlQuery);
+                if(rtemp.next())
+                {
+                    int origin = rtemp.getInt(3);
+                    origin += p.get(i).PackLen;
+                    sqlUpdate = "update Simple set PInnerLength = origin";
+                    stat.execute(sqlUpdate);
+                }
+                else
+                {
+                    sqlInsert = "insert into Simple values('";
+                    sqlInsert = sqlInsert + temp +"'," + Integer.toString(p.get(i).PackLen) + ",0)";
+                    stat.execute(sqlInsert);
+                }
+            }
+            else
+            {
+                sqlQuery = "select * from Simple where PDate = '";
+                sqlQuery =  sqlQuery + temp + "'";
+                ResultSet rtemp = stat.executeQuery(sqlQuery);
+                if(rtemp.next())
+                {
+                    int origin = rtemp.getInt(2);
+                    origin += p.get(i).PackLen;
+                    sqlUpdate = "update Simple set POuterLength = origin";
+                    stat.execute(sqlUpdate);
+                }
+                else
+                {
+                    sqlInsert = "insert into Simple values('";
+                    sqlInsert = sqlInsert + temp +"',0," + Integer.toString(p.get(i).PackLen) + ")";
+                    stat.execute(sqlInsert);
+                }
+            }
+        }
+    }
+    private boolean inStub(Packet p)
+    {
+        return true;
     }
 }
