@@ -70,7 +70,7 @@ public class Database implements IDatabaseProxy{
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public List<Packet> checkDatetoDate(Date from,Date to) throws SQLException
+    public List<Packet> getDatetoDatePacket(Date from,Date to) throws SQLException
     {
         Statement stat = conn.createStatement();
         Long fd = from.getTime();
@@ -99,7 +99,7 @@ public class Database implements IDatabaseProxy{
         rs.close();
         return p;
     }
-    public List<Packet> checkDate(Date cdate) throws SQLException
+    public List<Packet> getDatePacket(Date cdate) throws SQLException
     {
         int year = cdate.getYear();
         int month = cdate.getMonth();
@@ -107,7 +107,7 @@ public class Database implements IDatabaseProxy{
         int tday = day+1;
         Date from  = new Date(year,month,day);
         Date to = new Date(year,month,tday);
-        return checkDatetoDate(from, to);
+        return getDatetoDatePacket(from, to);
     }
     private static String url="org.sqlite.JDBC";
     private static String dri="jdbc:sqlite:flow.sqlite";
@@ -123,7 +123,7 @@ public class Database implements IDatabaseProxy{
     }
     private static Connection conn;
 
-    public List<SimpleDate> checkFlowDtD(Date from, Date to) throws SQLException
+    public List<SimpleDate> getDatetoDateFlow(Date from, Date to) throws SQLException
     {
         List<SimpleDate> sDate = new ArrayList<SimpleDate>();
         Statement stat = conn.createStatement();
@@ -153,7 +153,7 @@ public class Database implements IDatabaseProxy{
         return sDate;
     }
 
-    public SimpleDate checkFlow(Date cdate) throws SQLException {
-        return checkFlowDtD(cdate, cdate).get(0);
+    public SimpleDate getDateFlow(Date cdate) throws SQLException {
+        return getDatetoDateFlow(cdate, cdate).get(0);
     }
 }

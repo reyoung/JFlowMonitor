@@ -80,7 +80,7 @@ public class DatabaseTest {
         Date from = new Date(111,5,5);
         Date to = new Date(111,5,7);
         Database instance = new Database();
-        List result = instance.checkDatetoDate(from, to);
+        List result = instance.getDatetoDatePacket(from, to);
         assertNotNull(result);
         instance.Closedb();
     }
@@ -92,7 +92,7 @@ public class DatabaseTest {
     public void testCheckDate() throws Exception {
         Date cdata = new Date(111,5,6);;
         Database instance = new Database();
-        List result = instance.checkDate(cdata);
+        List result = instance.getDatePacket(cdata);
         assertNotNull(result);
         instance.Closedb();
     }
@@ -105,7 +105,7 @@ public class DatabaseTest {
         Date from = new Date(111,5,4);
         Date to = new Date(111,5,5);
         Database instance = new Database();
-        List result = instance.checkFlowDtD(from, to);
+        List result = instance.getDatetoDateFlow(from, to);
         assertEquals(2, result.size());
     }
 
@@ -120,7 +120,7 @@ public class DatabaseTest {
         expResult.sDate = cdate;
         expResult.innerSize = 200000;
         expResult.outerSize = 10000;
-        SimpleDate result = instance.checkFlow(cdate);
+        SimpleDate result = instance.getDateFlow(cdate);
         assertEquals(expResult.sDate, result.sDate);
         assertEquals(expResult.innerSize, result.innerSize);
         assertEquals(expResult.outerSize, result.outerSize);
