@@ -23,13 +23,21 @@ import org.sqlite.JDBC;
  * @author Kuziki
  */
 public class Database implements IDatabaseProxy{
-    public Database()
+    private Database()
     {
         try {
             conn = getConn();
         } catch (Exception ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private static Database instance=null;
+    public static IDatabaseProxy instance()
+    {
+        if(instance==null){
+            instance = new Database();
+        }
+        return instance;
     }
     public void savePacket(List<IPacket> p)
     {
