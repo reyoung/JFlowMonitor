@@ -9,6 +9,7 @@ import Logic.Filters.CernetPacketFilter;
 import Logic.Filters.IPacketFilter;
 import Network.IPacket;
 import Network.Packet;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -56,7 +57,7 @@ public class Database implements IDatabaseProxy{
                 int size = p.get(i).getPacketLength();
                 int flag = p.get(i).getPacketFlag();
                 boolean  UpOrDown = p.get(i).isUpload();
-                String insertSql = "insert into Detail values(";
+                String insertSql = "insert into Detail values( ,";
                 insertSql += Long.toString(rdate.getTime());
                 insertSql += ",";
                 insertSql += Integer.toString(sip);
@@ -122,10 +123,20 @@ public class Database implements IDatabaseProxy{
     }
     private static String url="org.sqlite.JDBC";
     private static String dri="jdbc:sqlite:flow.sqlite";
+    private static String table0 = "CREATE TABLE Detail ( PPacketID integer PRIMARY KEY AUTOINCREMENT,PRecvTime integer(8) NOT NULL,PS_IP integer NOT NULL,PD_IP integer NOT NULL,PS_Port integer NOT NULL,PD_Port integer NOT NULL,PSize integer NOT NULL,PIsUpload boolean NOT NULL,PFlag integer NOT NULL)";
+    private static String table1 = "CREATE TABLE Simple (PDate date PRIMARY KEY,POuterLegnth integer NOT NULL,PInnerLength integer NOT NULL)";
     public static Connection getConn() throws Exception
     {
+        File f = new File("flow.sqlite");
+        boolean fexist = f.exists();
         Class.forName(url);
         Connection conn = DriverManager.getConnection(dri);
+        if(!fexist)
+        {
+            Statement stat = conn.createStatement();
+            stat.execute(table0);
+            stat.execute(table1);
+        }
         return conn;
     }
     public void Closedb() throws SQLException
@@ -165,7 +176,13 @@ public class Database implements IDatabaseProxy{
     }
 
     public Flow getFlow(Date cdate) throws SQLException {
-        return getFlow(cdate, cdate).get(0);
+        List<Flow> gf = getFlow(cdate, cdate);
+        if(gf.isEmpty())
+        {
+            Flow ans = new Flow();
+            return ans;
+        }
+        else return gf.get(0);
     }
     public void compress(Date cdate)throws SQLException
     {
