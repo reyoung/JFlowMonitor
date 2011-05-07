@@ -31,6 +31,7 @@ public class PacketPoolEvent implements IPacketPoolEvent {
         ListIterator<IPacket > it = m_packets.listIterator();
         while(it.hasNext()){
             IPacket p = it.next();
+            CernetPacketFilter.Initialize("");
             IPacketFilter cernet = CernetPacketFilter.Instance();
             boolean isInner = cernet.check(p);
             if(isInner){
