@@ -17,3 +17,4 @@ dist
 
 /selftest/reyoung/SmallPanelTest/nbproject/private
 /selftest/reyoung/SmallPanelTest/build
+/bin/flow.sqlite
