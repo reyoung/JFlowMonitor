@@ -4,19 +4,14 @@
  */
 package Presentation;
 
-import Network.IPacket;
-import Network.IPacketListener;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -25,10 +20,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.DefaultXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.time.Millisecond;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -55,9 +48,9 @@ public class TimeSeriesChart extends JPanel {
 // create two series that automatically discard data more than 30
 // seconds old...
         this.total = new TimeSeries("Total", Millisecond.class);
-        this.total.setMaximumItemAge(30000);
+        this.total.setMaximumItemAge(historyCount);
         this.free = new TimeSeries("Free", Millisecond.class);
-        this.free.setMaximumItemAge(30000);
+        this.free.setMaximumItemAge(historyCount);
         TimeSeriesCollection dataset = new TimeSeriesCollection();
         dataset.addSeries(this.total);
         dataset.addSeries(this.free);
@@ -141,18 +134,18 @@ public class TimeSeriesChart extends JPanel {
      *
      * @param args ignored.
      */
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Memory Usage Demo");
-        TimeSeriesChart panel = new TimeSeriesChart(30000);
-        frame.getContentPane().add(panel, BorderLayout.CENTER);
-        frame.setBounds(200, 120, 600, 280);
-        frame.setVisible(true);
-        panel.new DataGenerator(100).start();
-        frame.addWindowListener(new WindowAdapter() {
-
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        JFrame frame = new JFrame("Memory Usage Demo");
+//        TimeSeriesChart panel = new TimeSeriesChart(30000);
+//        frame.getContentPane().add(panel, BorderLayout.CENTER);
+//        frame.setBounds(200, 120, 600, 280);
+//        frame.setVisible(true);
+//        panel.new DataGenerator(100).start();
+//        frame.addWindowListener(new WindowAdapter() {
+//
+//            public void windowClosing(WindowEvent e) {
+//                System.exit(0);
+//            }
+//        });
+//    }
 }

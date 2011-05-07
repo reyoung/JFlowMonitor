@@ -118,7 +118,7 @@ public class UIFrame1 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         JFrame frame = new JFrame("Memory Usage Demo");
-        TimeSeriesChart panel = new TimeSeriesChart(30000);
+        TimeSeriesChart panel = new TimeSeriesChart(3000);
         frame.getContentPane().add(panel, BorderLayout.CENTER);
         frame.setBounds(200, 120, 600, 280);
         frame.setVisible(true);
