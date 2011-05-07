@@ -47,9 +47,9 @@ public class CernetPacketFilterTest {
     public void testCheck() {
         System.out.println("check");
         IPacket packet = new PacketStub();
-        CernetPacketFilter.Initialize("filename");
+        CernetPacketFilter.Initialize("Cernet");
         IPacketFilter instance =CernetPacketFilter.Instance();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.check(packet);
         assertEquals(expResult, result);
          //TODO review the generated test code and remove the default call to fail.
