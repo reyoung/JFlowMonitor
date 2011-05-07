@@ -18,7 +18,7 @@ public class PacketPoolEventListenerStub implements IPacketPoolEventListener{
         return true;
     }
 
-    public boolean isValid() {
+    public boolean isConcern() {
         return true;
     }
 

@@ -10,20 +10,25 @@
 
 package Presentation;
 
+import Logic.PacketPool.IPacketPoolEvent;
+import Logic.PacketPool.IPacketPoolEventListener;
+import Logic.PacketPool.PacketPool;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.PopupMenu;
+import java.text.Format;
 
 /**
  *
  * @author Reyoung
  */
-public class SmallWindow extends javax.swing.JFrame {
+public class SmallWindow extends javax.swing.JFrame implements IPacketPoolEventListener {
 
     /** Creates new form SmallWindow */
     public SmallWindow() {
         initComponents();
         m_keyPressed = false;
+        PacketPool.Instance().addPacketPoolListener(this);
     }
 
     /** This method is called from within the constructor to
@@ -39,7 +44,7 @@ public class SmallWindow extends javax.swing.JFrame {
         ui_downloadSpeed = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        ui_uploadSpeed = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(160, 20));
@@ -74,8 +79,8 @@ public class SmallWindow extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentation/arrow-up-double.png"))); // NOI18N
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("KB/S");
+        ui_uploadSpeed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        ui_uploadSpeed.setText("KB/S");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,7 +96,7 @@ public class SmallWindow extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(ui_uploadSpeed, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -100,7 +105,7 @@ public class SmallWindow extends javax.swing.JFrame {
             .addComponent(ui_downloadSpeed, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+            .addComponent(ui_uploadSpeed, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
         );
 
         pack();
@@ -140,9 +145,25 @@ public class SmallWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel ui_downloadSpeed;
+    private javax.swing.JLabel ui_uploadSpeed;
     // End of variables declaration//GEN-END:variables
+
+    public void onPoolRefresh(IPacketPoolEvent e) {
+        double us = e.getUploadSpeed()/1024;
+        double ds = e.getDownloadSpeed()/1024;
+        this.ui_downloadSpeed.setText(String.format("%.1f KB/S",us));
+        this.ui_uploadSpeed.setText(String.format("%.1f KB/S", ds));
+        
+    }
+
+    public boolean isEnable() {
+        return true;
+    }
+
+    public boolean isConcern() {
+        return true;
+    }
 
 }

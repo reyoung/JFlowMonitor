@@ -42,7 +42,7 @@ public class DatabaseAppender implements IPacketPoolEventListener{
      * 永远有效
      * @return
      */
-    final public boolean isValid() {
+    final public boolean isConcern() {
         return true;
     }
     static{

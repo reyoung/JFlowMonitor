@@ -44,7 +44,7 @@
               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jLabel3" pref="48" max="32767" attributes="0"/>
+              <Component id="ui_uploadSpeed" pref="48" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -55,7 +55,7 @@
           <Component id="ui_downloadSpeed" alignment="0" pref="16" max="32767" attributes="0"/>
           <Component id="jSeparator1" alignment="1" pref="16" max="32767" attributes="0"/>
           <Component id="jLabel2" alignment="0" pref="16" max="32767" attributes="0"/>
-          <Component id="jLabel3" alignment="0" pref="16" max="32767" attributes="0"/>
+          <Component id="ui_uploadSpeed" alignment="0" pref="16" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -85,7 +85,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="ui_uploadSpeed">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="KB/S"/>
