@@ -16,11 +16,11 @@ import java.util.List;
  */
 public interface IDatabaseProxy {
 
-    public void savePacket(IPacket[] p);//10个包插一次  // 更新文档，还是每十个包插一次？参数用List，不用数组
+    public void savePacket(IPacket[] p);//10个包插一次  // TODO 更新文档，还是每十个包插一次？参数用List，不用数组
 
 
     /**
-     * @warning !!!为什么用Check这个动词？应该用get获取属性，check做检查，应该返回boolean型。
+     * TODO      !!!为什么用Check这个动词？应该用get获取属性，check做检查，应该返回boolean型。
      *           比如getPacket就Ok了，我没必要知道这么多函数，不同的参数就好了。
      *           比如，getPacket(Date curDate);getPacket(Date From, Date to);
      *                 getSimpleData(Date curDate); getSimpleDate(Date from , Date to);
