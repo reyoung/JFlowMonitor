@@ -57,7 +57,7 @@ public class Database implements IDatabaseProxy{
                 int size = p.get(i).getPacketLength();
                 int flag = p.get(i).getPacketFlag();
                 boolean  UpOrDown = p.get(i).isUpload();
-                String insertSql = "insert into Detail values( ,";
+                String insertSql = "insert into Detail(PRecvTime,PS_IP,PD_IP,PS_Port,PD_Port,PSize,PIsUpload,PFlag) values(";
                 insertSql += Long.toString(rdate.getTime());
                 insertSql += ",";
                 insertSql += Integer.toString(sip);

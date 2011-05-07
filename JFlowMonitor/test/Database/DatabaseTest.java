@@ -80,6 +80,7 @@ public class DatabaseTest {
      */
     @Test
     public void testInstance() {
+        IDatabaseProxy instance = Database.instance();
         Date from = new Date(111,5,5);
         Date to = new Date(111,5,6);
         Long fd = from.getTime();
