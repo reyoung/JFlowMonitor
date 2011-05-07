@@ -72,50 +72,57 @@ public class DatabaseTest {
     public void testClosedb() throws Exception {
     }
 
+
     /**
-     * Test of checkDatetoDate method, of class Database.
+     * Test of instance method, of class Database.
      */
     @Test
-    public void testCheckDatetoDate() throws Exception {
+    public void testInstance() {
+
+    }
+
+    /**
+     * Test of getPacket method, of class Database.
+     */
+    @Test
+    public void testGetPacket_Date_Date() throws Exception {
         Date from = new Date(111,5,5);
         Date to = new Date(111,5,7);
-        Database instance = new Database();
+        IDatabaseProxy instance = Database.instance();
         List result = instance.getPacket(from, to);
         assertNotNull(result);
-        instance.Closedb();
     }
 
     /**
-     * Test of CheckDate method, of class Database.
+     * Test of getPacket method, of class Database.
      */
     @Test
-    public void testCheckDate() throws Exception {
+    public void testGetPacket_Date() throws Exception {
         Date cdata = new Date(111,5,6);;
-        Database instance = new Database();
+        IDatabaseProxy instance = Database.instance();
         List result = instance.getPacket(cdata);
         assertNotNull(result);
-        instance.Closedb();
     }
 
     /**
-     * Test of checkFlowDtD method, of class Database.
+     * Test of getFlow method, of class Database.
      */
     @Test
-    public void testCheckFlowDtD() throws Exception {
+    public void testGetFlow_Date_Date() throws Exception {
         Date from = new Date(111,5,4);
         Date to = new Date(111,5,5);
-        Database instance = new Database();
+        IDatabaseProxy instance = Database.instance();
         List result = instance.getFlow(from, to);
         assertEquals(2, result.size());
     }
 
     /**
-     * Test of checkFlow method, of class Database.
+     * Test of getFlow method, of class Database.
      */
     @Test
-    public void testCheckFlow() throws Exception {
+    public void testGetFlow_Date() throws Exception {
         Date cdate = new Date(111,5,5);
-        Database instance = new Database();
+        IDatabaseProxy instance = Database.instance();
         Flow expResult = new Flow();
         expResult.sDate = cdate;
         expResult.innerSize = 200000;
