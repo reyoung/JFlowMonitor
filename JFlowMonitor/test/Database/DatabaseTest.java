@@ -118,7 +118,7 @@ public class DatabaseTest {
     @Test
     public void testGetFlow_Date_Date() throws Exception {
         Date from = new Date(111,4,4);
-        Date to = new Date(111,4,5);
+        Date to = new Date(111,4,6);
         IDatabaseProxy instance = Database.instance();
         List result = instance.getFlow(from, to);
         assertEquals(2, result.size());

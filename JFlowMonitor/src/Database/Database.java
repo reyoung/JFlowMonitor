@@ -154,7 +154,7 @@ public class Database implements IDatabaseProxy{
             String ts = rs.getString(1);
             String[] ymd = ts.split("-");
             int yy = Integer.parseInt(ymd[0])-1900;
-            int mm = Integer.parseInt(ymd[1]);
+            int mm = Integer.parseInt(ymd[1])-1;
             int dd = Integer.parseInt(ymd[2]);
             sp.sDate = new Date(yy,mm,dd);
             sp.outerSize = rs.getInt(2);
