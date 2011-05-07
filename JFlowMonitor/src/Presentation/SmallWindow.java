@@ -8,7 +8,7 @@
  * Created on 2011-5-7, 14:23:10
  */
 
-package smallpaneltest;
+package Presentation;
 
 import java.awt.Dimension;
 import java.awt.Point;
@@ -65,16 +65,14 @@ public class SmallWindow extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallpaneltest/arrow-down-double.png"))); // NOI18N
-        jLabel1.setText("123");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentation/arrow-down-double.png"))); // NOI18N
 
         ui_downloadSpeed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         ui_downloadSpeed.setText("KB/S");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallpaneltest/arrow-up-double.png"))); // NOI18N
-        jLabel2.setText("123");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentation/arrow-up-double.png"))); // NOI18N
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("KB/S");
@@ -93,15 +91,15 @@ public class SmallWindow extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
             .addComponent(ui_downloadSpeed, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
         );
 
