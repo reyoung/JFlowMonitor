@@ -83,10 +83,10 @@ public class ListenThread extends Thread {
 //                    System.out.printf("No Tcp/Ip Capture\n");
                 } else {
                     Packet p = new Packet();
-                    p.DIP = d;
-                    p.SIP = s;
-                    p.DPort = tp;
-                    p.SPort = sp;
+                    p.DIP = s;
+                    p.SIP = d;
+                    p.DPort = sp;
+                    p.SPort = tp;
                     p.PackLen = packet.getCaptureHeader().caplen();
                     p.RecvTime = arriveTime;
                     if (s == GetDeviceIpInt(m_dev) || d == GetDeviceIpInt(m_dev)) {
