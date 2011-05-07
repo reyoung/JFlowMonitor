@@ -5,6 +5,7 @@
 
 package Database;
 
+import java.util.ArrayList;
 import Network.PacketStub;
 import Network.IPacket;
 import java.sql.Connection;
@@ -49,10 +50,11 @@ public class DatabaseTest {
      */
     @Test
     public void testSavePacket() {
-        PacketStub[] p = new PacketStub[10];
+        List<PacketStub> p = new ArrayList<PacketStub>();
         for(int i=0;i<10;i++)
         {
-            p[i] = new PacketStub();
+           PacketStub ps = new PacketStub();
+           p.add(ps);
         }
         //Database instance = new Database();
         //instance.savePacket(p);
@@ -115,8 +117,8 @@ public class DatabaseTest {
      */
     @Test
     public void testGetFlow_Date_Date() throws Exception {
-        Date from = new Date(111,5,4);
-        Date to = new Date(111,5,5);
+        Date from = new Date(111,4,4);
+        Date to = new Date(111,4,5);
         IDatabaseProxy instance = Database.instance();
         List result = instance.getFlow(from, to);
         assertEquals(2, result.size());
@@ -127,16 +129,25 @@ public class DatabaseTest {
      */
     @Test
     public void testGetFlow_Date() throws Exception {
-        Date cdate = new Date(111,5,5);
+        Date cdate = new Date(111,4,5);
         IDatabaseProxy instance = Database.instance();
         Flow expResult = new Flow();
         expResult.sDate = cdate;
-        expResult.innerSize = 200000;
+        expResult.innerSize = 20057;
         expResult.outerSize = 10000;
         Flow result = instance.getFlow(cdate);
         assertEquals(expResult.sDate, result.sDate);
         assertEquals(expResult.innerSize, result.innerSize);
         assertEquals(expResult.outerSize, result.outerSize);
+    }
+
+    /**
+     * Test of compress method, of class Database.
+     */
+    @Test
+    public void testCompress() throws Exception {
+        Date cdate = new Date(111,5,7);
+        Database.instance().compress(cdate);
     }
 
 }

@@ -44,12 +44,6 @@ public class DatabaseAppenderTest {
      */
     @Test
     public void testInstance() {
-        System.out.println("Instance");
-        IPacketPoolEventListener expResult = null;
-        IPacketPoolEventListener result = DatabaseAppender.Instance();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -57,12 +51,10 @@ public class DatabaseAppenderTest {
      */
     @Test
     public void testOnPoolRefresh() {
-        System.out.println("onPoolRefresh");
         IPacketPoolEvent e = null;
         DatabaseAppender instance = null;
         instance.onPoolRefresh(e);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -70,13 +62,6 @@ public class DatabaseAppenderTest {
      */
     @Test
     public void testIsEnable() {
-        System.out.println("isEnable");
-        DatabaseAppender instance = null;
-        boolean expResult = false;
-        boolean result = instance.isEnable();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -84,13 +69,6 @@ public class DatabaseAppenderTest {
      */
     @Test
     public void testIsValid() {
-        System.out.println("isValid");
-        DatabaseAppender instance = null;
-        boolean expResult = false;
-        boolean result = instance.isValid();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
 }

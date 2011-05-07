@@ -5,6 +5,8 @@
 
 package Database;
 
+import Logic.Filters.CernetPacketFilter;
+import Logic.Filters.IPacketFilter;
 import Network.IPacket;
 import Network.Packet;
 import java.sql.Connection;
@@ -137,11 +139,11 @@ public class Database implements IDatabaseProxy{
         List<Flow> sDate = new ArrayList<Flow>();
         Statement stat = conn.createStatement();
         int fromYear = from.getYear()+1900;
-        int fromMonth = from.getMonth();
+        int fromMonth = from.getMonth()+1;
         int fromDay = from.getDate();
         String fromD = "'"+Integer.toString(fromYear) + "-"+Integer.toString(fromMonth) +"-"+Integer.toString(fromDay)+"'";
         int toYear = to.getYear()+1900;
-        int toMonth = to.getMonth();
+        int toMonth = to.getMonth()+1;
         int toDay = to.getDate();
         String toD = "'"+Integer.toString(toYear) + "-"+Integer.toString(toMonth) +"-"+Integer.toString(toDay)+"'";
         String sqlQuery = "select * from Simple where PDate >= " +fromD + " and PDate <= " + toD;
@@ -191,7 +193,7 @@ public class Database implements IDatabaseProxy{
             p.add(pack);
         }
         rs.close();
-        stat.execute(sqlDel);
+        //stat.execute(sqlDel);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String temp = "";
         String sqlInsert = "";
@@ -208,7 +210,9 @@ public class Database implements IDatabaseProxy{
                 {
                     int origin = rtemp.getInt(3);
                     origin += p.get(i).PackLen;
-                    sqlUpdate = "update Simple set PInnerLength = origin";
+                    sqlUpdate = "update Simple set PInnerLength = ";
+                    sqlUpdate  = sqlUpdate + Integer.toString(origin) + " where PDate = '";
+                    sqlUpdate = sqlUpdate + temp + "'";
                     stat.execute(sqlUpdate);
                 }
                 else
@@ -227,7 +231,9 @@ public class Database implements IDatabaseProxy{
                 {
                     int origin = rtemp.getInt(2);
                     origin += p.get(i).PackLen;
-                    sqlUpdate = "update Simple set POuterLength = origin";
+                    sqlUpdate = "update Simple set POuterLength = ";
+                    sqlUpdate  = sqlUpdate + Integer.toString(origin) + " where PDate = '";
+                    sqlUpdate = sqlUpdate + temp + "'";
                     stat.execute(sqlUpdate);
                 }
                 else
@@ -241,6 +247,7 @@ public class Database implements IDatabaseProxy{
     }
     private boolean inStub(Packet p)
     {
-        return true;
+        IPacketFilter pf = CernetPacketFilter.Instance();
+        return pf.check(p);
     }
 }
