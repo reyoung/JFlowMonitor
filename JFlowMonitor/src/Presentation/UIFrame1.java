@@ -122,7 +122,7 @@ public class UIFrame1 extends javax.swing.JFrame {
         frame.getContentPane().add(panel, BorderLayout.CENTER);
         frame.setBounds(200, 120, 600, 280);
         frame.setVisible(true);
-        panel.new DataGenerator(250).start();
+        panel.new DataGenerator(90).start();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

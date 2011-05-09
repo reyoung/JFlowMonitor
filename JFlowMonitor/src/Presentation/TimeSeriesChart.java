@@ -11,8 +11,6 @@ import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -54,11 +52,12 @@ public class TimeSeriesChart extends JPanel {
         this.total.setMaximumItemAge(historyCount);
         this.free = new TimeSeries("Download", Millisecond.class);
         this.free.setMaximumItemAge(historyCount);
+
         TimeSeriesCollection dataset = new TimeSeriesCollection();
         dataset.addSeries(this.total);
         dataset.addSeries(this.free);
         DateAxis domain = new DateAxis("Time");
-        NumberAxis range = new NumberAxis("Memory");
+        NumberAxis range = new NumberAxis("Flow");
         domain.setTickLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         range.setTickLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         domain.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -89,9 +88,13 @@ public class TimeSeriesChart extends JPanel {
                 BorderFactory.createEmptyBorder(4, 4, 4, 4),
                 BorderFactory.createLineBorder(Color.black)));
         add(chartPanel);
+//        for(int i=0;i<10;i++){
+//            this.total.add(new Millisecond(), 0);
+//            this.free.add(new Millisecond(), 0);
+//        }
     }
 
-    private void addTotalObservation(double y) {
+    private void addUploadObservation(double y) {
         this.total.add(new Millisecond(), y);
     }
 
@@ -100,7 +103,7 @@ public class TimeSeriesChart extends JPanel {
      *
      * @param y the free memory.
      */
-    private void addFreeObservation(double y) {
+    private void addDownloadObservation(double y) {
         this.free.add(new Millisecond(), y);
     }
 
@@ -118,6 +121,10 @@ public class TimeSeriesChart extends JPanel {
             super(interval, null);
 //            addActionListener(this);
             PacketPool.Instance().addPacketPoolListener(this);
+//            for(int i=0;i<50;i++){
+//                addUploadObservation(0);
+//                addDownloadObservation(0);
+//            }
         }
 
         /**
@@ -128,15 +135,15 @@ public class TimeSeriesChart extends JPanel {
 //        public void actionPerformed(ActionEvent event) {
 //            long f = Runtime.getRuntime().freeMemory();
 //            long t = Runtime.getRuntime().totalMemory();
-//            addTotalObservation(t);
-//            addFreeObservation(f);
+//            addUploadObservation(t);
+//            addDownloadObservation(f);
 //        }
 
         public void onPoolRefresh(IPacketPoolEvent e) {
             double us = e.getUploadSpeed()/1024;
             double ds = e.getDownloadSpeed()/1024;
-            addTotalObservation(us);
-            addFreeObservation(ds);
+            addUploadObservation(us);
+            addDownloadObservation(ds);
         }
 
         public boolean isEnable() {
