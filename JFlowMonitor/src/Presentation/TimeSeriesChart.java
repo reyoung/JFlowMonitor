@@ -36,8 +36,12 @@ public class TimeSeriesChart extends JPanel {
 
     /** Time series for total memory used. */
     private TimeSeries total;
+    private TimeSeries upinn;
+    private TimeSeries upout;
     /** Time series for free memory. */
     private TimeSeries free;
+    private TimeSeries dninn;
+    private TimeSeries dnout;
 
     /**
      * Creates a new application.
