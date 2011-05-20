@@ -43,39 +43,24 @@ public class Database implements IDatabaseProxy{
         }
         return instance;
     }
-    public void savePacket(List<IPacket> p)
+    synchronized public void savePacket(List<IPacket> p)
     {
         try {
             conn.setAutoCommit(false);
             Statement stat = conn.createStatement();
-            for(int i=0 ; i<p.size() ; ++i)
+//            for(int i=0 ; i<p.size() ; ++i) // Change to Foreach
+            for(IPacket pack : p)
             {
-                Date rdate= p.get(i).getPacketRecvTime();
-                int sip  = p.get(i).getSourceAddress();
-                int dip  = p.get(i).getDestAddress();
-                int sport = p.get(i).getSourcePort();
-                int dport = p.get(i).getDestPort();
-                int size = p.get(i).getPacketLength();
-                int flag = p.get(i).getPacketFlag();
-                boolean  UpOrDown = p.get(i).isUpload();
-                String insertSql = "insert into Detail(PRecvTime,PS_IP,PD_IP,PS_Port,PD_Port,PSize,PIsUpload,PFlag) values(";
-                insertSql += Long.toString(rdate.getTime());
-                insertSql += ",";
-                insertSql += Integer.toString(sip);
-                insertSql += ",";
-                insertSql += Integer.toString(dip);
-                insertSql += ",";
-                insertSql += Integer.toString(sport);
-                insertSql += ",";
-                insertSql += Integer.toString(dport);
-                insertSql += ",";
-                insertSql += Integer.toString(size);
-                insertSql += ",";
-                int t = ((UpOrDown) ? 1 : 0);
-                insertSql += Integer.toString(t);
-                insertSql += ",";
-                insertSql += Integer.toString(flag);
-                insertSql += ")";
+                Date rdate=pack.getPacketRecvTime();
+                int sip  = pack.getSourceAddress();
+                int dip  = pack.getDestAddress();
+                int sport = pack.getSourcePort();
+                int dport = pack.getDestPort();
+                int size = pack.getPacketLength();
+                int flag = pack.getPacketFlag();
+                boolean  UpOrDown = pack.isUpload();
+                String insertSql = String.format("insert into Detail(PRecvTime,PS_IP,PD_IP,PS_Port,PD_Port,PSize,PIsUpload,PFlag) values(%d,%d,%d,%d,%d,%d,%d,%d)"
+                        , rdate.getTime(),sip,dip,sport,dport,size,UpOrDown?1:0,flag);
                 stat.addBatch(insertSql);
             }
             stat.executeBatch();
