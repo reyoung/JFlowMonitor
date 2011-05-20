@@ -24,6 +24,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.time.Millisecond;
+import org.jfree.data.time.Second;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.ui.RectangleInsets;
@@ -72,8 +73,8 @@ public class TimeSeriesChart extends JPanel {
         dataset.addSeries(this.down);
         dataset.addSeries(this.dninn);
         dataset.addSeries(this.dnout);
-        DateAxis domain = new DateAxis("Time");
-        NumberAxis range = new NumberAxis("Flow");
+        DateAxis domain = new DateAxis("Time(s)");
+        NumberAxis range = new NumberAxis("Flow(kb)");
         domain.setTickLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         range.setTickLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         domain.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -89,13 +90,14 @@ public class TimeSeriesChart extends JPanel {
         plot.setDomainGridlinePaint(Color.white);
         plot.setRangeGridlinePaint(Color.white);
         plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
-        domain.setAutoRange(true);
-        range.setAutoRangeMinimumSize(10);
-        range.setLowerBound(0);  
+        domain.setAutoRange(true);        
         domain.setLowerMargin(0.0);
         domain.setUpperMargin(0.0);
         domain.setTickLabelsVisible(true);
+        domain.setAutoRange(true);  
         range.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        range.setAutoRangeMinimumSize(100);
+        range.setLowerBound(0);  
         JFreeChart chart = new JFreeChart(
                 "Flow observation",
                 new Font("SansSerif", Font.BOLD, 24),
@@ -107,10 +109,15 @@ public class TimeSeriesChart extends JPanel {
                 BorderFactory.createEmptyBorder(4, 4, 4, 4),
                 BorderFactory.createLineBorder(Color.black)));
         add(chartPanel);
-//        for(int i=0;i<10;i++){
-//            this.total.add(new Millisecond(), 0);
-//            this.free.add(new Millisecond(), 0);
-//        }
+
+        for(int i=0;i<90;i++){
+            this.upload.add(new Millisecond(i,new Second()), 0);
+            this.upinn.add(new Millisecond(i,new Second()), 0);
+            this.upout.add(new Millisecond(i,new Second()), 0);
+            this.down.add(new Millisecond(i,new Second()), 0);
+            this.dninn.add(new Millisecond(i,new Second()), 0);
+            this.dnout.add(new Millisecond(i,new Second()), 0);
+        }
     }
 
     private void addUploadObservation(double y) {
