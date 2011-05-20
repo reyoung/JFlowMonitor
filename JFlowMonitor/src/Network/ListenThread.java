@@ -110,7 +110,7 @@ public class ListenThread extends Thread {
             }
         };
         while (true) {
-            cap.loop(Pcap.LOOP_INFINITE, jpacketHandler, m_dev.getDescription());
+            cap.loop(10, jpacketHandler, m_dev.getDescription());
         }
     }
 

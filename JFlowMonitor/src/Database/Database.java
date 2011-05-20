@@ -88,7 +88,7 @@ public class Database implements IDatabaseProxy{
             }
         }
     }
-    public List<Packet> getPacket(Date from,Date to) throws SQLException
+    public List<IPacket> getPacket(Date from,Date to) throws SQLException
     {
         conn.setAutoCommit(true);
         Statement stat = conn.createStatement();
@@ -99,7 +99,7 @@ public class Database implements IDatabaseProxy{
         sqlQuery += " and PRecvTime < ";
         sqlQuery += Long.toString(td);
         ResultSet rs = stat.executeQuery(sqlQuery);
-        List< Packet > p = new ArrayList< Packet >();
+        List< IPacket > p = new ArrayList< IPacket >();
         while(rs.next())
         {
             Packet pack = new Packet();
@@ -118,7 +118,7 @@ public class Database implements IDatabaseProxy{
         rs.close();
         return p;
     }
-    public List<Packet> getPacket(Date cdate) throws SQLException
+    public List<IPacket> getPacket(Date cdate) throws SQLException
     {
         int year = cdate.getYear();
         int month = cdate.getMonth();
