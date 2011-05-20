@@ -7,16 +7,19 @@
  *
  * Created on 2011-5-7, 14:23:10
  */
-
 package Presentation;
 
 import Logic.PacketPool.IPacketPoolEvent;
 import Logic.PacketPool.IPacketPoolEventListener;
 import Logic.PacketPool.PacketPool;
 import java.awt.Dimension;
+import java.awt.MenuItem;
 import java.awt.Point;
 import java.awt.PopupMenu;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.Format;
+import javax.swing.JFrame;
 
 /**
  *
@@ -112,19 +115,54 @@ public class SmallWindow extends javax.swing.JFrame implements IPacketPoolEventL
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        if(evt.getButton() == java.awt.event.MouseEvent.BUTTON3){
+        if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3) {
             PopupMenu menu = new PopupMenu();
             this.add(menu);
-            menu.add("Exit");
-            menu.show(this, evt.getX(),evt.getY());
+            {   /// 添加Show Static
+                MenuItem mit = new MenuItem("Show Statics");
+                mit.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        onStaticsShow();
+                    }
+                });
+                menu.add(mit);
+            }
+            {   /// 添加分隔符
+                menu.addSeparator();
+            }
+            {   /// 添加Exit操作
+                MenuItem mit = new MenuItem("Exit");
+                mit.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e) {
+                        System.exit(0);
+                    }
+                });
+                menu.add(mit);
+            }
+            menu.show(this, evt.getX(), evt.getY());
+        } else if (evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
+            onStaticsShow();
         }
     }//GEN-LAST:event_formMouseClicked
 
+    private void onStaticsShow() {
+        if (m_mainWindow == null) {
+            MainWindow wd = new MainWindow();
+            wd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            m_mainWindow = wd;
+        }
+        m_mainWindow.setVisible(true);
+    }
+    private JFrame m_mainWindow = null;
+
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
-        if(!m_keyPressed)return;
+        if (!m_keyPressed) {
+            return;
+        }
 //        System.out.printf("In\n");
         Point pos2 = evt.getLocationOnScreen();
-        this.setLocation(pos2.x-m_inPos.x, pos2.y-m_inPos.y);
+        this.setLocation(pos2.x - m_inPos.x, pos2.y - m_inPos.y);
     }//GEN-LAST:event_formMouseMoved
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
@@ -139,8 +177,7 @@ public class SmallWindow extends javax.swing.JFrame implements IPacketPoolEventL
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         this.formMouseMoved(evt);
     }//GEN-LAST:event_formMouseDragged
-
-    private boolean  m_keyPressed;
+    private boolean m_keyPressed;
     private Point m_inPos;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -151,11 +188,10 @@ public class SmallWindow extends javax.swing.JFrame implements IPacketPoolEventL
     // End of variables declaration//GEN-END:variables
 
     public void onPoolRefresh(IPacketPoolEvent e) {
-        double us = e.getUploadSpeed()/1024;
-        double ds = e.getDownloadSpeed()/1024;
-        this.ui_downloadSpeed.setText(String.format("%.1f KB/S",us));
+        double us = e.getUploadSpeed() / 1024;
+        double ds = e.getDownloadSpeed() / 1024;
+        this.ui_downloadSpeed.setText(String.format("%.1f KB/S", us));
         this.ui_uploadSpeed.setText(String.format("%.1f KB/S", ds));
-        
     }
 
     public boolean isEnable() {
@@ -165,5 +201,4 @@ public class SmallWindow extends javax.swing.JFrame implements IPacketPoolEventL
     public boolean isConcern() {
         return true;
     }
-
 }
