@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,12 +21,11 @@ import java.util.logging.Logger;
  * @author Reyoung
  */
 public class FlowHistoryInfo extends HistoryInfo{
-    public HashMap<Date,Flow> Data;
+    public Map<Date,Flow> Data;
     public FlowHistoryInfo(Date From,Date To){
         super(From,To);
         Data = new HashMap<Date, Flow>();
     }
-    
     @Override
     protected void process() {
         IDatabaseProxy ins = Database.instance();
