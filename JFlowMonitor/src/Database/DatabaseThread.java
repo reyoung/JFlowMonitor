@@ -20,6 +20,8 @@ public class DatabaseThread extends Thread{
     }
     public void run()
     {
-        Database.instance().savePacket(p);
+        synchronized(this){
+            Database.instance().savePacket(p);
+        }
     }
 }

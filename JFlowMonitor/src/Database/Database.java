@@ -36,7 +36,7 @@ public class Database implements IDatabaseProxy{
         }
     }
     private static Database instance=null;
-    public static IDatabaseProxy instance()
+    public synchronized static IDatabaseProxy instance()
     {
         if(instance==null){
             instance = new Database();
