@@ -87,14 +87,14 @@ public class ListenThread extends Thread {
                         break;
                     } else {
                         Packet p = new Packet();
-                        p.DIP = s;
-                        p.SIP = d;
+                        p.DIP = d;
+                        p.SIP = s;
                         p.DPort = sp;
                         p.SPort = tp;
                         p.PackLen = packet.getCaptureHeader().caplen();
                         p.RecvTime = arriveTime;
                         if (s == GetDeviceIpInt(m_dev) || d == GetDeviceIpInt(m_dev)) {
-                            p.IsUpdate = (GetDeviceIpInt(m_dev) != s); //! TODO upload download refine.
+                            p.IsUpdate = (GetDeviceIpInt(m_dev) == s); //! TODO upload download refine.
                             p.PacketFlag = flag;
                             synchronized (ListenThread.this) {
                                 List<IPacketListener> listeners = m_network.getPacketListeners();

@@ -190,8 +190,8 @@ public class SmallWindow extends javax.swing.JFrame implements IPacketPoolEventL
     public void onPoolRefresh(IPacketPoolEvent e) {
         double us = e.getUploadSpeed() / 1024;
         double ds = e.getDownloadSpeed() / 1024;
-        this.ui_downloadSpeed.setText(String.format("%.1f KB/S", us));
-        this.ui_uploadSpeed.setText(String.format("%.1f KB/S", ds));
+        this.ui_downloadSpeed.setText(String.format("%.1f KB/S", ds));
+        this.ui_uploadSpeed.setText(String.format("%.1f KB/S", us));
     }
 
     public boolean isEnable() {
