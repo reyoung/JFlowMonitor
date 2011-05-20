@@ -32,6 +32,7 @@ public class SmallWindow extends javax.swing.JFrame implements IPacketPoolEventL
         initComponents();
         m_keyPressed = false;
         PacketPool.Instance().addPacketPoolListener(this);
+        this.setAlwaysOnTop(true);
     }
 
     /** This method is called from within the constructor to
