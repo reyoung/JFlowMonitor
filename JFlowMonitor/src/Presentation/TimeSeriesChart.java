@@ -91,6 +91,7 @@ public class TimeSeriesChart extends JPanel {
         plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
         domain.setAutoRange(true);
         range.setAutoRangeMinimumSize(10);
+        range.setLowerBound(0);  
         domain.setLowerMargin(0.0);
         domain.setUpperMargin(0.0);
         domain.setTickLabelsVisible(true);
