@@ -28,7 +28,8 @@ public class DatabaseAppender implements IPacketPoolEventListener{
 
     public void onPoolRefresh(IPacketPoolEvent e) {
         List<IPacket> packets = e.getRawPackets();
-        Database.instance().savePacket(packets);
+        DatabaseThread dt = new DatabaseThread(packets);
+        dt.start();
     }
 
     /**
