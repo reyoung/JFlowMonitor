@@ -11,16 +11,16 @@ import java.util.List;
  *
  * @author Reyoung
  */
-public class MostVisitedSiteHistoryInfo extends RawPacketHistoryInfo{
+public class MostFlowedSiteHistoryInfo extends RawPacketHistoryInfo{
 
-    List<String > m_siteIp;
-    public MostVisitedSiteHistoryInfo(Date From,Date To,int N) {
+    public List<String > Sites;
+    public MostFlowedSiteHistoryInfo(Date From,Date To,int N) {
         super(From,To);
     }
 
     @Override
     protected void process(){
         super.process();
-        //! TODO Process MostVisitedSite History Info
+        
     }
 }
