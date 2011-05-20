@@ -20,7 +20,7 @@ public class Main{
      */
     public static void main(String args[]) {
         CernetPacketFilter.Initialize("Cernet");
-//        PacketPool.Instance().addPacketPoolListener(DatabaseAppender.Instance());
+        PacketPool.Instance().addPacketPoolListener(DatabaseAppender.Instance());
         INetwork in = Network.Network.Instance();
         in.startListenThreads();
         java.awt.EventQueue.invokeLater(new Runnable() {

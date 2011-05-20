@@ -36,7 +36,7 @@ public class Database implements IDatabaseProxy{
         }
     }
     private static Database instance=null;
-    public static IDatabaseProxy instance()
+    public synchronized static IDatabaseProxy instance()
     {
         if(instance==null){
             instance = new Database();
@@ -46,6 +46,7 @@ public class Database implements IDatabaseProxy{
     public void savePacket(List<IPacket> p)
     {
         try {
+            conn.setAutoCommit(false);
             Statement stat = conn.createStatement();
             for(int i=0 ; i<p.size() ; ++i)
             {
@@ -78,12 +79,19 @@ public class Database implements IDatabaseProxy{
                 stat.addBatch(insertSql);
             }
             stat.executeBatch();
+            conn.commit();
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+
         }
     }
     public List<Packet> getPacket(Date from,Date to) throws SQLException
     {
+        conn.setAutoCommit(true);
         Statement stat = conn.createStatement();
         Long fd = from.getTime();
         Long td = to.getTime();
@@ -148,6 +156,7 @@ public class Database implements IDatabaseProxy{
     public List<Flow> getFlow(Date from, Date to) throws SQLException
     {
         List<Flow> sDate = new ArrayList<Flow>();
+        conn.setAutoCommit(true);
         Statement stat = conn.createStatement();
         int fromYear = from.getYear()+1900;
         int fromMonth = from.getMonth()+1;
@@ -186,6 +195,7 @@ public class Database implements IDatabaseProxy{
     }
     public void compress(Date cdate)throws SQLException
     {
+        conn.setAutoCommit(true);
         Statement stat = conn.createStatement();
         Long deadtime = cdate.getTime();
         String sqlQuery = "select * from Detail where PRecvTime < ";
