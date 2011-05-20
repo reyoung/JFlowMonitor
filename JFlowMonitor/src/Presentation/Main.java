@@ -25,7 +25,7 @@ public class Main{
         in.startListenThreads();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UIFrame1().setVisible(true);
+                new MainWindow().setVisible(true);
                 new SmallWindow().setVisible(true);
             }
         });
