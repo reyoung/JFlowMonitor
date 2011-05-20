@@ -6,22 +6,38 @@
 package Database;
 
 import Network.IPacket;
+import Network.Packet;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 
 /**
  *
  * @author Kuziki
  */
-public class DatabaseThread extends Thread{
+public class DatabaseThread{
     private List<IPacket> p = null;
-    public DatabaseThread(List<IPacket> packet)
+    private Timer timer;
+    public  DatabaseThread()
     {
-        p = packet;
+        p = new ArrayList<IPacket>();
+        timer = new Timer();
+//        timer.schedule(new MyTask(), 0, 10000);
+        timer.schedule(new MyTask(),0,10000);
     }
-    public void run()
+    public void addPackets(List<IPacket> packet)
     {
-        synchronized(this){
-            Database.instance().savePacket(p);
+        p.addAll(packet);
+    }
+    class MyTask extends java.util.TimerTask{
+        @Override
+        public void run(){
+            if(p != null && p.size() > 0)
+            {
+                Database.instance().savePacket(p);
+                p.clear();
+            }
         }
     }
+
 }

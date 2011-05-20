@@ -86,7 +86,6 @@ public class Database implements IDatabaseProxy{
             } catch (SQLException ex1) {
                 Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex1);
             }
-
         }
     }
     public List<Packet> getPacket(Date from,Date to) throws SQLException
