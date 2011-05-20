@@ -11,8 +11,6 @@ import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -38,8 +36,12 @@ public class TimeSeriesChart extends JPanel {
 
     /** Time series for total memory used. */
     private TimeSeries total;
+    private TimeSeries upinn;
+    private TimeSeries upout;
     /** Time series for free memory. */
     private TimeSeries free;
+    private TimeSeries dninn;
+    private TimeSeries dnout;
 
     /**
      * Creates a new application.
@@ -52,13 +54,26 @@ public class TimeSeriesChart extends JPanel {
 // seconds old...
         this.total = new TimeSeries("Upload", Millisecond.class);
         this.total.setMaximumItemAge(historyCount);
+        this.upinn = new TimeSeries("UpInner", Millisecond.class);
+        this.upinn.setMaximumItemAge(historyCount);
+        this.upout = new TimeSeries("UpOuter", Millisecond.class);
+        this.upout.setMaximumItemAge(historyCount);
         this.free = new TimeSeries("Download", Millisecond.class);
         this.free.setMaximumItemAge(historyCount);
+        this.dninn = new TimeSeries("DownInner", Millisecond.class);
+        this.dninn.setMaximumItemAge(historyCount);
+        this.dnout = new TimeSeries("DownOuter", Millisecond.class);
+        this.dnout.setMaximumItemAge(historyCount);
+
         TimeSeriesCollection dataset = new TimeSeriesCollection();
         dataset.addSeries(this.total);
+        dataset.addSeries(this.upinn);
+        dataset.addSeries(this.upout);
         dataset.addSeries(this.free);
+        dataset.addSeries(this.dninn);
+        dataset.addSeries(this.dnout);
         DateAxis domain = new DateAxis("Time");
-        NumberAxis range = new NumberAxis("Memory");
+        NumberAxis range = new NumberAxis("Flow");
         domain.setTickLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         range.setTickLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         domain.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -66,6 +81,7 @@ public class TimeSeriesChart extends JPanel {
         XYItemRenderer renderer = new XYLineAndShapeRenderer(true, false);
         renderer.setSeriesPaint(0, Color.red);
         renderer.setSeriesPaint(1, Color.green);
+
         renderer.setStroke(
                 new BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
         XYPlot plot = new XYPlot(dataset, domain, range, renderer);
@@ -89,10 +105,20 @@ public class TimeSeriesChart extends JPanel {
                 BorderFactory.createEmptyBorder(4, 4, 4, 4),
                 BorderFactory.createLineBorder(Color.black)));
         add(chartPanel);
+//        for(int i=0;i<10;i++){
+//            this.total.add(new Millisecond(), 0);
+//            this.free.add(new Millisecond(), 0);
+//        }
     }
 
-    private void addTotalObservation(double y) {
+    private void addUploadObservation(double y) {
         this.total.add(new Millisecond(), y);
+    }
+    private void addUpinnObservation(double y) {
+        this.upinn.add(new Millisecond(), y);
+    }
+    private void addUpoutObservation(double y) {
+        this.upout.add(new Millisecond(), y);
     }
 
     /**
@@ -100,8 +126,14 @@ public class TimeSeriesChart extends JPanel {
      *
      * @param y the free memory.
      */
-    private void addFreeObservation(double y) {
+    private void addDownloadObservation(double y) {
         this.free.add(new Millisecond(), y);
+    }
+    private void addDowninnObservation(double y) {
+        this.dninn.add(new Millisecond(), y);
+    }
+    private void addDownoutObservation(double y) {
+        this.dnout.add(new Millisecond(), y);
     }
 
     /**
@@ -118,6 +150,10 @@ public class TimeSeriesChart extends JPanel {
             super(interval, null);
 //            addActionListener(this);
             PacketPool.Instance().addPacketPoolListener(this);
+//            for(int i=0;i<50;i++){
+//                addUploadObservation(0);
+//                addDownloadObservation(0);
+//            }
         }
 
         /**
@@ -128,15 +164,23 @@ public class TimeSeriesChart extends JPanel {
 //        public void actionPerformed(ActionEvent event) {
 //            long f = Runtime.getRuntime().freeMemory();
 //            long t = Runtime.getRuntime().totalMemory();
-//            addTotalObservation(t);
-//            addFreeObservation(f);
+//            addUploadObservation(t);
+//            addDownloadObservation(f);
 //        }
 
         public void onPoolRefresh(IPacketPoolEvent e) {
             double us = e.getUploadSpeed()/1024;
+            double ui = e.getInnerUploadSpeed()/1024;
+            double uo = e.getOutterUploadSpeed()/1024;
             double ds = e.getDownloadSpeed()/1024;
-            addTotalObservation(us);
-            addFreeObservation(ds);
+            double di = e.getInnerDownloadSpeed()/1024;
+            double dout = e.getOutterDownloadSpeed()/1024;
+            addUploadObservation(us);
+            addUpinnObservation(ui);
+            addUpoutObservation(uo);
+            addDownloadObservation(ds);
+            addDowninnObservation(di);;
+            addDownoutObservation(dout);
         }
 
         public boolean isEnable() {
