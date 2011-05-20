@@ -7,18 +7,21 @@ package Logic.History;
 import Database.Flow;
 import Logic.Filters.CernetPacketFilter;
 import Network.IPacket;
-import java.util.Calendar;
+//import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Hashtable;
+//import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
+//import java.util.ListIterator;
 import java.util.Map;
-import oracle.toplink.essentials.internal.expressions.LogicalExpression;
+//import oracle.toplink.essentials.internal.expressions.LogicalExpression;
 
 /**
- *
+ * HistoryInfo是UI层访问数据库历史的唯一通道！
+ *  他可以获得UI层所需要的所有历史数据。
+ *  比如，从某天到某天的简单流量信息，可以为
+ *      FlowHistoryInfo info = new FlowHistoryInfo(BeginDate,EndDate);
  * @author Reyoung
  */
 public abstract class HistoryInfo {
