@@ -23,6 +23,7 @@ public class FlowHistoryInfo extends HistoryInfo{
     public HashMap<Date,Flow> Data;
     public FlowHistoryInfo(Date From,Date To){
         super(From,To);
+        Data = new HashMap<Date, Flow>();
     }
     
     @Override
@@ -31,10 +32,13 @@ public class FlowHistoryInfo extends HistoryInfo{
         try {
             List<Flow> flow = ins.getFlow(FromDate, ToDate);
             List<IPacket> ipckets = ins.getPacket(FromDate, ToDate);
+            Data.putAll(ConvertPacketToFlow(ipckets));
+            for(Flow f:flow){
+                Data.put(f.sDate,f);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(FlowHistoryInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 }
 

@@ -4,7 +4,18 @@
 
 package Logic.History;
 
+import Database.Flow;
+import Logic.Filters.CernetPacketFilter;
+import Network.IPacket;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import oracle.toplink.essentials.internal.expressions.LogicalExpression;
 
 /**
  *
@@ -22,6 +33,39 @@ public abstract class HistoryInfo {
         this.Complete = false;
         this.process();
     }
+    static protected Date NormalizeDate(Date date){
+        int d = date.getDate();
+        int m = date.getMonth();
+        int y = date.getYear();
+        return new Date(y, m, d);
+    }
+    static protected Map<Date,Flow> ConvertPacketToFlow(List<IPacket> packs){
+        Map<Date,Flow> table = new HashMap<Date, Flow>();
+        Iterator<IPacket> it = packs.iterator();
+        while(it.hasNext()){
+            IPacket p = it.next();
+            Date recv = p.getPacketRecvTime();
+            recv = NormalizeDate(recv);
+            if(table.containsKey(recv)){
+                Flow f = table.get(recv);
+                boolean isIn = CernetPacketFilter.Instance().check(p);
+                if(isIn)
+                    f.innerSize+=p.getPacketLength();
+                else
+                    f.outerSize+=p.getPacketLength();
+            }else{
+                Flow f = new Flow();
+                boolean isIn = CernetPacketFilter.Instance().check(p);
+                if(isIn)
+                    f.innerSize+=p.getPacketLength();
+                else
+                    f.outerSize+=p.getPacketLength();
+                table.put(recv, f);
+            }
+        }
+        return table;
+    }
+
 
     abstract protected  void process();
 }
