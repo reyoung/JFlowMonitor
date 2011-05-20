@@ -35,11 +35,11 @@ import org.jfree.ui.RectangleInsets;
 public class TimeSeriesChart extends JPanel {
 
     /** Time series for total memory used. */
-    private TimeSeries total;
+    private TimeSeries upload;
     private TimeSeries upinn;
     private TimeSeries upout;
     /** Time series for free memory. */
-    private TimeSeries free;
+    private TimeSeries down;
     private TimeSeries dninn;
     private TimeSeries dnout;
 
@@ -52,24 +52,24 @@ public class TimeSeriesChart extends JPanel {
         super(new BorderLayout());
 // create two series that automatically discard data more than 30
 // seconds old...
-        this.total = new TimeSeries("Upload", Millisecond.class);
-        this.total.setMaximumItemAge(historyCount);
+        this.upload = new TimeSeries("Upload", Millisecond.class);
+        this.upload.setMaximumItemAge(historyCount);
         this.upinn = new TimeSeries("UpInner", Millisecond.class);
         this.upinn.setMaximumItemAge(historyCount);
         this.upout = new TimeSeries("UpOuter", Millisecond.class);
         this.upout.setMaximumItemAge(historyCount);
-        this.free = new TimeSeries("Download", Millisecond.class);
-        this.free.setMaximumItemAge(historyCount);
+        this.down = new TimeSeries("Download", Millisecond.class);
+        this.down.setMaximumItemAge(historyCount);
         this.dninn = new TimeSeries("DownInner", Millisecond.class);
         this.dninn.setMaximumItemAge(historyCount);
         this.dnout = new TimeSeries("DownOuter", Millisecond.class);
         this.dnout.setMaximumItemAge(historyCount);
 
         TimeSeriesCollection dataset = new TimeSeriesCollection();
-        dataset.addSeries(this.total);
+        dataset.addSeries(this.upload);
         dataset.addSeries(this.upinn);
         dataset.addSeries(this.upout);
-        dataset.addSeries(this.free);
+        dataset.addSeries(this.down);
         dataset.addSeries(this.dninn);
         dataset.addSeries(this.dnout);
         DateAxis domain = new DateAxis("Time");
@@ -90,6 +90,7 @@ public class TimeSeriesChart extends JPanel {
         plot.setRangeGridlinePaint(Color.white);
         plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
         domain.setAutoRange(true);
+        range.setAutoRangeMinimumSize(10);
         domain.setLowerMargin(0.0);
         domain.setUpperMargin(0.0);
         domain.setTickLabelsVisible(true);
@@ -112,7 +113,7 @@ public class TimeSeriesChart extends JPanel {
     }
 
     private void addUploadObservation(double y) {
-        this.total.add(new Millisecond(), y);
+        this.upload.add(new Millisecond(), y);
     }
     private void addUpinnObservation(double y) {
         this.upinn.add(new Millisecond(), y);
@@ -127,7 +128,7 @@ public class TimeSeriesChart extends JPanel {
      * @param y the free memory.
      */
     private void addDownloadObservation(double y) {
-        this.free.add(new Millisecond(), y);
+        this.down.add(new Millisecond(), y);
     }
     private void addDowninnObservation(double y) {
         this.dninn.add(new Millisecond(), y);
