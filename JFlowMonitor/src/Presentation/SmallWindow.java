@@ -20,6 +20,7 @@ import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.Format;
+import javax.swing.JFrame;
 
 /**
  *
@@ -127,12 +128,14 @@ public class SmallWindow extends javax.swing.JFrame implements IPacketPoolEventL
             menu.add(mit);
             menu.show(this, evt.getX(),evt.getY());
         }else if(evt.getButton() == java.awt.event.MouseEvent.BUTTON1){
-            
+            onStaticsShow();
         }
     }//GEN-LAST:event_formMouseClicked
 
     private void onStaticsShow(){
-        
+        MainWindow wd = new MainWindow();
+        wd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        wd.setVisible(true);   
     }
 
 
