@@ -14,8 +14,11 @@ import Logic.PacketPool.IPacketPoolEvent;
 import Logic.PacketPool.IPacketPoolEventListener;
 import Logic.PacketPool.PacketPool;
 import java.awt.Dimension;
+import java.awt.MenuItem;
 import java.awt.Point;
 import java.awt.PopupMenu;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.Format;
 
 /**
@@ -115,10 +118,24 @@ public class SmallWindow extends javax.swing.JFrame implements IPacketPoolEventL
         if(evt.getButton() == java.awt.event.MouseEvent.BUTTON3){
             PopupMenu menu = new PopupMenu();
             this.add(menu);
-            menu.add("Exit");
+            MenuItem mit = new MenuItem("Exit");
+            mit.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+            menu.add(mit);
             menu.show(this, evt.getX(),evt.getY());
+        }else if(evt.getButton() == java.awt.event.MouseEvent.BUTTON1){
+            
         }
     }//GEN-LAST:event_formMouseClicked
+
+    private void onStaticsShow(){
+        
+    }
+
+
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         if(!m_keyPressed)return;
