@@ -13,13 +13,18 @@ import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 /**
  *
  * @author YQ
  */
 public class TrayIconWindow {
-    public void StartTrayIcon()
+    public TrayIconWindow(){
+        initComponents();
+    }
+    private void initComponents()
     {
          try
         {
@@ -27,7 +32,7 @@ public class TrayIconWindow {
             {// 判断当前平台是否支持系统托盘
                 SystemTray st = SystemTray.getSystemTray();
                 Image image = Toolkit.getDefaultToolkit().getImage(
-                        "/Presentation/arrow-up-double.png");//定义托盘图标的图片
+                        "/Presentation/tray-icon-16.png");//定义托盘图标的图片
                 PopupMenu pm = new PopupMenu();//创建右键菜单
                 MenuItem changeUserMenu = new MenuItem("Show Statics");
                 changeUserMenu.addActionListener(new ActionListener()
@@ -46,6 +51,7 @@ public class TrayIconWindow {
                     }
                 });
                 pm.add(changeUserMenu);
+                pm.addSeparator();
                 pm.add(exitMenu);
                 TrayIcon ti = new TrayIcon(image, "JFlowMonitor", pm);
                 ti.setImageAutoSize(true);
