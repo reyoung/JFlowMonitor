@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentation;
+package Presentation.Statics;
 
 import Logic.PacketPool.IPacketPoolEvent;
 import Logic.PacketPool.IPacketPoolEventListener;

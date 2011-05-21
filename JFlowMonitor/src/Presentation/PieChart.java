@@ -4,12 +4,11 @@
  */
 package Presentation;
 
-import Database.Database;
-import Database.IDatabaseProxy;
-import java.sql.SQLException;
-import java.util.Date;
+
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
@@ -17,14 +16,11 @@ import org.jfree.data.general.DefaultPieDataset;
  *
  * @author Administrator
  */
-public class PieChart {
+public class PieChart extends JPanel{
     private DefaultPieDataset dataset = new DefaultPieDataset();
     private int flowFir;
-    public PieChart(Date d){
-
-    }
-    public void Init(){
-
+    public PieChart(){
+        super(new BorderLayout());
         dataset.setValue("WebSite 1", flowFir);
         dataset.setValue("WebSite 2", 27.9);
         dataset.setValue("WebSite 3", 79.5);
@@ -37,8 +33,11 @@ public class PieChart {
                 false // URLs?
                 );
         // create and display a frame...
-        ChartFrame frame = new ChartFrame("Test", chart);
-        frame.pack();
-        frame.setVisible(true);
+//        ChartFrame frame = new ChartFrame("Test", chart);
+//        frame.pack();
+//        frame.setVisible(true);
+        ChartPanel chartPanel = new ChartPanel(chart);
+        add(chartPanel);
     }
+   
 }
