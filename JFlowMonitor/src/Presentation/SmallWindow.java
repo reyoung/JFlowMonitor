@@ -12,6 +12,7 @@ package Presentation;
 import Logic.PacketPool.IPacketPoolEvent;
 import Logic.PacketPool.IPacketPoolEventListener;
 import Logic.PacketPool.PacketPool;
+import Presentation.Statics.StaticsMain;
 import java.awt.Dimension;
 import java.awt.MenuItem;
 import java.awt.Point;
@@ -149,7 +150,7 @@ public class SmallWindow extends javax.swing.JFrame implements IPacketPoolEventL
 
     private void onStaticsShow() {
         if (m_mainWindow == null) {
-            MainWindow wd = new MainWindow();
+            StaticsMain wd = new StaticsMain();
             wd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             m_mainWindow = wd;
         }

@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Database;
 
 import Network.IPacket;
@@ -15,29 +14,32 @@ import java.util.Timer;
  *
  * @author Kuziki
  */
-public class DatabaseThread{
+public class DatabaseThread {
+
     private List<IPacket> p = null;
     private Timer timer;
-    public  DatabaseThread()
-    {
+
+    public DatabaseThread() {
         p = new ArrayList<IPacket>();
         timer = new Timer();
 //        timer.schedule(new MyTask(), 0, 10000);
-        timer.schedule(new MyTask(),0,10000);
+        timer.schedule(new MyTask(), 0, 10000);
     }
-    public void addPackets(List<IPacket> packet)
-    {
+
+    public void addPackets(List<IPacket> packet) {
         p.addAll(packet);
     }
-    class MyTask extends java.util.TimerTask{
+
+    class MyTask extends java.util.TimerTask {
+
         @Override
-        public void run(){
-            if(p != null && p.size() > 0)
-            {
+        public void run() {
+//            synchronized (p) {
+            if (p != null && p.size() > 0) {
                 Database.instance().savePacket(p);
                 p.clear();
             }
+//            }
         }
     }
-
 }

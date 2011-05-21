@@ -34,6 +34,9 @@ public abstract class HistoryInfo {
         this.FromDate = FromDate;
         this.ToDate = ToDate;
         this.Complete = false;
+//        this.process();
+    }
+    public void init(){
         this.process();
     }
     static protected Date NormalizeDate(Date date){
@@ -68,7 +71,5 @@ public abstract class HistoryInfo {
         }
         return table;
     }
-
-
     abstract protected  void process();
 }
