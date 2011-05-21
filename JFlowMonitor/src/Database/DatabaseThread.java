@@ -34,12 +34,12 @@ public class DatabaseThread {
 
         @Override
         public void run() {
-            synchronized (p) {
-                if (p != null && p.size() > 0) {
-                    Database.instance().savePacket(p);
-                    p.clear();
-                }
+//            synchronized (p) {
+            if (p != null && p.size() > 0) {
+                Database.instance().savePacket(p);
+                p.clear();
             }
+//            }
         }
     }
 }

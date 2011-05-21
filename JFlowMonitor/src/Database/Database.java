@@ -48,9 +48,10 @@ public class Database implements IDatabaseProxy{
         try {
             conn.setAutoCommit(false);
             Statement stat = conn.createStatement();
-//            for(int i=0 ; i<p.size() ; ++i) // Change to Foreach
-            for(IPacket pack : p)
+            for(int i=0 ; i<p.size() ; ++i) // Change to Foreach
+//            for(IPacket pack : p)
             {
+                IPacket pack = p.get(i);
                 Date rdate=pack.getPacketRecvTime();
                 int sip  = pack.getSourceAddress();
                 int dip  = pack.getDestAddress();
