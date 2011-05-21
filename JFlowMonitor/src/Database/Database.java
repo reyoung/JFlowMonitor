@@ -36,54 +36,47 @@ public class Database implements IDatabaseProxy{
         }
     }
     private static Database instance=null;
-    public static IDatabaseProxy instance()
+    public synchronized static IDatabaseProxy instance()
     {
         if(instance==null){
             instance = new Database();
         }
         return instance;
     }
-    public void savePacket(List<IPacket> p)
+    synchronized public void savePacket(List<IPacket> p)
     {
         try {
+            conn.setAutoCommit(false);
             Statement stat = conn.createStatement();
-            for(int i=0 ; i<p.size() ; ++i)
+            for(int i=0 ; i<p.size() ; ++i) // Change to Foreach
+//            for(IPacket pack : p)
             {
-                Date rdate= p.get(i).getPacketRecvTime();
-                int sip  = p.get(i).getSourceAddress();
-                int dip  = p.get(i).getDestAddress();
-                int sport = p.get(i).getSourcePort();
-                int dport = p.get(i).getDestPort();
-                int size = p.get(i).getPacketLength();
-                int flag = p.get(i).getPacketFlag();
-                boolean  UpOrDown = p.get(i).isUpload();
-                String insertSql = "insert into Detail(PRecvTime,PS_IP,PD_IP,PS_Port,PD_Port,PSize,PIsUpload,PFlag) values(";
-                insertSql += Long.toString(rdate.getTime());
-                insertSql += ",";
-                insertSql += Integer.toString(sip);
-                insertSql += ",";
-                insertSql += Integer.toString(dip);
-                insertSql += ",";
-                insertSql += Integer.toString(sport);
-                insertSql += ",";
-                insertSql += Integer.toString(dport);
-                insertSql += ",";
-                insertSql += Integer.toString(size);
-                insertSql += ",";
-                int t = ((UpOrDown) ? 1 : 0);
-                insertSql += Integer.toString(t);
-                insertSql += ",";
-                insertSql += Integer.toString(flag);
-                insertSql += ")";
+                IPacket pack = p.get(i);
+                Date rdate=pack.getPacketRecvTime();
+                int sip  = pack.getSourceAddress();
+                int dip  = pack.getDestAddress();
+                int sport = pack.getSourcePort();
+                int dport = pack.getDestPort();
+                int size = pack.getPacketLength();
+                int flag = pack.getPacketFlag();
+                boolean  UpOrDown = pack.isUpload();
+                String insertSql = String.format("insert into Detail(PRecvTime,PS_IP,PD_IP,PS_Port,PD_Port,PSize,PIsUpload,PFlag) values(%d,%d,%d,%d,%d,%d,%d,%d)"
+                        , rdate.getTime(),sip,dip,sport,dport,size,UpOrDown?1:0,flag);
                 stat.addBatch(insertSql);
             }
             stat.executeBatch();
+            conn.commit();
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
     }
-    public List<Packet> getPacket(Date from,Date to) throws SQLException
+    public List<IPacket> getPacket(Date from,Date to) throws SQLException
     {
+        conn.setAutoCommit(true);
         Statement stat = conn.createStatement();
         Long fd = from.getTime();
         Long td = to.getTime();
@@ -92,7 +85,7 @@ public class Database implements IDatabaseProxy{
         sqlQuery += " and PRecvTime < ";
         sqlQuery += Long.toString(td);
         ResultSet rs = stat.executeQuery(sqlQuery);
-        List< Packet > p = new ArrayList< Packet >();
+        List< IPacket > p = new ArrayList< IPacket >();
         while(rs.next())
         {
             Packet pack = new Packet();
@@ -111,7 +104,7 @@ public class Database implements IDatabaseProxy{
         rs.close();
         return p;
     }
-    public List<Packet> getPacket(Date cdate) throws SQLException
+    public List<IPacket> getPacket(Date cdate) throws SQLException
     {
         int year = cdate.getYear();
         int month = cdate.getMonth();
@@ -148,6 +141,7 @@ public class Database implements IDatabaseProxy{
     public List<Flow> getFlow(Date from, Date to) throws SQLException
     {
         List<Flow> sDate = new ArrayList<Flow>();
+        conn.setAutoCommit(true);
         Statement stat = conn.createStatement();
         int fromYear = from.getYear()+1900;
         int fromMonth = from.getMonth()+1;
@@ -186,6 +180,7 @@ public class Database implements IDatabaseProxy{
     }
     public void compress(Date cdate)throws SQLException
     {
+        conn.setAutoCommit(true);
         Statement stat = conn.createStatement();
         Long deadtime = cdate.getTime();
         String sqlQuery = "select * from Detail where PRecvTime < ";

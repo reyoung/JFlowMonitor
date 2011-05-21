@@ -18,17 +18,19 @@ import java.util.List;
 public class DatabaseAppender implements IPacketPoolEventListener{
     private DatabaseAppender(){
     }
+    static private DatabaseThread dt;
     static private DatabaseAppender instance = null;
     public static IPacketPoolEventListener Instance(){
         if(instance == null){
             instance = new DatabaseAppender();
+            dt = new DatabaseThread();
         }
         return instance;
     }
-
+    private static int PSize = 0;
     public void onPoolRefresh(IPacketPoolEvent e) {
         List<IPacket> packets = e.getRawPackets();
-        Database.instance().savePacket(packets);
+        dt.addPackets(packets);
     }
 
     /**

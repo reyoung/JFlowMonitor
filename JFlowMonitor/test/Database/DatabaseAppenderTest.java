@@ -54,7 +54,6 @@ public class DatabaseAppenderTest {
         IPacketPoolEvent e = null;
         DatabaseAppender instance = null;
         instance.onPoolRefresh(e);
-        
     }
 
     /**

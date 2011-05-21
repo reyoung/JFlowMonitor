@@ -16,4 +16,9 @@ public class Flow {
     public Date sDate;
     public int innerSize;
     public int outerSize;
+    public Flow(){
+        innerSize = 0;
+        outerSize = 0;
+        sDate = new Date();
+    }
 }

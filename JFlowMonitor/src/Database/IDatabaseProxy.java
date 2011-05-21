@@ -16,8 +16,8 @@ import java.util.List;
  */
 public interface IDatabaseProxy {
     public void savePacket(List<IPacket> p);//N个包插一次
-    public List<Packet> getPacket(Date cdate)throws SQLException;//查询某一天的包
-    public List<Packet> getPacket(Date from,Date to) throws SQLException;//查询几天之间的包
+    public List<IPacket> getPacket(Date cdate)throws SQLException;//查询某一天的包
+    public List<IPacket> getPacket(Date from,Date to) throws SQLException;//查询几天之间的包
     public List<Flow> getFlow(Date from,Date to)throws SQLException;//查询几天之间的流量
     public Flow getFlow(Date cdate)throws SQLException;//查询某天的流量
     public void compress(Date cDate)throws SQLException;//将指定时间范围内的详细信息压缩成简表条目
