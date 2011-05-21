@@ -17,8 +17,9 @@ public class TestPage extends AbstractStaticsPage{
 
     @Override
     protected Component doGetWidget() {
+        QDateChooser q=new QDateChooser();
         Label l = new Label("Hello world");
-        return l;
+        return q;
     }
 
     @Override

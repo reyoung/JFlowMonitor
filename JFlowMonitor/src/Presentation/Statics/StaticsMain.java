@@ -74,8 +74,8 @@ public class StaticsMain extends javax.swing.JFrame {
             }
             m_widget = ip.getWidget();
             StaticsMain.this.add(m_widget);
-            m_widget.setLocation(20, 100);
-            m_widget.setSize(480, 320);
+            m_widget.setLocation(20, 60);
+            m_widget.setSize(480, 400);
             m_widget.setVisible(true);
         }
     }
