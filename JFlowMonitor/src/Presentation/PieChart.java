@@ -18,25 +18,13 @@ import org.jfree.data.general.DefaultPieDataset;
  * @author Administrator
  */
 public class PieChart {
-//    private IDatabaseProxy iDP;
+    private DefaultPieDataset dataset = new DefaultPieDataset();
     private int flowFir;
     public PieChart(Date d){
-        try{
-        IDatabaseProxy iDP=Database.instance();
-        flowFir=iDP.getFlow(d).innerSize;
-        System.out.println(flowFir);
-        Init();
-        }
-        catch(SQLException e){
-        }
+
     }
     public void Init(){
-        // create a dataset...
-//        Date d=new Date();
-//        int i=d.getDay();
-//        System.out.println(""+iDP.getFlow(d).innerSize);
-//        System.out.println(""+i);
-        DefaultPieDataset dataset = new DefaultPieDataset();
+
         dataset.setValue("WebSite 1", flowFir);
         dataset.setValue("WebSite 2", 27.9);
         dataset.setValue("WebSite 3", 79.5);
