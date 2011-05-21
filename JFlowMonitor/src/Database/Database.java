@@ -98,7 +98,7 @@ public class Database implements IDatabaseProxy{
             pack.DPort = rs.getInt(5);
             pack.PackLen = rs.getInt(6);
             pack.IsUpdate = rs.getBoolean(7);
-            pack.PacketFlag = rs.getInt(8);
+            pack.PacketFlag = rs.getInt("PFlag");
             p.add(pack);
         }
         rs.close();
