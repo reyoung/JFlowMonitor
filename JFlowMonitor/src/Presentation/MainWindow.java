@@ -11,9 +11,10 @@
 
 package Presentation;
 
+import Presentation.TimeSeriesChart.DataGenerator;
 import java.awt.BorderLayout;
-import java.awt.Container;
-import java.sql.SQLException;
+import java.awt.Button;
+import java.awt.Label;
 import java.util.Date;
 import javax.swing.JFrame;
 
@@ -25,8 +26,18 @@ public class MainWindow extends javax.swing.JFrame {
 
     /** Creates new form UIFrame1 */
     public MainWindow() {
-        
+
+        TimeSeriesChart panel = new TimeSeriesChart(12000,false);
+        panel.new DataGenerator(90).start();
+        panel.setSize(400, 200);
+        panel.setLocation(0,170);
+        this.add(panel);
+//        Label a = new Label("Hello world");
+//        this.add(a);
+//        a.setSize(400, 200);
+//        a.setLocation(0,200);
         initComponents();
+
     }
 
     /** This method is called from within the constructor to
@@ -43,6 +54,7 @@ public class MainWindow extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("流量监控系统");
@@ -82,6 +94,17 @@ public class MainWindow extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,7 +118,8 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -103,7 +127,9 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(204, 204, 204)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1)
@@ -121,12 +147,11 @@ public class MainWindow extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         JFrame frame = new JFrame("Flow observation");
-        TimeSeriesChart panel = new TimeSeriesChart(12000);
+        TimeSeriesChart panel = new TimeSeriesChart(12000,true);
         frame.getContentPane().add(panel, BorderLayout.CENTER);
         frame.setBounds(200, 120, 600, 280);
         frame.setVisible(true);
         panel.new DataGenerator(90).start();
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -135,25 +160,13 @@ public class MainWindow extends javax.swing.JFrame {
         new PieChart(e);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @return the jPanel1
-     */
 
-
-    /**
-     * @param jPanel1 the jPanel1 to set
-     */
-
-
-    /**
-    * @param args the command line arguments
-    */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
