@@ -31,8 +31,6 @@ public class TrayIconWindow {
             if (SystemTray.isSupported())
             {// 判断当前平台是否支持系统托盘
                 SystemTray st = SystemTray.getSystemTray();
-                Image image = Toolkit.getDefaultToolkit().getImage(
-                        "/Presentation/tray-icon-16.png");//定义托盘图标的图片
                 PopupMenu pm = new PopupMenu();//创建右键菜单
                 MenuItem changeUserMenu = new MenuItem("Show Statics");
                 changeUserMenu.addActionListener(new ActionListener()
@@ -53,7 +51,7 @@ public class TrayIconWindow {
                 pm.add(changeUserMenu);
                 pm.addSeparator();
                 pm.add(exitMenu);
-                TrayIcon ti = new TrayIcon(image, "JFlowMonitor", pm);
+                TrayIcon ti = new TrayIcon(new ImageIcon(getClass().getResource("/Presentation/tray-icon-16.png")).getImage(), "JFlowMonitor", pm);
                 ti.setImageAutoSize(true);
                 st.add(ti);
             }
