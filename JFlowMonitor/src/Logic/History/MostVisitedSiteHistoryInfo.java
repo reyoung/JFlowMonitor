@@ -5,6 +5,9 @@
 package Logic.History;
 
 import Network.IPacket;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +16,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -65,7 +70,24 @@ public class MostVisitedSiteHistoryInfo extends ProtocolHistoryInfo{
             }
         });
         for(int i=0;i< (m_limit<auxlist.size()?m_limit:auxlist.size());++i){
-            MostVisitedSite.add(Integer.toString(auxlist.get(i).site));
+            int ip = auxlist.get(i).site;
+            byte [] ipv4 = convertIp(ip);
+            try {
+                InetAddress addr = Inet4Address.getByAddress(ipv4);
+                MostVisitedSite.add(addr.toString());
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(MostVisitedSiteHistoryInfo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
+    }
+
+    static byte [] convertIp(int ipv4){
+        byte[] retv = new byte[4];
+        retv[0] = (byte) (((ipv4 & (0xff000000)) >> 24) & 0x000000ff);
+        retv[1] = (byte) ((ipv4&0x00ff0000)>>16);
+        retv[2] = (byte) ((ipv4&0x0000ff00)>>8);
+        retv[3] = (byte) (ipv4&0x000000ff);
+        return  retv;
     }
 }
