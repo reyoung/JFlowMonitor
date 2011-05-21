@@ -56,7 +56,7 @@ public class StaticsMain extends javax.swing.JFrame {
         this.ui_comboBox.addItemListener(new ItemListener() {
 
             public void itemStateChanged(ItemEvent e) {
-                System.out.printf("Item Change\n");
+//                System.out.printf("Item Change\n");
                 IStaticsPage ip = (IStaticsPage) e.getItem();
                 changeItem(ip);
             }

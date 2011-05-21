@@ -148,7 +148,7 @@ public class SmallWindow extends javax.swing.JFrame implements IPacketPoolEventL
         }
     }//GEN-LAST:event_formMouseClicked
 
-    private void onStaticsShow() {
+    static public void onStaticsShow() {
         if (m_mainWindow == null) {
             StaticsMain wd = new StaticsMain();
             wd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -156,7 +156,7 @@ public class SmallWindow extends javax.swing.JFrame implements IPacketPoolEventL
         }
         m_mainWindow.setVisible(true);
     }
-    private JFrame m_mainWindow = null;
+    static private JFrame m_mainWindow = null;
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         if (!m_keyPressed) {

@@ -5,25 +5,34 @@
 
 package Presentation;
 
-import java.awt.Image;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
-import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 /**
  *
  * @author YQ
  */
 public class TrayIconWindow {
-    public TrayIconWindow(){
+    private TrayIconWindow(){
         initComponents();
     }
+    static TrayIconWindow instance = null;
+    static public TrayIconWindow Instance(){
+        if(instance==null){
+            instance = new TrayIconWindow();
+        }
+        return instance;
+    }
+    private TrayIcon m_trayIcon;
+    static public void showMessage(String title,String msg){
+        Instance().m_trayIcon.displayMessage(title, msg, TrayIcon.MessageType.INFO);
+    }
+
+
     private void initComponents()
     {
          try
@@ -54,19 +63,15 @@ public class TrayIconWindow {
                 TrayIcon ti = new TrayIcon(new ImageIcon(getClass().getResource("/Presentation/tray-icon-16.png")).getImage(), "JFlowMonitor", pm);
                 ti.setImageAutoSize(true);
                 st.add(ti);
+                m_trayIcon = ti;
             }
         } catch (Exception e)
         {
             e.printStackTrace();
         }
     }
-    private void onStaticsShow() {
-        if (m_mainWindow == null) {
-            MainWindow wd = new MainWindow();
-            wd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            m_mainWindow = wd;
-        }
-        m_mainWindow.setVisible(true);
+    void onStaticsShow() {
+        SmallWindow.onStaticsShow();
     }
-    private JFrame m_mainWindow = null;
+
 }
