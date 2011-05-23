@@ -22,6 +22,7 @@ import java.util.Map;
 public class MostFlowedSiteHistoryInfo extends RawPacketHistoryInfo{
 
     public List<String > Sites;
+    public List<Integer> SiteFolws;
     private int SiteNum;
     private List<AUX_CLASS> l;
     public MostFlowedSiteHistoryInfo(Date From,Date To,int N) {
@@ -34,6 +35,7 @@ public class MostFlowedSiteHistoryInfo extends RawPacketHistoryInfo{
     protected void process(){
         super.process();
         SiteMap = new HashMap<String,Integer>();
+        SiteFolws = new ArrayList<Integer>();
         l = new ArrayList<AUX_CLASS>();
         getMap();
         getLink();
@@ -93,30 +95,6 @@ public class MostFlowedSiteHistoryInfo extends RawPacketHistoryInfo{
                 else return -1;
             }
         });
-
-//        for(String site : SiteMap.keySet())
-//        {
-//            SiteLinkItem sl = new SiteLinkItem(site,SiteMap.get(site));
-//            if(linksite.isEmpty())
-//            {
-//                linksite.add(sl);
-//            }
-//            else
-//            {
-//                for(SiteLinkItem ts : linksite)
-//                {
-//                    int index = linksite.indexOf(ts);
-//                    if(sl.flow > ts.flow)
-//                    {
-//                        linksite.add(index,sl);
-//                    }
-//                    else if((index +1) == linksite.size())
-//                    {
-//                        linksite.add(sl);
-//                    }
-//                }
-//            }
-//        }
     }
     private void getSites()
     {
@@ -127,6 +105,7 @@ public class MostFlowedSiteHistoryInfo extends RawPacketHistoryInfo{
                 if(l.indexOf(e) < SiteNum)
                 {
                     Sites.add(e.Site);
+                    SiteFolws.add(e.Times);
                 }
                 else break;
             }

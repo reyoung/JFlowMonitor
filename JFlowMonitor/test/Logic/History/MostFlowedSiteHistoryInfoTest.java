@@ -50,6 +50,10 @@ public class MostFlowedSiteHistoryInfoTest {
         {
             System.out.println(t);
         }
+        for(int i : instance.SiteFolws)
+        {
+            System.out.println(i);
+        }
     }
 
 }

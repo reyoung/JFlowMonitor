@@ -35,15 +35,15 @@ public class Database implements IDatabaseProxy{
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private static Database instance=null;
-    public synchronized static IDatabaseProxy instance()
+    private static Database instance = null;
+    public synchronized  static IDatabaseProxy instance()
     {
         if(instance==null){
             instance = new Database();
         }
         return instance;
     }
-    synchronized public void savePacket(List<IPacket> p)
+    synchronized  public void savePacket(List<IPacket> p)
     {
         try {
             conn.setAutoCommit(false);
