@@ -10,7 +10,11 @@
  */
 package Presentation.Statics;
 
+import Logic.History.FlowHistoryInfo;
+import Logic.History.HistoryInfo;
 import Logic.History.MostFlowedSiteHistoryInfo;
+import Logic.History.ProcessCompleteListener;
+import Logic.History.ProcessThread;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.util.Date;
@@ -32,10 +36,13 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class TimeSelectPage extends javax.swing.JPanel {
 
-    
+    private MostFlowedSiteHistoryInfo info;
+    private CategoryDataset dataset;
+    private JFreeChart chart;
+
     /** Creates new form TimeSelectage */
     public TimeSelectPage() {
-        
+
         initComponents();
 //        CategoryDataset dataset = createDataset(0);
 //        JFreeChart chart = createChart(dataset);
@@ -202,19 +209,27 @@ public class TimeSelectPage extends javax.swing.JPanel {
         String tod = jTextField6.getText();
         int dt = Integer.parseInt(tod);
         Date to = new Date(yt - 1900, mt - 1, dt);
-//        from=new Date();
-//        to=new Date();
-        MostFlowedSiteHistoryInfo info = new MostFlowedSiteHistoryInfo(from, to, 10);
-        CategoryDataset dataset = createDataset(from,to,10);
-        JFreeChart chart = createChart(dataset);
+        System.out.println(from);
+        System.out.println(to);
+
+        info = new MostFlowedSiteHistoryInfo(from, to, 10);
+        ProcessThread pt = new ProcessThread(new ProcessCompleteListener() {
+            public void onProcessComplete(HistoryInfo info) {
+                chartshow();
+            }
+        }, info);
+        pt.start();
+
+        chart = createChart(dataset);
         ChartPanel chartPanel = new ChartPanel(chart);
         add(chartPanel);
         chartPanel.setLocation(20, 200);
         chartPanel.setSize(400, 200);
-        
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    private void chartshow() {
+        dataset = createDataset(info);
+    }
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
@@ -283,22 +298,23 @@ public class TimeSelectPage extends javax.swing.JPanel {
         return chart;
     }
 
-    public CategoryDataset createDataset(Date from,Date to,int N) {
+    public CategoryDataset createDataset(MostFlowedSiteHistoryInfo info) {
 // row keys...
         String series1 = "Flow";
 // column keys...
 
-        System.out.println(from);
-        System.out.println(to);
-        
-        MostFlowedSiteHistoryInfo info=new MostFlowedSiteHistoryInfo(from,to,N);
 
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         System.out.println("create dataset");
-        for(int i=0;i<N;i++){
+        int N;
+        if(info.Sites.size()>10)
+            N=10;
+        else
+            N=info.Sites.size();
+        for (int i = 0; i <N; i++) {
             System.out.println("start insert!");
-//            dataset.addValue(info.SiteFolws.get(i), series1, info.Sites.get(i));
+            dataset.addValue(info.SiteFolws.get(i), series1, info.Sites.get(i));
 //            dataset.addValue(1,series1,series1);
         }
         System.out.println("data insert finish");

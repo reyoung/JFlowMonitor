@@ -15,7 +15,7 @@ public class DynamicFlowChartPage extends AbstractStaticsPage{
 
     @Override
     protected String doToString() {
-        return "实时流量监控";
+        return "Realtime Flow Observation";
     }
 
     @Override
