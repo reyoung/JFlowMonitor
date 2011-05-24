@@ -39,8 +39,8 @@ public class StaticsMain extends javax.swing.JFrame {
                 RegistePage(TestPage.class);
                 RegistePage(TestPage2.class);
 
-//                RegistePage(DynamicFlowChartPage.class);
-//                RegistePage(AnalysisChartPage.class);
+                RegistePage(DynamicFlowChartPage.class);
+                RegistePage(AnalysisChartPage.class);
                 RegistePage(HistoryFlowPage.class);
 
             } catch (InstantiationException ex) {
@@ -70,6 +70,7 @@ public class StaticsMain extends javax.swing.JFrame {
     final protected void changeItem(IStaticsPage ip) {
         if (ip != null) {
             if (m_widget != null) {
+                m_widget.setVisible(false);
                 StaticsMain.this.remove(m_widget);
             }
             m_widget = ip.getWidget();
