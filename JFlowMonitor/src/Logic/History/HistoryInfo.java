@@ -56,16 +56,16 @@ public abstract class HistoryInfo {
                 Flow f = table.get(recv);
                 boolean isIn = CernetPacketFilter.Instance().check(p);
                 if(isIn)
-                    f.innerSize+=p.getPacketLength();
+                    f.innerSize+=(long)p.getPacketLength() / 1024;
                 else
-                    f.outerSize+=p.getPacketLength();
+                    f.outerSize+=(long)p.getPacketLength() / 1024;
             }else{
                 Flow f = new Flow();
                 boolean isIn = CernetPacketFilter.Instance().check(p);
                 if(isIn)
-                    f.innerSize+=p.getPacketLength();
+                    f.innerSize+=(long)p.getPacketLength() / 1024;
                 else
-                    f.outerSize+=p.getPacketLength();
+                    f.outerSize+=(long)p.getPacketLength() / 1024;
                 table.put(recv, f);
             }
         }
