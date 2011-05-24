@@ -59,9 +59,7 @@ public class StaticsMain extends javax.swing.JFrame {
             this.ui_comboBox.addItem(p);
         }
         this.ui_comboBox.addItemListener(new ItemListener() {
-
             public void itemStateChanged(ItemEvent e) {
-//                System.out.printf("Item Change\n");
                 IStaticsPage ip = (IStaticsPage) e.getItem();
                 changeItem(ip);
             }
@@ -72,7 +70,6 @@ public class StaticsMain extends javax.swing.JFrame {
     final protected void changeItem(IStaticsPage ip) {
         if (ip != null) {
             if (m_widget != null) {
-                m_widget.setVisible(false);
                 StaticsMain.this.remove(m_widget);
             }
             m_widget = ip.getWidget();
@@ -80,6 +77,7 @@ public class StaticsMain extends javax.swing.JFrame {
             m_widget.setLocation(20, 60);
             m_widget.setSize(480, 400);
             m_widget.setVisible(true);
+            this.pack();
         }
     }
 
