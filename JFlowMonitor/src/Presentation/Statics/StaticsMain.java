@@ -70,6 +70,7 @@ public class StaticsMain extends javax.swing.JFrame {
     final protected void changeItem(IStaticsPage ip) {
         if (ip != null) {
             if (m_widget != null) {
+                m_widget.setVisible(false);
                 StaticsMain.this.remove(m_widget);
             }
             m_widget = ip.getWidget();

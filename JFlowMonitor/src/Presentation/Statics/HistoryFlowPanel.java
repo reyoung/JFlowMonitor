@@ -28,7 +28,7 @@ public class HistoryFlowPanel extends javax.swing.JPanel {
     private DefaultTableModel tableModel;
     /** Creates new form HistoryFlowPanel */
     public HistoryFlowPanel() {
-        String[] colName = {"Date","InnerFlow","OuterFlow"};
+        String[] colName = {"Date","InnerFlow(KB)","OuterFlow(KB)"};
         tableModel = new DefaultTableModel(colName, 0);
         initComponents();
 //        TableModel tableModel =HistoryTable.getModel();
@@ -58,6 +58,8 @@ public class HistoryFlowPanel extends javax.swing.JPanel {
         ErrorLbl = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         HistoryTable = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        ChargeLbl = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,36 +78,42 @@ public class HistoryFlowPanel extends javax.swing.JPanel {
 
         jLabel2.setText("ToDate:");
 
+        FromYearLbl.setText("2011");
         FromYearLbl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FromYearLblActionPerformed(evt);
             }
         });
 
+        FromMonthLbl.setText("5");
         FromMonthLbl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FromMonthLblActionPerformed(evt);
             }
         });
 
+        FromDayLbl.setText("1");
         FromDayLbl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FromDayLblActionPerformed(evt);
             }
         });
 
+        ToYearLbl.setText("2011");
         ToYearLbl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ToYearLblActionPerformed(evt);
             }
         });
 
+        ToMonthLbl.setText("6");
         ToMonthLbl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ToMonthLblActionPerformed(evt);
             }
         });
 
+        ToDayLbl.setText("1");
         ToDayLbl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ToDayLblActionPerformed(evt);
@@ -121,6 +129,15 @@ public class HistoryFlowPanel extends javax.swing.JPanel {
 
         HistoryTable.setModel(this.tableModel);
         jScrollPane2.setViewportView(HistoryTable);
+
+        jLabel3.setText("ChargePerKB($):");
+
+        ChargeLbl.setText("0.001");
+        ChargeLbl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChargeLblActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -154,6 +171,11 @@ public class HistoryFlowPanel extends javax.swing.JPanel {
                                 .addComponent(ErrorLbl))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ChargeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                                 .addComponent(CheckBtn)))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -166,7 +188,9 @@ public class HistoryFlowPanel extends javax.swing.JPanel {
                     .addComponent(FromYearLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FromMonthLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FromDayLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ErrorLbl))
+                    .addComponent(ErrorLbl)
+                    .addComponent(jLabel3)
+                    .addComponent(ChargeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -239,19 +263,40 @@ public class HistoryFlowPanel extends javax.swing.JPanel {
         }, fhis);
         pt.start();
     }//GEN-LAST:event_CheckBtnActionPerformed
+
+    private void ChargeLblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChargeLblActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChargeLblActionPerformed
     private void tableshow()
     {
         int rowNum = this.fhis.Data.size();
+        tableModel.setRowCount(rowNum+2);
+        long total_in = 0;
+        long total_out = 0;
+        int rowNo = 0;
         for( Flow tf : fhis.Data.values())
-        {
-            String [] rowdata = {tf.sDate.toString(),String.valueOf(tf.innerSize),String.valueOf(tf.outerSize)};
-            tableModel.addRow(rowdata);
+        {;
+            total_in += tf.innerSize;
+            total_out += tf.outerSize;
+            tableModel.setValueAt(tf.sDate.toString(), rowNo, 0);
+            tableModel.setValueAt(Long.toString(tf.innerSize), rowNo, 1);
+            tableModel.setValueAt(Long.toString(tf.outerSize), rowNo, 2);
+            rowNo++;
         }
-        
+        tableModel.setValueAt("TotalFlow",rowNo,0);
+        tableModel.setValueAt(Long.toString(total_in),rowNo,1);
+        tableModel.setValueAt(Long.toString(total_out),rowNo,2);
+        double cost = 0.001;
+        if(!ChargeLbl.getText().equals(""))cost = Double.parseDouble(ChargeLbl.getText());
+        cost = total_out * cost;
+        tableModel.setValueAt("TotalCharge",rowNo+1,0);
+        tableModel.setValueAt("",rowNo+1,1);
+        tableModel.setValueAt(cost,rowNo+1,2);
         //HistoryTable.setModel(tableModel);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ChargeLbl;
     private javax.swing.JButton CheckBtn;
     private javax.swing.JLabel ErrorLbl;
     private javax.swing.JTextField FromDayLbl;
@@ -263,6 +308,7 @@ public class HistoryFlowPanel extends javax.swing.JPanel {
     private javax.swing.JTextField ToYearLbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

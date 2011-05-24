@@ -174,8 +174,8 @@ public class Database implements IDatabaseProxy{
             int mm = Integer.parseInt(ymd[1])-1;
             int dd = Integer.parseInt(ymd[2]);
             sp.sDate = new Date(yy,mm,dd);
-            sp.outerSize = rs.getInt(2);
-            sp.innerSize = rs.getInt(3);
+            sp.outerSize = rs.getLong(2) / 1024;
+            sp.innerSize = rs.getLong(3) / 1024;
             sDate.add(sp);
         }
         return sDate;
