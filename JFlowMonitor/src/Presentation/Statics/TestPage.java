@@ -4,7 +4,10 @@
 
 package Presentation.Statics;
 
+import Logic.History.HistoryInfo;
 import Logic.History.MostVisitedSiteHistoryInfo;
+import Logic.History.ProcessCompleteListener;
+import Logic.History.ProcessThread;
 import java.awt.Component;
 import java.awt.Label;
 import java.util.Date;
@@ -19,15 +22,13 @@ public class TestPage extends AbstractStaticsPage{
 
     @Override
     protected Component doGetWidget() {
-        QDateChooser q=new QDateChooser();
+
         Label l = new Label("Hello world");
-        return q;
+        return l;
     }
 
     @Override
     protected String doToString() {
-//        MostVisitedSiteHistoryInfo mvshi = new MostVisitedSiteHistoryInfo(new Date(111,4,15), new Date(111,4,22), 3);
-//        mvshi.init();
         return "Test";
     }
 

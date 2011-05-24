@@ -11,7 +11,7 @@ import java.awt.Component;
  *
  * @author Administrator
  */
-public class DynamicFlowChart extends AbstractStaticsPage{
+public class DynamicFlowChartPage extends AbstractStaticsPage{
 
     @Override
     protected String doToString() {
@@ -20,7 +20,7 @@ public class DynamicFlowChart extends AbstractStaticsPage{
 
     @Override
     protected Component doGetWidget() {
-        TimeSeriesChart panel = new TimeSeriesChart(12000,true);
+        TimeSeriesChartPage panel = new TimeSeriesChartPage(12000,true);
         panel.new DataGenerator(90).start();
         
         return panel;

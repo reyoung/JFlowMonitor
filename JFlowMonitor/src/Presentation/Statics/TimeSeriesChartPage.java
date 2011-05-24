@@ -34,7 +34,7 @@ import org.jfree.ui.RectangleInsets;
  *
  * @author Administrator
  */
-public class TimeSeriesChart extends JPanel {
+public class TimeSeriesChartPage extends JPanel {
 
     /** Time series for total memory used. */
     private TimeSeries upload;
@@ -50,7 +50,7 @@ public class TimeSeriesChart extends JPanel {
      *
      * @param historyCount the history count (in milliseconds).
      */
-    public TimeSeriesChart(int historyCount, boolean det) {
+    public TimeSeriesChartPage(int historyCount, boolean det) {
         super(new BorderLayout());
 // create two series that automatically discard data more than 30
 // seconds old...

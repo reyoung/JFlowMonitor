@@ -38,8 +38,8 @@ public class StaticsMain extends javax.swing.JFrame {
             try {
                 RegistePage(TestPage.class);
                 RegistePage(TestPage2.class);
-                RegistePage(DynamicFlowChart.class);
-                RegistePage(AnalysisChart.class);
+                RegistePage(DynamicFlowChartPage.class);
+                RegistePage(AnalysisChartPage.class);
             } catch (InstantiationException ex) {
                 Logger.getLogger(StaticsMain.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IllegalAccessException ex) {
