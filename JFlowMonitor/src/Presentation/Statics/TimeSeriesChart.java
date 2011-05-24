@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentation;
+package Presentation.Statics;
 
 import Logic.PacketPool.IPacketPoolEvent;
 import Logic.PacketPool.IPacketPoolEventListener;
@@ -11,6 +11,7 @@ import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -67,23 +68,17 @@ public class TimeSeriesChart extends JPanel {
         this.dnout.setMaximumItemAge(historyCount);
 
         TimeSeriesCollection dataset = new TimeSeriesCollection();
+        TimeSeriesCollection dataset2 = new TimeSeriesCollection();
         dataset.addSeries(this.upload);
-        dataset.addSeries(this.down);
-        if (det) {
-            dataset.addSeries(this.upinn);
-            dataset.addSeries(this.upout);
-            dataset.addSeries(this.dninn);
-            dataset.addSeries(this.dnout);
-        }
-        DateAxis domain ;
+        dataset2.addSeries(this.down);
+        dataset.addSeries(this.upinn);
+        dataset.addSeries(this.upout);
+        dataset2.addSeries(this.dninn);
+        dataset2.addSeries(this.dnout);
+        DateAxis domain;
         NumberAxis range;
-        if(det){
-            domain = new DateAxis("Time(s)");
-            range = new NumberAxis("Flow(kb)");
-        }else{
-            domain = new DateAxis();
-            range = new NumberAxis();
-        }
+        domain = new DateAxis("Time(s)");
+        range = new NumberAxis("Flow(kb)");
         domain.setTickLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         range.setTickLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         domain.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -99,37 +94,44 @@ public class TimeSeriesChart extends JPanel {
         plot.setDomainGridlinePaint(Color.DARK_GRAY);
         plot.setRangeGridlinePaint(Color.DARK_GRAY);
         plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
+        XYPlot plot2 = new XYPlot(dataset2, domain, range, renderer);
+        plot2.setBackgroundPaint(Color.white);
+        plot2.setDomainGridlinePaint(Color.DARK_GRAY);
+        plot2.setRangeGridlinePaint(Color.DARK_GRAY);
+        plot2.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
         domain.setAutoRange(true);
         domain.setLowerMargin(0.0);
         domain.setUpperMargin(0.0);
         domain.setTickLabelsVisible(true);
-//        range.setAutoRange(true);
+        range.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        range.setAutoRange(true);
 
 //        range.setAutoRangeMinimumSize(+100);
 //        range.setLowerBound(0);
-        range.setLowerMargin(0.0);
-        range.setUpperMargin(0.5);
-        range.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-        JFreeChart chart;
-        if (det) {
-            chart = new JFreeChart(
-                    "实时流量监控",
-                    new Font("SansSerif", Font.BOLD, 14),
-                    plot,
-                    true);
-        } else {
-            chart = new JFreeChart(
-                    null,
-                    new Font("SansSerif", Font.BOLD, 10),
-                    plot,
-                    true);
-        }
+//        range.setLowerMargin(0.0);
+//        range.setUpperMargin(0.5);
+        JFreeChart chart = new JFreeChart(
+                "实时上传流量监控",
+                new Font("SansSerif", Font.BOLD, 16),
+                plot,
+                true);
+        JFreeChart chart2 = new JFreeChart(
+                "实时下载流量监控",
+                new Font("SansSerif", Font.BOLD, 16),
+                plot2,
+                true);
+
 //        chart.setBackgroundPaint(Color.lightGray);
-        ChartPanel chartPanel = new ChartPanel(chart);
+//        ChartPanel chartPanel = new ChartPanel(chart);
+
 //        chartPanel.setBorder(BorderFactory.createCompoundBorder(
 //                BorderFactory.createEmptyBorder(4, 4, 4, 4),
 //                BorderFactory.createLineBorder(Color.black)));
-        add(chartPanel);
+//        add(chartPanel);
+        JPanel panel = new JPanel(new GridLayout(2, 1));
+        panel.add(new ChartPanel(chart));
+        panel.add(new ChartPanel(chart2));
+        add(panel);
 
         for (int i = 0; i < 90; i++) {
             this.upload.add(new Millisecond(i, new Second()), 0);

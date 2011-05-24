@@ -38,6 +38,8 @@ public class StaticsMain extends javax.swing.JFrame {
             try {
                 RegistePage(TestPage.class);
                 RegistePage(TestPage2.class);
+                RegistePage(DynamicFlowChart.class);
+                RegistePage(AnalysisChart.class);
             } catch (InstantiationException ex) {
                 Logger.getLogger(StaticsMain.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IllegalAccessException ex) {
@@ -72,8 +74,8 @@ public class StaticsMain extends javax.swing.JFrame {
             }
             m_widget = ip.getWidget();
             StaticsMain.this.add(m_widget);
-            m_widget.setLocation(20, 100);
-            m_widget.setSize(480, 320);
+            m_widget.setLocation(20, 60);
+            m_widget.setSize(480, 400);
             m_widget.setVisible(true);
         }
     }
@@ -102,6 +104,7 @@ public class StaticsMain extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         ui_comboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +117,7 @@ public class StaticsMain extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(213, Short.MAX_VALUE)
+                .addContainerGap(314, Short.MAX_VALUE)
                 .addComponent(ui_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -123,7 +126,7 @@ public class StaticsMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ui_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(409, Short.MAX_VALUE))
+                .addContainerGap(457, Short.MAX_VALUE))
         );
 
         pack();
