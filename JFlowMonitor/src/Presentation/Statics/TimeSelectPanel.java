@@ -34,14 +34,14 @@ import org.jfree.data.category.DefaultCategoryDataset;
  *
  * @author Administrator
  */
-public class TimeSelectPage extends javax.swing.JPanel {
+public class TimeSelectPanel extends javax.swing.JPanel {
 
     private MostFlowedSiteHistoryInfo info;
     private CategoryDataset dataset;
     private JFreeChart chart;
 
     /** Creates new form TimeSelectage */
-    public TimeSelectPage() {
+    public TimeSelectPanel() {
 
         initComponents();
 
@@ -112,7 +112,7 @@ public class TimeSelectPage extends javax.swing.JPanel {
 
         jTextField6.setText("30");
 
-        jButton1.setText("Enter");
+        jButton1.setText("Check");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -123,8 +123,8 @@ public class TimeSelectPage extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(134, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel5)
@@ -159,9 +159,9 @@ public class TimeSelectPage extends javax.swing.JPanel {
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField6)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(jButton1)))
-                .addGap(78, 78, 78))
+                .addGap(151, 151, 151))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +211,7 @@ public class TimeSelectPage extends javax.swing.JPanel {
         System.out.println(from);
         System.out.println(to);
 
-        info = new MostFlowedSiteHistoryInfo(from, to, 10);
+        info = new MostFlowedSiteHistoryInfo(from, to, 20);
         ProcessThread pt = new ProcessThread(new ProcessCompleteListener() {
 
             public void onProcessComplete(HistoryInfo info) {
@@ -219,10 +219,6 @@ public class TimeSelectPage extends javax.swing.JPanel {
             }
         }, info);
         pt.start();
-
-
-
-
     }//GEN-LAST:event_jButton1ActionPerformed
     private void chartshow() {
         dataset = createDataset(info);
@@ -262,7 +258,7 @@ public class TimeSelectPage extends javax.swing.JPanel {
         JFreeChart chart = ChartFactory.createBarChart(
                 "Flow Analysis", // chart title
                 "Category", // domain axis label
-                "Flow(KB)", // range axis label
+                "Flow(kb)", // range axis label
                 dataset, // data
                 PlotOrientation.VERTICAL, // orientation
                 true, // include legend

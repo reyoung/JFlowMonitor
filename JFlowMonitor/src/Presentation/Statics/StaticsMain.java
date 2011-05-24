@@ -36,11 +36,11 @@ public class StaticsMain extends javax.swing.JFrame {
         if (StaticPages == null) {
             StaticPages = new ArrayList<IStaticsPage>();
             try {
-                RegistePage(TestPage.class);
-                RegistePage(TestPage2.class);
+//                RegistePage(TestPage.class);
+//                RegistePage(TestPage2.class);
 
-//                RegistePage(DynamicFlowChartPage.class);
-//                RegistePage(AnalysisChartPage.class);
+                RegistePage(DynamicFlowChartPage.class);
+                RegistePage(AnalysisChartPage.class);
                 RegistePage(HistoryFlowPage.class);
 
             } catch (InstantiationException ex) {
