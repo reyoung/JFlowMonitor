@@ -44,13 +44,7 @@ public class TimeSelectPage extends javax.swing.JPanel {
     public TimeSelectPage() {
 
         initComponents();
-//        CategoryDataset dataset = createDataset(0);
-//        JFreeChart chart = createChart(dataset);
-//        ChartPanel chartPanel = new ChartPanel(chart);
-//        add(chartPanel);
-//        chartPanel.setLocation(20, 200);
-//        chartPanel.setSize(400, 200);
-//        System.out.printf("Hello world\n");
+
     }
 
     /** This method is called from within the constructor to
@@ -97,7 +91,12 @@ public class TimeSelectPage extends javax.swing.JPanel {
 
         jLabel4.setText("Day");
 
-        jTextField3.setText("23");
+        jTextField3.setText("10");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("To:");
 
@@ -111,7 +110,7 @@ public class TimeSelectPage extends javax.swing.JPanel {
 
         jLabel8.setText("Day");
 
-        jTextField6.setText("24");
+        jTextField6.setText("30");
 
         jButton1.setText("Enter");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -159,9 +158,10 @@ public class TimeSelectPage extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField6))))
-                    .addComponent(jButton1))
-                .addGap(151, 151, 151))
+                                .addComponent(jTextField6)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)))
+                .addGap(78, 78, 78))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,10 +185,9 @@ public class TimeSelectPage extends javax.swing.JPanel {
                     .addComponent(jLabel7)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(255, Short.MAX_VALUE))
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(286, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -214,25 +213,32 @@ public class TimeSelectPage extends javax.swing.JPanel {
 
         info = new MostFlowedSiteHistoryInfo(from, to, 10);
         ProcessThread pt = new ProcessThread(new ProcessCompleteListener() {
+
             public void onProcessComplete(HistoryInfo info) {
                 chartshow();
             }
         }, info);
         pt.start();
 
-        chart = createChart(dataset);
-        ChartPanel chartPanel = new ChartPanel(chart);
-        add(chartPanel);
-        chartPanel.setLocation(20, 200);
-        chartPanel.setSize(400, 200);
+
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
     private void chartshow() {
         dataset = createDataset(info);
+        chart = createChart(dataset);
+        ChartPanel chartPanel = new ChartPanel(chart);
+        add(chartPanel);
+        chartPanel.setLocation(20, 160);
+        chartPanel.setSize(440, 290);
     }
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -254,9 +260,9 @@ public class TimeSelectPage extends javax.swing.JPanel {
     public JFreeChart createChart(CategoryDataset dataset) {
 // create the chart...
         JFreeChart chart = ChartFactory.createBarChart(
-                "Bar Chart Demo", // chart title
+                "Flow Analysis", // chart title
                 "Category", // domain axis label
-                "Value", // range axis label
+                "Flow(KB)", // range axis label
                 dataset, // data
                 PlotOrientation.VERTICAL, // orientation
                 true, // include legend
@@ -308,13 +314,15 @@ public class TimeSelectPage extends javax.swing.JPanel {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         System.out.println("create dataset");
         int N;
-        if(info.Sites.size()>10)
-            N=10;
-        else
-            N=info.Sites.size();
-        for (int i = 0; i <N; i++) {
+        if (info.Sites.size() > 10) {
+            N = 10;
+        } else {
+            N = info.Sites.size();
+        }
+        for (int i = N-1; i >=0; i--) {
             System.out.println("start insert!");
             dataset.addValue(info.SiteFolws.get(i), series1, info.Sites.get(i));
+            System.out.println(info.SiteFolws.get(i));
 //            dataset.addValue(1,series1,series1);
         }
         System.out.println("data insert finish");

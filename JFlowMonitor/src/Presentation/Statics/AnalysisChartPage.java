@@ -20,9 +20,7 @@ public class AnalysisChartPage extends AbstractStaticsPage {
     @Override
     protected Component doGetWidget() {
 
-        //对应日期的流量分析
-        //制作一个输入界面
-
+       
         return new TimeSelectPage();
     }
 
