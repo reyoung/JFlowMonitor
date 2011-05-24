@@ -80,9 +80,9 @@ public class Database implements IDatabaseProxy{
         Statement stat = conn.createStatement();
         Long fd = from.getTime();
         Long td = to.getTime();
-        String sqlQuery = "select * from detail where PRecvTime > ";
+        String sqlQuery = "select * from detail where PRecvTime >= ";
         sqlQuery += Long.toString(fd);
-        sqlQuery += " and PRecvTime < ";
+        sqlQuery += " and PRecvTime <= ";
         sqlQuery += Long.toString(td);
         ResultSet rs = stat.executeQuery(sqlQuery);
         List< IPacket > p = new ArrayList< IPacket >();
@@ -146,11 +146,23 @@ public class Database implements IDatabaseProxy{
         int fromYear = from.getYear()+1900;
         int fromMonth = from.getMonth()+1;
         int fromDay = from.getDate();
-        String fromD = "'"+Integer.toString(fromYear) + "-"+Integer.toString(fromMonth) +"-"+Integer.toString(fromDay)+"'";
+        String fyear,fmonth,fday;
+        fyear = Integer.toString(fromYear);
+        fmonth = Integer.toString(fromMonth);
+        fday = Integer.toString(fromDay);
+        if(fromMonth < 10) fmonth = "0" + fmonth;
+        if(fromDay < 10)fday = "0" + fday;
+        String fromD = "'"+fyear + "-"+fmonth +"-"+fday+"'";
         int toYear = to.getYear()+1900;
         int toMonth = to.getMonth()+1;
         int toDay = to.getDate();
-        String toD = "'"+Integer.toString(toYear) + "-"+Integer.toString(toMonth) +"-"+Integer.toString(toDay)+"'";
+        String tyear,tmonth,tday;
+        tyear = Integer.toString(toYear);
+        tmonth = Integer.toString(toMonth);
+        tday = Integer.toString(toDay);
+        if(toMonth < 10) tmonth = "0" + tmonth;
+        if(toDay < 10)tday = "0" + tday;
+        String toD = "'"+tyear + "-"+tmonth +"-"+tday+"'";
         String sqlQuery = "select * from Simple where PDate >= " +fromD + " and PDate <= " + toD;
         ResultSet rs = stat.executeQuery(sqlQuery);
         while(rs.next())
@@ -243,7 +255,7 @@ public class Database implements IDatabaseProxy{
                 {
                     int origin = rtemp.getInt(2);
                     origin += p.get(i).PackLen;
-                    sqlUpdate = "update Simple set POuterLength = ";
+                    sqlUpdate = "update Simple set POuterLegnth = ";
                     sqlUpdate  = sqlUpdate + Integer.toString(origin) + " where PDate = '";
                     sqlUpdate = sqlUpdate + temp + "'";
                     stat.execute(sqlUpdate);

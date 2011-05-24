@@ -5,6 +5,7 @@
 
 package Database;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import Network.PacketStub;
 import Network.IPacket;
@@ -50,12 +51,12 @@ public class DatabaseTest {
      */
     @Test
     public void testSavePacket() {
-        List<PacketStub> p = new ArrayList<PacketStub>();
-        for(int i=0;i<10;i++)
-        {
-           PacketStub ps = new PacketStub();
-           p.add(ps);
-        }
+//        List<PacketStub> p = new ArrayList<PacketStub>();
+//        for(int i=0;i<10;i++)
+//        {
+//           PacketStub ps = new PacketStub();
+//           p.add(ps);
+//        }
         //Database instance = new Database();
         //instance.savePacket(p);
     }
@@ -102,47 +103,9 @@ public class DatabaseTest {
         assertNotNull(result);
     }
 
-    /**
-     * Test of getPacket method, of class Database.
-     */
-    @Test
-    public void testGetPacket_Date() throws Exception {
-        Date cdata = new Date(111,5,6);;
-        IDatabaseProxy instance = Database.instance();
-        List result = instance.getPacket(cdata);
-        assertNotNull(result);
-    }
 
-    /**
-     * Test of getFlow method, of class Database.
-     */
-    @Test
-    public void testGetFlow_Date_Date() throws Exception {
-        Date from = new Date(111,4,4);
-        Date to = new Date(111,4,6);
-        IDatabaseProxy instance = Database.instance();
-        List result = instance.getFlow(from, to);
-        //assertEquals(2, result.size());
-    }
 
-    /**
-     * Test of getFlow method, of class Database.
-     */
-    /*
-    @Test
-    public void testGetFlow_Date() throws Exception {
-        Date cdate = new Date(111,4,5);
-        IDatabaseProxy instance = Database.instance();
-        Flow expResult = new Flow();
-        expResult.sDate = cdate;
-        expResult.innerSize = 20057;
-        expResult.outerSize = 10000;
-        Flow result = instance.getFlow(cdate);
-        assertEquals(expResult.sDate, result.sDate);
-        assertEquals(expResult.innerSize, result.innerSize);
-        assertEquals(expResult.outerSize, result.outerSize);
-    }
-    */
+
     /**
      * Test of compress method, of class Database.
      */
@@ -150,6 +113,37 @@ public class DatabaseTest {
     public void testCompress() throws Exception {
         Date cdate = new Date(111,5,7);
         Database.instance().compress(cdate);
+    }
+
+    /**
+     * Test of getPacket method, of class Database.
+     */
+    @Test
+    public void testGetPacket_Date() throws Exception {
+        System.out.println("getPacket");
+        Date cdate = null;
+        Database instance = null;
+        List expResult = null;
+        List result = instance.getPacket(cdate);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+
+    /**
+     * Test of getFlow method, of class Database.
+     */
+    @Test
+    public void testGetFlow() throws Exception {
+        Date fd = new Date(111,4,10);
+        Date td = new Date(111,4,23);
+        List<Flow> result;
+        try {
+            result = Database.instance().getFlow(fd, td);
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

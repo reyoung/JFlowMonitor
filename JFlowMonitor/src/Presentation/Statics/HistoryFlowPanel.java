@@ -10,6 +10,7 @@
  */
 
 package Presentation.Statics;
+import Database.Flow;
 import Logic.History.FlowHistoryInfo;
 import Logic.History.HistoryInfo;
 import Logic.History.ProcessCompleteListener;
@@ -24,7 +25,7 @@ import javax.swing.table.TableModel;
  */
 public class HistoryFlowPanel extends javax.swing.JPanel {
     private FlowHistoryInfo fhis;
-    private TableModel tableModel;
+    private DefaultTableModel tableModel;
     /** Creates new form HistoryFlowPanel */
     public HistoryFlowPanel() {
         String[] colName = {"Date","InnerFlow","OuterFlow"};
@@ -128,7 +129,7 @@ public class HistoryFlowPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -154,7 +155,7 @@ public class HistoryFlowPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(CheckBtn)))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,12 +241,14 @@ public class HistoryFlowPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_CheckBtnActionPerformed
     private void tableshow()
     {
-
         int rowNum = this.fhis.Data.size();
-        TableModel model =HistoryTable.getModel();
-        model = new DefaultTableModel(rowNum+1,3);
-        model.setValueAt("5-10", 0, 0);
-        HistoryTable.setModel(tableModel);
+        for( Flow tf : fhis.Data.values())
+        {
+            String [] rowdata = {tf.sDate.toString(),String.valueOf(tf.innerSize),String.valueOf(tf.outerSize)};
+            tableModel.addRow(rowdata);
+        }
+        
+        //HistoryTable.setModel(tableModel);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

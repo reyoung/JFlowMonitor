@@ -43,7 +43,7 @@ public class MostFlowedSiteHistoryInfoTest {
      */
     @Test
     public void testProcess() {
-        MostFlowedSiteHistoryInfo instance = new MostFlowedSiteHistoryInfo(new Date(111,4,19),new Date(111,4,22),5);
+        MostFlowedSiteHistoryInfo instance = new MostFlowedSiteHistoryInfo(new Date(111,4,10),new Date(111,4,30),5);
         instance.process();
         // TODO review the generated test code and remove the default call to fail.
         for(String t : instance.Sites)
