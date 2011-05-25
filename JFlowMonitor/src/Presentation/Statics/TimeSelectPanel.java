@@ -224,8 +224,8 @@ public class TimeSelectPanel extends javax.swing.JPanel {
         int mt = Integer.parseInt(tom);
         int dt = Integer.parseInt(tod);
         Date to = new Date(yt - 1900, mt - 1, dt);
-        System.out.println(from);
-        System.out.println(to);
+//        System.out.println(from);
+//        System.out.println(to);
 
         info = new MostFlowedSiteHistoryInfo(from, to, 20);
         ProcessThread pt = new ProcessThread(new ProcessCompleteListener() {
@@ -325,7 +325,7 @@ public class TimeSelectPanel extends javax.swing.JPanel {
 
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        System.out.println("create dataset");
+//        System.out.println("create dataset");
         int N;
         if (info.Sites.size() > 10) {
             N = 10;
@@ -333,12 +333,12 @@ public class TimeSelectPanel extends javax.swing.JPanel {
             N = info.Sites.size();
         }
         for (int i = N - 1; i >= 0; i--) {
-            System.out.println("start insert!");
+//            System.out.println("start insert!");
             dataset.addValue(info.SiteFolws.get(i), series1, info.Sites.get(i));
-            System.out.println(info.SiteFolws.get(i));
+//            System.out.println(info.SiteFolws.get(i));
 //            dataset.addValue(1,series1,series1);
         }
-        System.out.println("data insert finish");
+//        System.out.println("data insert finish");
         return dataset;
     }
 
