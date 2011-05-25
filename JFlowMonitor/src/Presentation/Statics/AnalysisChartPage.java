@@ -14,14 +14,14 @@ public class AnalysisChartPage extends AbstractStaticsPage {
 
     @Override
     protected String doToString() {
-        return "Flaw Analysis";
+        return "Flow Analysis";
     }
 
     @Override
     protected Component doGetWidget() {
 
        
-        return new TimeSelectPage();
+        return new TimeSelectPanel();
     }
 
 }

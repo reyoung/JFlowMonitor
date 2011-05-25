@@ -20,7 +20,7 @@ public class DynamicFlowChartPage extends AbstractStaticsPage{
 
     @Override
     protected Component doGetWidget() {
-        TimeSeriesChartPage panel = new TimeSeriesChartPage(12000,true);
+        TimeSeriesChartPanel panel = new TimeSeriesChartPanel(12000,true);
         panel.new DataGenerator(90).start();
         
         return panel;

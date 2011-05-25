@@ -34,7 +34,7 @@ import org.jfree.ui.RectangleInsets;
  *
  * @author Administrator
  */
-public class TimeSeriesChartPage extends JPanel {
+public class TimeSeriesChartPanel extends JPanel {
 
     /** Time series for total memory used. */
     private TimeSeries upload;
@@ -50,7 +50,7 @@ public class TimeSeriesChartPage extends JPanel {
      *
      * @param historyCount the history count (in milliseconds).
      */
-    public TimeSeriesChartPage(int historyCount, boolean det) {
+    public TimeSeriesChartPanel(int historyCount, boolean det) {
         super(new BorderLayout());
 // create two series that automatically discard data more than 30
 // seconds old...
@@ -94,11 +94,13 @@ public class TimeSeriesChartPage extends JPanel {
         plot.setDomainGridlinePaint(Color.DARK_GRAY);
         plot.setRangeGridlinePaint(Color.DARK_GRAY);
         plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
+        
         XYPlot plot2 = new XYPlot(dataset2, domain, range, renderer);
         plot2.setBackgroundPaint(Color.white);
         plot2.setDomainGridlinePaint(Color.DARK_GRAY);
         plot2.setRangeGridlinePaint(Color.DARK_GRAY);
         plot2.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
+
         domain.setAutoRange(true);
         domain.setLowerMargin(0.0);
         domain.setUpperMargin(0.0);
