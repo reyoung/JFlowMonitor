@@ -21,6 +21,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import org.sqlite.JDBC;
 /**
  *
@@ -69,8 +71,14 @@ public class Database implements IDatabaseProxy{
         } catch (SQLException ex) {
             try {
                 conn.rollback();
+                JDialog j = new JDialog();
+                j.setAlwaysOnTop(true);
+                j.setTitle("Database Error");
+                JLabel ver = new JLabel("Database has been destoryed,please delete it");
+                j.add(ver);
+                j.setSize(320, 240);
+                j.setVisible(true);
             } catch (SQLException ex1) {
-                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }
     }
@@ -90,14 +98,14 @@ public class Database implements IDatabaseProxy{
         {
             Packet pack = new Packet();
             Date d = new Date();
-            d.setTime(rs.getLong(1));
+            d.setTime(rs.getLong(2));
             pack.RecvTime = d;
-            pack.SIP = rs.getInt(2);
-            pack.DIP = rs.getInt(3);
-            pack.SPort = rs.getInt(4);
-            pack.DPort = rs.getInt(5);
-            pack.PackLen = rs.getInt(6);
-            pack.IsUpdate = rs.getBoolean(7);
+            pack.SIP = rs.getInt(3);
+            pack.DIP = rs.getInt(4);
+            pack.SPort = rs.getInt(5);
+            pack.DPort = rs.getInt(6);
+            pack.PackLen = rs.getInt(7);
+            pack.IsUpdate = rs.getBoolean(8);
             pack.PacketFlag = rs.getInt("PFlag");
             p.add(pack);
         }
@@ -205,15 +213,15 @@ public class Database implements IDatabaseProxy{
         {
             Packet pack = new Packet();
             Date d = new Date();
-            d.setTime(rs.getLong(1));
+            d.setTime(rs.getLong(2));
             pack.RecvTime = d;
-            pack.SIP = rs.getInt(2);
-            pack.DIP = rs.getInt(3);
-            pack.SPort = rs.getInt(4);
-            pack.DPort = rs.getInt(5);
-            pack.PackLen = rs.getInt(6);
-            pack.IsUpdate = rs.getBoolean(7);
-            pack.PacketFlag = rs.getInt(8);
+            pack.SIP = rs.getInt(3);
+            pack.DIP = rs.getInt(4);
+            pack.SPort = rs.getInt(5);
+            pack.DPort = rs.getInt(6);
+            pack.PackLen = rs.getInt(7);
+            pack.IsUpdate = rs.getBoolean(8);
+            pack.PacketFlag = rs.getInt(9);
             p.add(pack);
         }
         rs.close();
@@ -222,10 +230,12 @@ public class Database implements IDatabaseProxy{
         String temp = "";
         String sqlInsert = "";
         String sqlUpdate = "";
-        for(int i=0 ; i<p.size() ; ++i)
+        int total_in = 0;
+        int total_out = 0;
+        for(Packet ip : p)
         {
-            temp = sdf.format(p.get(i).RecvTime);
-            if(inStub(p.get(i)))
+            temp = sdf.format(ip.RecvTime);
+            if(inStub(ip))
             {
                 sqlQuery = "select * from Simple where PDate = '";
                 sqlQuery =  sqlQuery + temp + "'";
@@ -233,7 +243,7 @@ public class Database implements IDatabaseProxy{
                 if(rtemp.next())
                 {
                     int origin = rtemp.getInt(3);
-                    origin += p.get(i).PackLen;
+                    origin += ip.PackLen;
                     sqlUpdate = "update Simple set PInnerLength = ";
                     sqlUpdate  = sqlUpdate + Integer.toString(origin) + " where PDate = '";
                     sqlUpdate = sqlUpdate + temp + "'";
@@ -242,7 +252,7 @@ public class Database implements IDatabaseProxy{
                 else
                 {
                     sqlInsert = "insert into Simple values('";
-                    sqlInsert = sqlInsert + temp +"'," + Integer.toString(p.get(i).PackLen) + ",0)";
+                    sqlInsert = sqlInsert + temp +"'," + Integer.toString(ip.PackLen) + ",0)";
                     stat.execute(sqlInsert);
                 }
             }
@@ -254,7 +264,7 @@ public class Database implements IDatabaseProxy{
                 if(rtemp.next())
                 {
                     int origin = rtemp.getInt(2);
-                    origin += p.get(i).PackLen;
+                    origin += ip.PackLen;
                     sqlUpdate = "update Simple set POuterLegnth = ";
                     sqlUpdate  = sqlUpdate + Integer.toString(origin) + " where PDate = '";
                     sqlUpdate = sqlUpdate + temp + "'";
@@ -263,7 +273,7 @@ public class Database implements IDatabaseProxy{
                 else
                 {
                     sqlInsert = "insert into Simple values('";
-                    sqlInsert = sqlInsert + temp +"',0," + Integer.toString(p.get(i).PackLen) + ")";
+                    sqlInsert = sqlInsert + temp +"',0," + Integer.toString(ip.PackLen) + ")";
                     stat.execute(sqlInsert);
                 }
             }

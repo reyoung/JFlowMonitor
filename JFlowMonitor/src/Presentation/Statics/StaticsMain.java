@@ -42,7 +42,7 @@ public class StaticsMain extends javax.swing.JFrame {
                 RegistePage(DynamicFlowChartPage.class);
                 RegistePage(AnalysisChartPage.class);
                 RegistePage(HistoryFlowPage.class);
-
+                RegistePage(DataCompressPage.class);
             } catch (InstantiationException ex) {
                 Logger.getLogger(StaticsMain.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IllegalAccessException ex) {

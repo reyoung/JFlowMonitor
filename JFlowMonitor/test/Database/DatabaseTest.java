@@ -120,14 +120,14 @@ public class DatabaseTest {
      */
     @Test
     public void testGetPacket_Date() throws Exception {
-        System.out.println("getPacket");
-        Date cdate = null;
-        Database instance = null;
-        List expResult = null;
-        List result = instance.getPacket(cdate);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+//        System.out.println("getPacket");
+//        Date cdate = null;
+//        Database instance = null;
+//        List expResult = null;
+//        List result = instance.getPacket(cdate);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
     }
 
 
