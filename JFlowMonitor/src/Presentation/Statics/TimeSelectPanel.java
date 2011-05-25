@@ -209,13 +209,13 @@ public class TimeSelectPanel extends javax.swing.JPanel {
         String toy = jTextField4.getText();
         String tom = jTextField5.getText();
         String tod = jTextField6.getText();
-        if (isNumeric(fromy) || isNumeric(fromm) || isNumeric(fromd) || isNumeric(toy) || isNumeric(tom) || isNumeric(tod)) {
-           
+        jLabel9.setText("");
+        if (isNumeric(fromy) && isNumeric(fromm) && isNumeric(fromd) && isNumeric(toy) && isNumeric(tom) && isNumeric(tod)) {
         } else {
             jLabel9.setText("Wrong Input!");
             return;
         }
-        
+
         int yf = Integer.parseInt(fromy);
         int mf = Integer.parseInt(fromm);
         int df = Integer.parseInt(fromd);
@@ -226,7 +226,7 @@ public class TimeSelectPanel extends javax.swing.JPanel {
         Date to = new Date(yt - 1900, mt - 1, dt);
         System.out.println(from);
         System.out.println(to);
-        
+
         info = new MostFlowedSiteHistoryInfo(from, to, 20);
         ProcessThread pt = new ProcessThread(new ProcessCompleteListener() {
 
@@ -321,7 +321,7 @@ public class TimeSelectPanel extends javax.swing.JPanel {
 // row keys...
         String series1 = "Flow";
 // column keys...
- 
+
 
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
