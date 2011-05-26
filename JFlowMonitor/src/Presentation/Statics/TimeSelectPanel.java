@@ -317,7 +317,7 @@ public class TimeSelectPanel extends javax.swing.JPanel {
         for (int i = N - 1; i >= 0; i--) {
 //            System.out.println("start insert!");
             dataset.addValue(info.SiteFolws.get(i), series1, info.Sites.get(i));
-            System.out.println(info.SiteFolws.get(i));
+//            System.out.println(info.SiteFolws.get(i));
 //            dataset.addValue(1,series1,series1);
         }
 //        System.out.println("data insert finish");
