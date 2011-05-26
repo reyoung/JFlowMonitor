@@ -38,7 +38,7 @@ public class StaticsMain extends javax.swing.JFrame {
             try {
 //                RegistePage(TestPage.class);
 //                RegistePage(TestPage2.class);
-
+                RegistePage(TimeAttributePage.class);
                 RegistePage(DynamicFlowChartPage.class);
                 RegistePage(AnalysisChartPage.class);
                 RegistePage(HistoryFlowPage.class);
