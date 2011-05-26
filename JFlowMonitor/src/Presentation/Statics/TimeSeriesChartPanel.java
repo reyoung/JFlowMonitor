@@ -70,11 +70,13 @@ public class TimeSeriesChartPanel extends JPanel {
         TimeSeriesCollection dataset = new TimeSeriesCollection();
         TimeSeriesCollection dataset2 = new TimeSeriesCollection();
         dataset.addSeries(this.upload);
-        dataset2.addSeries(this.down);
         dataset.addSeries(this.upinn);
         dataset.addSeries(this.upout);
+
+        dataset2.addSeries(this.down);
         dataset2.addSeries(this.dninn);
         dataset2.addSeries(this.dnout);
+
         DateAxis domain;
         NumberAxis range;
         domain = new DateAxis("Time(s)");
@@ -83,19 +85,27 @@ public class TimeSeriesChartPanel extends JPanel {
         range.setTickLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         domain.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
         range.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
+
         XYItemRenderer renderer = new XYLineAndShapeRenderer(true, false);
         renderer.setSeriesPaint(0, Color.red);
         renderer.setSeriesPaint(1, Color.green);
-
         renderer.setStroke(
                 new BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
+
+        XYItemRenderer renderer2 = new XYLineAndShapeRenderer(true, false);
+        renderer2.setSeriesPaint(0, Color.red);
+        renderer2.setSeriesPaint(1, Color.green);
+        renderer2.setStroke(
+                new BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
+
+
         XYPlot plot = new XYPlot(dataset, domain, range, renderer);
         plot.setBackgroundPaint(Color.white);
         plot.setDomainGridlinePaint(Color.DARK_GRAY);
         plot.setRangeGridlinePaint(Color.DARK_GRAY);
         plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
         
-        XYPlot plot2 = new XYPlot(dataset2, domain, range, renderer);
+        XYPlot plot2 = new XYPlot(dataset2, domain, range, renderer2);
         plot2.setBackgroundPaint(Color.white);
         plot2.setDomainGridlinePaint(Color.DARK_GRAY);
         plot2.setRangeGridlinePaint(Color.DARK_GRAY);
@@ -122,6 +132,7 @@ public class TimeSeriesChartPanel extends JPanel {
                 new Font("SansSerif", Font.BOLD, 16),
                 plot2,
                 true);
+
 
 //        chart.setBackgroundPaint(Color.lightGray);
 //        ChartPanel chartPanel = new ChartPanel(chart);
