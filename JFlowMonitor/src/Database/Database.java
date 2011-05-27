@@ -100,8 +100,8 @@ public class Database implements IDatabaseProxy{
             Date d = new Date();
             d.setTime(rs.getLong(2));
             pack.RecvTime = d;
-            pack.SIP = rs.getInt(3);
-            pack.DIP = rs.getInt(4);
+            pack.SIP = rs.getInt("PS_IP");
+            pack.DIP = rs.getInt("PD_IP");
             pack.SPort = rs.getInt(5);
             pack.DPort = rs.getInt(6);
             pack.PackLen = rs.getInt(7);
@@ -237,6 +237,8 @@ public class Database implements IDatabaseProxy{
             temp = sdf.format(ip.RecvTime);
             if(inStub(ip))
             {
+                System.out.println(ip.getDestAddressString());
+                System.out.println(ip.getSourceAddressString());
                 sqlQuery = "select * from Simple where PDate = '";
                 sqlQuery =  sqlQuery + temp + "'";
                 ResultSet rtemp = stat.executeQuery(sqlQuery);
@@ -252,7 +254,7 @@ public class Database implements IDatabaseProxy{
                 else
                 {
                     sqlInsert = "insert into Simple values('";
-                    sqlInsert = sqlInsert + temp +"'," + Integer.toString(ip.PackLen) + ",0)";
+                    sqlInsert = sqlInsert + temp +"',0," + Integer.toString(ip.PackLen)+")";
                     stat.execute(sqlInsert);
                 }
             }
@@ -273,7 +275,7 @@ public class Database implements IDatabaseProxy{
                 else
                 {
                     sqlInsert = "insert into Simple values('";
-                    sqlInsert = sqlInsert + temp +"',0," + Integer.toString(ip.PackLen) + ")";
+                    sqlInsert = sqlInsert + temp + Integer.toString(ip.PackLen)+"',0)";
                     stat.execute(sqlInsert);
                 }
             }
