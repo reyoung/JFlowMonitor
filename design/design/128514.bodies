@@ -1,0 +1,19 @@
+class Packet
+!!!145538.java!!!	Packet()
+        RecvTime = null;
+!!!145666.java!!!	getSourceAddress() : int
+        return SIP;
+!!!145794.java!!!	getDestAddress() : int
+        return DIP;
+!!!145922.java!!!	getSourcePort() : int
+        return SPort;
+!!!146050.java!!!	getDestPort() : int
+        return DPort;
+!!!146178.java!!!	getPacketLength() : int
+        return PackLen;
+!!!146306.java!!!	getPacketRecvTime() : Date
+        return RecvTime;
+!!!146434.java!!!	isUpload() : boolean
+        return IsUpdate;
+!!!146562.java!!!	getPacketFlag() : int
+        return PacketFlag;

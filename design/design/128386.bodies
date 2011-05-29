@@ -1,0 +1,5 @@
+class Flow
+!!!131714.java!!!	Flow()
+        innerSize = 0;
+        outerSize = 0;
+        sDate = new Date();

@@ -1,0 +1,17 @@
+class ProtocolHistoryInfo
+!!!136194.java!!!	ProtocolHistoryInfo(inout From : Date, inout To : Date, in Protocol : int)
+        super(From, To);
+        ProtocolPacket = new ArrayList<IPacket>();
+        m_protocol = Protocol;
+!!!136322.java!!!	process() : void
+        super.process();
+        if(false){  // 为其他情况预留的if语句
+
+        }else{
+            for(IPacket p : this.Packets){
+                int flag = p.getPacketFlag();
+                if(( m_protocol&flag )!=0){
+                    ProtocolPacket.add(p);
+                }
+            }
+        }

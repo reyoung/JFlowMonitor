@@ -1,0 +1,31 @@
+window_sizes 1280 738 335 939 533 86
+diagrams
+  componentdiagram_ref 128002 // CVD
+    711 428 130 4 0 0
+  classdiagram_ref 128130 // CD
+    711 428 100 4 0 0
+  classdiagram_ref 128258 // CD
+    775 459 70 4 0 0
+  classdiagram_ref 128386 // CD
+    775 459 100 4 144 0
+  classdiagram_ref 128514 // CD
+    688 459 70 4 0 0
+  classdiagram_ref 128642 // CD
+    688 459 100 4 24 0
+  active  classdiagram_ref 128770 // CD
+    939 574 110 4 35 0
+end
+show_stereotypes
+selected class_ref 136322 // TimeSeriesChartPanel
+open
+  
+  package_ref 128130 // Database
+  
+  package_ref 128258 // Network
+  
+  package_ref 128386 // Logic
+  classview_ref 128898 // Presentation
+  classview_ref 129154 // Statics
+  componentview_ref 128130 // CV
+end
+end

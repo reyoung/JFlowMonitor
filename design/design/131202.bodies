@@ -1,0 +1,4 @@
+class AUX_CLASS
+!!!135810.java!!!	AUX_CLASS(in site : String, in time : int)
+            Site = site;
+            Times = time;

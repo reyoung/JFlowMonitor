@@ -1,0 +1,9 @@
+class ProcessThread
+!!!136962.java!!!	ProcessThread(inout lis : ProcessCompleteListener, inout h : HistoryInfo)
+        m_listener = lis;
+        m_info = h;
+!!!137090.java!!!	run() : void
+        m_info.process();
+        synchronized(this){
+            m_listener.onProcessComplete(m_info);
+        }

@@ -1,0 +1,56 @@
+class MostVisitedSiteHistoryInfo
+!!!136450.java!!!	MostVisitedSiteHistoryInfo(inout From : Date, inout To : Date, in N : int)
+        super(From, To, HTTP); //! 只使用HTTP包
+        m_limit = N;
+!!!136578.java!!!	process() : void
+        super.process();
+        MostVisitedSite = new ArrayList<String>();
+        Map<Integer , Integer> ipMap = new HashMap<Integer, Integer>();
+        for(IPacket p : this.ProtocolPacket){
+            if(p.isUpload()){
+                if(ipMap.containsKey(p.getDestAddress())){
+                    Integer value = ipMap.get(p.getDestAddress())+1;
+                    ipMap.put(p.getDestAddress(), value);
+                }else{
+                    ipMap.put(p.getDestAddress(), 1);
+                }
+            }
+        }
+        List<__AUX_Class> auxlist = new ArrayList<__AUX_Class>();
+        for(Map.Entry<Integer,Integer> p: ipMap.entrySet()){
+            __AUX_Class c = new __AUX_Class();
+            c.site = p.getKey();
+            c.times = p.getValue();
+            auxlist.add(c);
+        }
+        Collections.sort(auxlist, new Comparator() {
+            public int compare(Object o1, Object o2) {
+                __AUX_Class c1 = (__AUX_Class)o1;
+                __AUX_Class c2 = (__AUX_Class)o2;
+                if(c1.times<c2.times){
+                    return 1;
+                }else if(c1.times>c2.times){
+                    return -1;
+                }else{
+                    return 0;
+                }
+            }
+        });
+        for(int i=0;i< (m_limit<auxlist.size()?m_limit:auxlist.size());++i){
+            int ip = auxlist.get(i).site;
+            byte [] ipv4 = convertIp(ip);
+            try {
+                InetAddress addr = Inet4Address.getByAddress(ipv4);
+                MostVisitedSite.add(addr.toString());
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(MostVisitedSiteHistoryInfo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+!!!136706.java!!!	convertIp(in ipv4 : int) : byte
+        byte[] retv = new byte[4];
+        retv[0] = (byte) (((ipv4 & (0xff000000)) >> 24) & 0x000000ff);
+        retv[1] = (byte) ((ipv4&0x00ff0000)>>16);
+        retv[2] = (byte) ((ipv4&0x0000ff00)>>8);
+        retv[3] = (byte) (ipv4&0x000000ff);
+        return  retv;

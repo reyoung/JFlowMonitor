@@ -1,0 +1,8 @@
+class DatabaseThread
+!!!131330.java!!!	DatabaseThread()
+        p = new ArrayList<IPacket>();
+        timer = new Timer();
+//        timer.schedule(new MyTask(), 0, 10000);
+        timer.schedule(new MyTask(), 0, 10000);
+!!!131458.java!!!	addPackets(inout packet : List<IPacket>) : void
+        p.addAll(packet);

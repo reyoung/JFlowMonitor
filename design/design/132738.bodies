@@ -1,0 +1,7 @@
+class PacketPoolEventListenerStub
+!!!141186.java!!!	onPoolRefresh(inout e : IPacketPoolEvent) : void
+        System.out.printf("Current Downspeed = %f\n",e.getDownloadSpeed()); 
+!!!141314.java!!!	isEnable() : boolean
+        return true;
+!!!141442.java!!!	isConcern() : boolean
+        return true;

@@ -1,0 +1,10 @@
+class FilterFactory
+!!!133122.java!!!	getFilterByName(in n : String) : IPacketFilter
+        if(n.equals(HttpFilter.class.getSimpleName())){
+            return HttpFilter.Instance();
+        }else if(n.equals(TcpFilter.class.getSimpleName())){
+            return TcpFilter.Instance();
+        }else if(n.equals(CernetPacketFilter.class.getSimpleName())){
+            return CernetPacketFilter.Instance();
+        }
+        return null;

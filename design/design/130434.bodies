@@ -1,0 +1,16 @@
+class FlowHistoryInfo
+!!!134658.java!!!	FlowHistoryInfo(inout From : Date, inout To : Date)
+        super(From,To);
+        Data = new HashMap<Date, Flow>();
+!!!134786.java!!!	process() : void
+        IDatabaseProxy ins = Database.instance();
+        try {
+            List<Flow> flow = ins.getFlow(FromDate, ToDate);
+            List<IPacket> ipckets = ins.getPacket(FromDate, ToDate);
+            Data.putAll(ConvertPacketToFlow(ipckets));
+            for(Flow f:flow){
+                Data.put(f.sDate,f);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FlowHistoryInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }

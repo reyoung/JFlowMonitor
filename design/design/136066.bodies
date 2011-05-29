@@ -1,0 +1,105 @@
+class TimeAttributePanel
+!!!155394.java!!!	TimeAttributePanel()
+        initComponents();
+!!!155522.java!!!	initComponents() : void
+
+        ToDayLbl = new javax.swing.JTextField();
+        ToMonthLbl = new javax.swing.JTextField();
+        ToYearLbl = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        FromYearLbl = new javax.swing.JTextField();
+        FromMonthLbl = new javax.swing.JTextField();
+        FromDayLbl = new javax.swing.JTextField();
+        ui_checkBtn = new javax.swing.JButton();
+
+        ToDayLbl.setText("1");
+
+        ToMonthLbl.setText("6");
+
+        ToYearLbl.setText("2011");
+
+        jLabel2.setText("ToDate:");
+
+        jLabel1.setText("FromDate:");
+
+        FromYearLbl.setText("2011");
+
+        FromMonthLbl.setText("5");
+
+        FromDayLbl.setText("1");
+
+        ui_checkBtn.setText("Check");
+        ui_checkBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ui_checkBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(FromYearLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FromMonthLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ToYearLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ToMonthLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ToDayLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100)
+                        .addComponent(ui_checkBtn))
+                    .addComponent(FromDayLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(FromYearLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FromMonthLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FromDayLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(ToYearLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ToMonthLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ToDayLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ui_checkBtn))
+                .addContainerGap(214, Short.MAX_VALUE))
+        );
+!!!155650.java!!!	ui_checkBtnActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_ui_checkBtnActionPerformed
+        String fd_s = this.FromDayLbl.getText();
+        String fm_s = this.FromMonthLbl.getText();
+        String fy_s = this.FromYearLbl.getText();
+        String td_s = this.ToDayLbl.getText();
+        String tm_s = this.ToMonthLbl.getText();
+        String ty_s = this.ToYearLbl.getText();
+        try{
+            int fd = Integer.parseInt(fd_s);
+            int fm = Integer.parseInt(fm_s);
+            int fy = Integer.parseInt(fy_s);
+            int td = Integer.parseInt(td_s);
+            int tm = Integer.parseInt(tm_s);
+            int ty = Integer.parseInt(ty_s);
+            Date from = new Date(fy-1900,fm-1,fd);
+            Date to = new Date(ty-1900,tm-1,fd);
+            ProcessThread p = new ProcessThread(this,new TimeAttributeHistoryInfo(from, to));
+            p.start();
+        }catch(Exception e){
+        }

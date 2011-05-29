@@ -1,0 +1,38 @@
+class HistoryInfo
+!!!134018.java!!!	HistoryInfo(inout FromDate : Date, inout ToDate : Date)
+        this.FromDate = FromDate;
+        this.ToDate = ToDate;
+        this.Complete = false;
+//        this.process();
+!!!134146.java!!!	init() : void
+        this.process();
+!!!134274.java!!!	NormalizeDate(inout date : Date) : Date
+        int d = date.getDate();
+        int m = date.getMonth();
+        int y = date.getYear();
+        return new Date(y, m, d);
+!!!134402.java!!!	ConvertPacketToFlow(inout packs : List<IPacket>) : Flow
+        Map<Date,Flow> table = new HashMap<Date, Flow>();
+        Iterator<IPacket> it = packs.iterator();
+        while(it.hasNext()){
+            IPacket p = it.next();
+            Date recv = p.getPacketRecvTime();
+            recv = NormalizeDate(recv);
+            if(table.containsKey(recv)){
+                Flow f = table.get(recv);
+                boolean isIn = CernetPacketFilter.Instance().check(p);
+                if(isIn)
+                    f.innerSize+=(long)p.getPacketLength() / 1024;
+                else
+                    f.outerSize+=(long)p.getPacketLength() / 1024;
+            }else{
+                Flow f = new Flow();
+                boolean isIn = CernetPacketFilter.Instance().check(p);
+                if(isIn)
+                    f.innerSize+=(long)p.getPacketLength() / 1024;
+                else
+                    f.outerSize+=(long)p.getPacketLength() / 1024;
+                table.put(recv, f);
+            }
+        }
+        return table;

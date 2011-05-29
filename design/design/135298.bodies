@@ -1,0 +1,5 @@
+class HistoryFlowPage
+!!!152066.java!!!	doToString() : String
+        return "HistoryFlow";
+!!!152194.java!!!	doGetWidget() : Component
+        return new HistoryFlowPanel();

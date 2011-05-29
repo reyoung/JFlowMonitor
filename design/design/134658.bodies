@@ -1,0 +1,7 @@
+class AnalysisChartPage
+!!!150914.java!!!	doToString() : String
+        return "Flow Analysis";
+!!!151042.java!!!	doGetWidget() : Component
+
+       
+        return new TimeSelectPanel();

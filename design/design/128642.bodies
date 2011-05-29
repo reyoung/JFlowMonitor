@@ -1,0 +1,14 @@
+class DatabaseAppender
+!!!130818.java!!!	Instance() : IPacketPoolEventListener
+        if(instance == null){
+            instance = new DatabaseAppender();
+            dt = new DatabaseThread();
+        }
+        return instance;
+!!!130946.java!!!	onPoolRefresh(inout e : IPacketPoolEvent) : void
+        List<IPacket> packets = e.getRawPackets();
+        dt.addPackets(packets);
+!!!131074.java!!!	isEnable() : boolean
+        return true;
+!!!131202.java!!!	isConcern() : boolean
+        return true;

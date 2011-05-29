@@ -1,0 +1,20 @@
+class PieChart
+!!!147970.java!!!	PieChart()
+        super(new BorderLayout());
+        dataset.setValue("WebSite 1", flowFir);
+        dataset.setValue("WebSite 2", 27.9);
+        dataset.setValue("WebSite 3", 79.5);
+        // create a chart...
+        JFreeChart chart = ChartFactory.createPieChart(
+                "WebSite Flow Analysis Chart",
+                dataset,
+                true, // legend?
+                true, // tooltips?
+                false // URLs?
+                );
+        // create and display a frame...
+//        ChartFrame frame = new ChartFrame("Test", chart);
+//        frame.pack();
+//        frame.setVisible(true);
+        ChartPanel chartPanel = new ChartPanel(chart);
+        add(chartPanel);

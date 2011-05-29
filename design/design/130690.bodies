@@ -1,0 +1,9 @@
+class HistoryCompressThread
+!!!134914.java!!!	HistoryCompressThread(inout t : Date)
+         deadDay = t;
+!!!135042.java!!!	run() : void
+        try {
+            Database.instance().compress(deadDay);
+        } catch (SQLException ex) {
+            Logger.getLogger(HistoryCompressThread.class.getName()).log(Level.SEVERE, null, ex);
+        }

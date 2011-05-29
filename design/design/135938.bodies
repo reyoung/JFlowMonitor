@@ -1,0 +1,5 @@
+class TimeAttributePage
+!!!155138.java!!!	doToString() : String
+        return "Time Attribute Page";
+!!!155266.java!!!	doGetWidget() : Component
+        return new TimeAttributePanel();

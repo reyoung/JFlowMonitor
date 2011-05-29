@@ -1,0 +1,9 @@
+class RawPacketHistoryInfo
+!!!135170.java!!!	RawPacketHistoryInfo(inout From : Date, inout To : Date)
+        super(From,To);
+!!!135298.java!!!	process() : void
+        try {
+            Packets = Database.instance().getPacket(FromDate, ToDate);
+        } catch (SQLException ex) {
+            Logger.getLogger(RawPacketHistoryInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }

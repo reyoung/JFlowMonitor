@@ -1,0 +1,42 @@
+class PacketPool
+!!!139010.java!!!	PacketPool()
+        this.m_timer = new Timer();
+        m_interval = 1000;
+        m_listeners = new ArrayList<IPacketPoolEventListener>();
+        m_packets = new ArrayList<IPacket>();
+//        forceRefresh();
+        this.m_timer.schedule(this,0,this.m_interval);
+!!!139138.java!!!	Instance() : IPacketPool
+        if(instance==null){
+            PacketPool temp = new PacketPool();
+            Network.Network.Instance().addPacketListener(temp);
+            instance = temp;
+        }
+        return instance;
+!!!139266.java!!!	addPacketPoolListener(inout lis : IPacketPoolEventListener) : void
+        this.m_listeners.add(lis);
+!!!139394.java!!!	setTimerInterval(in tim : int) : void
+        this.m_interval = tim;
+        this.m_timer.cancel();
+        this.m_timer.schedule(this,0,this.m_interval);
+!!!139522.java!!!	onPacketRecv(inout p : IPacket) : void
+        synchronized(m_packets){
+            m_packets.add(p);
+        }
+!!!139650.java!!!	forceRefresh() : void
+        PacketPoolEvent event = new PacketPoolEvent(this.m_packets,this.m_interval);
+        for(int i=0;i<m_listeners.size();++i){
+            IPacketPoolEventListener temp = m_listeners.get(i);
+            if(!temp.isConcern()){
+                this.m_listeners.remove(i);
+                --i;
+            }
+            if(temp.isEnable()){
+                temp.onPoolRefresh(event);
+            }
+        }
+        this.m_packets.clear();
+!!!139778.java!!!	run() : void
+        synchronized(m_packets){
+            this.forceRefresh();
+        }

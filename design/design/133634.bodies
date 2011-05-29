@@ -1,0 +1,12 @@
+class Main
+!!!147842.java!!!	main(inout args : String) : void
+        CernetPacketFilter.Initialize("Cernet");
+        PacketPool.Instance().addPacketPoolListener(DatabaseAppender.Instance());
+        INetwork in = Network.Network.Instance();
+        in.startListenThreads();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new SmallWindow().setVisible(true);
+                TrayIconWindow.Instance();
+            }
+        });

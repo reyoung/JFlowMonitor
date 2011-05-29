@@ -1,0 +1,17 @@
+class PacketStub
+!!!146818.java!!!	getPacketLength() : int
+        return 1284;
+!!!146946.java!!!	getPacketRecvTime() : Date
+        return new Date(System.currentTimeMillis());
+!!!147074.java!!!	getSourceAddress() : int
+        return 0xde1e19a9;
+!!!147202.java!!!	getDestAddress() : int
+        return 0x73180f02;
+!!!147330.java!!!	getSourcePort() : int
+        return 3149;
+!!!147458.java!!!	getDestPort() : int
+        return 23;
+!!!147586.java!!!	isUpload() : boolean
+        return false;
+!!!147714.java!!!	getPacketFlag() : int
+        return 1;

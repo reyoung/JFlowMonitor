@@ -1,0 +1,40 @@
+class TrayIconWindow
+!!!149506.java!!!	TrayIconWindow()
+        initComponents();
+!!!149634.java!!!	Instance() : TrayIconWindow
+        if (instance == null) {
+            instance = new TrayIconWindow();
+        }
+        return instance;
+!!!149762.java!!!	showMessage(in title : String, in msg : String) : void
+        Instance().m_trayIcon.displayMessage(title, msg, TrayIcon.MessageType.INFO);
+!!!149890.java!!!	initComponents() : void
+        try {
+            if (SystemTray.isSupported()) {// 判断当前平台是否支持系统托盘
+                SystemTray st = SystemTray.getSystemTray();
+                PopupMenu pm = new PopupMenu();//创建右键菜单
+                MenuItem changeUserMenu = new MenuItem("Show Statics");
+                changeUserMenu.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        onStaticsShow();
+                    }
+                });
+                MenuItem exitMenu = new MenuItem("Exit");
+                exitMenu.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        System.exit(0);
+                    }
+                });
+                pm.add(changeUserMenu);
+                pm.addSeparator();
+                pm.add(exitMenu);
+                TrayIcon ti = new TrayIcon(new ImageIcon(getClass().getResource("/Presentation/tray-icon-16.png")).getImage(), "JFlowMonitor", pm);
+                ti.setImageAutoSize(true);
+                st.add(ti);
+                m_trayIcon = ti;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+!!!150018.java!!!	onStaticsShow() : void
+        SmallWindow.onStaticsShow();

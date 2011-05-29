@@ -1,0 +1,105 @@
+class ListenThread
+!!!144002.java!!!	ListenThread(inout dev : PcapIf, inout nw : INetwork)
+
+        assert (dev != null);
+        assert (nw != null);
+        m_dev = dev;
+        m_network = nw;
+!!!144130.java!!!	run() : void
+        StringBuilder errorbuffer = new StringBuilder();
+        Pcap cap = Pcap.openLive(m_dev.getName(),
+                1024*64,
+                Pcap.MODE_PROMISCUOUS,
+                1000 * 30,
+                errorbuffer);
+        assert (cap != null);
+        
+        PcapPacketHandler<String> jpacketHandler = new PcapPacketHandler<String>() {
+
+            public void nextPacket(PcapPacket packet, String user) {
+                int i = 0;
+                while (true) {
+                    Ip4 ip = new Ip4();
+                    long t = packet.getCaptureHeader().timestampInMillis();
+                    Tcp tcp = new Tcp();
+                    Udp udp = new Udp();
+                    int s = 0;
+                    int d = 0;
+                    int sp = 0;
+                    int tp = 0;
+                    int okcount = 0;
+                    int flag = 0;
+                    Date arriveTime = new Date(t);
+                    if (packet.hasHeader(ip, i)) {
+                        s = ip.sourceToInt();
+                        d = ip.destinationToInt();
+                        ++okcount;
+                    }
+                    if (packet.hasHeader(tcp,i)) {
+                        sp = tcp.source();
+                        tp = tcp.destination();
+                        flag |= IPacket.PacketFlag_TCP;
+                        ++okcount;
+                    }else if (packet.hasHeader(udp,i)) {
+                        sp = udp.source();
+                        tp = udp.destination();
+                        flag |= IPacket.PacketFlag_UDP;
+                        ++okcount;
+                    }
+                    if (packet.hasHeader(Http.ID,i)) {
+                        flag |= IPacket.PacketFlag_HTTP;
+                    }
+                    if (packet.hasHeader(Ethernet.ID,i)) {
+                        flag |= IPacket.PacketFlag_Ethernet;
+                    }
+                    if (okcount != 2) {
+                        break;
+                    } else {
+                        Packet p = new Packet();
+                        p.DIP = d;
+                        p.SIP = s;
+                        p.DPort = sp;
+                        p.SPort = tp;
+                        p.PackLen = packet.getCaptureHeader().caplen();
+                        p.RecvTime = arriveTime;
+                        if (s == GetDeviceIpInt(m_dev) || d == GetDeviceIpInt(m_dev)) {
+                            p.IsUpdate = (GetDeviceIpInt(m_dev) == s); //! TODO upload download refine.
+                            p.PacketFlag = flag;
+                            synchronized (ListenThread.this) {
+                                List<IPacketListener> listeners = m_network.getPacketListeners();
+                                ListIterator<IPacketListener> it = listeners.listIterator();
+                                while (it.hasNext()) {
+                                    it.next().onPacketRecv(p);
+                                }
+                            }
+                        }
+                    }
+                    ++i;
+                }
+            }
+        };
+        while (true) {
+            cap.loop(10, jpacketHandler, m_dev.getDescription());
+        }
+!!!144258.java!!!	GetDeviceIpInt(inout dev : PcapIf) : int
+        List<PcapAddr> addrs = dev.getAddresses();
+        ListIterator<PcapAddr> it = addrs.listIterator();
+        PcapAddr ipv4 = null;
+        while (it.hasNext()) {
+            PcapAddr temp = it.next();
+            if (temp.getAddr().getFamily() == PcapSockAddr.AF_INET) {
+                ipv4 = temp;
+            }
+        }
+        if (ipv4 == null) {
+            return -1;
+        } else {
+            byte[] ipv4byte = ipv4.getAddr().getData();
+            assert (ipv4byte.length == 4);
+            int retv = 0;
+            retv = ((ipv4byte[0] << 24) & 0xff000000)
+                    | ((ipv4byte[1] << 16) & 0x00ff0000)
+                    | ((ipv4byte[2] << 8) & 0x0000ff00)
+                    | (ipv4byte[3] & 0x000000ff);
+            return retv;
+        }

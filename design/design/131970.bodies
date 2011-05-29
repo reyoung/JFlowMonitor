@@ -1,0 +1,14 @@
+class TimeAttributeHistoryInfo
+!!!137218.java!!!	TimeAttributeHistoryInfo(inout From : Date, inout To : Date)
+        super(From, To);
+        TimeBytes = new long[24];
+!!!137346.java!!!	process() : void
+        super.process();
+        for (int i = 0; i < TimeBytes.length; ++i) {
+            TimeBytes[i] = 0;
+        }
+        for (IPacket p : this.Packets) {
+            int l = p.getPacketLength();
+            Date d = p.getPacketRecvTime();
+            TimeBytes[d.getHours()]+=l;
+        }

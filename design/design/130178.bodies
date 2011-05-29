@@ -1,0 +1,10 @@
+class HttpFilter
+!!!133250.java!!!	HttpFilter()
+        
+!!!133378.java!!!	Instance() : IPacketFilter
+        if(instance==null){
+            instance = new HttpFilter();
+        }
+        return instance;
+!!!133506.java!!!	check(inout packet : IPacket) : boolean
+        return (packet.getPacketFlag()&packet.PacketFlag_HTTP)!=0;

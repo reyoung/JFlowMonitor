@@ -1,0 +1,27 @@
+class DataGenerator
+!!!157954.java!!!	DataGenerator(in interval : int)
+            super(interval, null);
+//            addActionListener(this);
+            PacketPool.Instance().addPacketPoolListener(this);
+//            for(int i=0;i<50;i++){
+//                addUploadObservation(0);
+//                addDownloadObservation(0);
+//            }
+!!!158082.java!!!	onPoolRefresh(inout e : IPacketPoolEvent) : void
+            double us = e.getUploadSpeed() / 1024;
+            double ui = e.getInnerUploadSpeed() / 1024;
+            double uo = e.getOutterUploadSpeed() / 1024;
+            double ds = e.getDownloadSpeed() / 1024;
+            double di = e.getInnerDownloadSpeed() / 1024;
+            double dout = e.getOutterDownloadSpeed() / 1024;
+            addUploadObservation(us);
+            addUpinnObservation(ui);
+            addUpoutObservation(uo);
+            addDownloadObservation(ds);
+            addDowninnObservation(di);
+            ;
+            addDownoutObservation(dout);
+!!!158210.java!!!	isEnable() : boolean
+            return true;
+!!!158338.java!!!	isConcern() : boolean
+            return true;

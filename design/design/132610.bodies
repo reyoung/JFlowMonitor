@@ -1,0 +1,43 @@
+class PacketPoolEvent
+!!!139906.java!!!	PacketPoolEvent(inout packet : List<IPacket >, in interval : int)
+        this.m_packets = packet;
+        this.m_interval = (double)(interval)/1000.0f;
+        process();
+!!!140034.java!!!	getIntervalTime() : double
+        return this.m_interval;
+!!!140162.java!!!	process() : void
+        ListIterator<IPacket > it = m_packets.listIterator();
+        while(it.hasNext()){
+            IPacket p = it.next();
+            IPacketFilter cernet = CernetPacketFilter.Instance();
+            if(cernet==null){
+                CernetPacketFilter.Initialize("Cernet");
+                cernet = CernetPacketFilter.Instance();
+            }
+            boolean isInner = cernet.check(p);
+            if(isInner){
+                if(p.isUpload())
+                    m_IU += p.getPacketLength();
+                else
+                    m_ID += p.getPacketLength();
+            }else{
+                if(p.isUpload())
+                    m_OU += p.getPacketLength();
+                else
+                    m_OD += p.getPacketLength();
+            }
+        }
+!!!140290.java!!!	getInnerUploadSpeed() : double
+        return (double)m_IU/(double) m_interval;
+!!!140418.java!!!	getOutterUploadSpeed() : double
+        return (double)m_OU/(double) m_interval;
+!!!140546.java!!!	getInnerDownloadSpeed() : double
+        return (double)m_ID/(double) m_interval;
+!!!140674.java!!!	getOutterDownloadSpeed() : double
+        return (double)m_OD/(double) m_interval;
+!!!140802.java!!!	getRawPackets() : IPacket
+        return this.m_packets;
+!!!140930.java!!!	getUploadSpeed() : double
+        return this.getInnerUploadSpeed()+ this.getOutterUploadSpeed();
+!!!141058.java!!!	getDownloadSpeed() : double
+        return this.getOutterDownloadSpeed()+this.getInnerDownloadSpeed();

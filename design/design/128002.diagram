@@ -1,0 +1,28 @@
+format 75
+
+componentcanvas 128002 component_ref 128002 // Database
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 49.5 111.5 2000 141 45
+end
+componentcanvas 128130 component_ref 128130 // Network
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 149.9 250.9 2000 141 45
+end
+componentcanvas 128258 component_ref 128258 // Logic
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 268.4 140 2000 141 45
+end
+componentcanvas 128386 component_ref 128386 // Presentation
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 345.3 44.3 2000 141 45
+end
+simplerelationcanvas 128642 simplerelation_ref 128130
+  from ref 128258 z 2001 to ref 128130
+end
+simplerelationcanvas 128770 simplerelation_ref 128258
+  from ref 128258 z 2001 to ref 128002
+end
+simplerelationcanvas 128898 simplerelation_ref 128386
+  from ref 128386 z 2001 to ref 128258
+end
+end

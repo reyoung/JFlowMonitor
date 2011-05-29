@@ -1,0 +1,8 @@
+class DynamicFlowChartPage
+!!!151810.java!!!	doToString() : String
+        return "Realtime Flow Observation";
+!!!151938.java!!!	doGetWidget() : Component
+        TimeSeriesChartPanel panel = new TimeSeriesChartPanel(12000,true);
+        panel.new DataGenerator(90).start();
+        
+        return panel;

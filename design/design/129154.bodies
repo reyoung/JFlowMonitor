@@ -1,0 +1,8 @@
+class MyTask
+!!!131586.java!!!	run() : void
+//            synchronized (p) {
+            if (p != null && p.size() > 0) {
+                Database.instance().savePacket(p);
+                p.clear();
+            }
+//            }

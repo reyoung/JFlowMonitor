@@ -1,0 +1,5 @@
+class DataCompressPage
+!!!151170.java!!!	doGetWidget() : Component
+        return new DataCompressPanel();
+!!!151298.java!!!	doToString() : String
+        return "History-Data Compress";

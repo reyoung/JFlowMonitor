@@ -1,0 +1,15 @@
+class AbstractPacket
+!!!142850.java!!!	getSourceAddressString() : String
+        return Ipv4Int2Str(this.getSourceAddress());
+!!!142978.java!!!	getDestAddressString() : String
+        return Ipv4Int2Str(getDestAddress());
+!!!143106.java!!!	Ipv4Int2Str(in ipv4 : int) : String
+        StringBuilder sb = new StringBuilder();
+        sb.append(((ipv4 & 0xff000000) >> 24) & 0x000000ff);
+        sb.append('.');
+        sb.append((ipv4 & 0x00ff0000) >> 16);
+        sb.append('.');
+        sb.append((ipv4 & 0x0000ff00) >> 8);
+        sb.append('.');
+        sb.append((ipv4 & 0x000000ff));
+        return sb.toString();

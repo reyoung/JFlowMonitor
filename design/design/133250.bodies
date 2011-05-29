@@ -1,0 +1,38 @@
+class Network
+!!!144386.java!!!	Network()
+        m_listeners = new ArrayList<IPacketListener>();
+        m_devices = new ArrayList<PcapIf>();
+        StringBuilder buf = new StringBuilder();
+        m_listenThread = new ArrayList<ListenThread>();
+        int ok = Pcap.findAllDevs(m_devices, buf);
+        assert (ok != Pcap.OK && m_devices.isEmpty());
+        initThreads();
+!!!144514.java!!!	Instance() : Network
+        return m_network;
+!!!144642.java!!!	deviceCount() : int
+        return m_devices.size();
+!!!144770.java!!!	getDeviceAt(in i : int) : PcapIf
+        return m_devices.get(i);
+!!!144898.java!!!	addPacketListener(inout lis : IPacketListener) : void
+        m_listeners.add(lis);
+!!!145026.java!!!	getPacketListeners() : IPacketListener
+        return m_listeners;
+!!!145154.java!!!	initThreads() : void
+        for (int i = 0; i < m_devices.size(); ++i) {
+            ListenThread temp = new ListenThread(m_devices.get(i), this);
+            m_listenThread.add(temp);
+        }
+!!!145282.java!!!	startListenThreads() : void
+        assert(m_listenThread.isEmpty());
+        for(int i=0;i<this.m_listenThread.size();++i){
+            m_listenThread.get(i).start();
+        }
+!!!145410.java!!!	joinAllListenThreads() : void
+        assert(m_listenThread.isEmpty());
+        for(int i=0;i<this.m_listenThread.size();++i){
+            try {
+                m_listenThread.get(i).join();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }

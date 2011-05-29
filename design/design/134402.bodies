@@ -1,0 +1,8 @@
+class AbstractStaticsPage
+!!!150402.java!!!	getWidget() : Component
+        if(instance==null){
+            instance = doGetWidget();
+        }
+        return instance;
+!!!150530.java!!!	toString() : String
+        return this.doToString();

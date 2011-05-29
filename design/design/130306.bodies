@@ -1,0 +1,10 @@
+class TcpFilter
+!!!133634.java!!!	TcpFilter()
+
+!!!133762.java!!!	Instance() : TcpFilter
+        if(instance == null){
+            instance = new TcpFilter();
+        }
+        return instance;
+!!!133890.java!!!	check(inout packet : IPacket) : boolean
+        return (packet.getPacketFlag()&IPacket.PacketFlag_TCP)!=0;

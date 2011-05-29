@@ -1,0 +1,2309 @@
+format 75
+"Statics" // src::Presentation::Statics
+  revision 1
+  modified_by 2 "Reyoung"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "f:/JFlowMonitor/JFlowMonitor/src/Presentation/Statics/"
+  java_package "Presentation.Statics"
+  classview 129154 "Statics"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 134402 "AbstractStaticsPage"
+      abstract visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Reyoung"
+      classrelation 134786 // <realization>
+	relation 134786 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 134786 // <realization>
+	  b parent class_ref 134530 // IStaticsPage
+      end
+
+      attribute 136194 "instance"
+	private explicit_type "Component"
+	init_value " null"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 150402 "getWidget"
+	public explicit_return_type "Component"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150530 "toString"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 150658 "doToString"
+	abstract protected explicit_return_type "String"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150786 "doGetWidget"
+	abstract protected explicit_return_type "Component"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 134530 "IStaticsPage"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Reyoung"
+      operation 150146 "toString"
+	public explicit_return_type "String"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 150274 "getWidget"
+	public explicit_return_type "Component"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 134658 "AnalysisChartPage"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      classrelation 134914 // <generalisation>
+	relation 134914 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 134914 // <generalisation>
+	  b parent class_ref 134402 // AbstractStaticsPage
+      end
+
+      operation 150914 "doToString"
+	protected explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 151042 "doGetWidget"
+	protected explicit_return_type "Component"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 134786 "DataCompressPage"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Kuziki"
+      classrelation 135042 // <generalisation>
+	relation 135042 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 135042 // <generalisation>
+	  b parent class_ref 134402 // AbstractStaticsPage
+      end
+
+      operation 151170 "doGetWidget"
+	protected explicit_return_type "Component"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 151298 "doToString"
+	protected explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 134914 "DataCompressPanel"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Kuziki"
+      classrelation 135170 // <generalisation>
+	relation 135170 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 135170 // <generalisation>
+	  b parent class_ref 135042 // JPanel
+      end
+
+      operation 151426 "DataCompressPanel"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Creates new form DataCompressPanel "
+      end
+
+      operation 151554 "initComponents"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+	comment " This method is called from within the constructor to
+initialize the form.
+WARNING: Do NOT modify this code. The content of this method is
+always regenerated by the Form Editor.
+
+ <editor-fold defaultstate=\"collapsed\" desc=\"Generated Code\">//GEN-BEGIN:initComponents"
+      end
+
+      operation 151682 "CompressBtnActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " </editor-fold>//GEN-END:initComponents"
+      end
+
+      attribute 136322 "CompressBtn"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "GEN-LAST:event_CompressBtnActionPerformed
+ Variables declaration - do not modify//GEN-BEGIN:variables"
+      end
+
+      attribute 136450 "DayLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 136578 "MonthLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 136706 "ResultLbl"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 136834 "YearLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 136962 "jLabel1"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 137090 "jLabel2"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 137218 "jLabel3"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+    end
+
+    class 135170 "DynamicFlowChartPage"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      classrelation 135298 // <generalisation>
+	relation 135298 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 135298 // <generalisation>
+	  b parent class_ref 134402 // AbstractStaticsPage
+      end
+
+      operation 151810 "doToString"
+	protected explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 151938 "doGetWidget"
+	protected explicit_return_type "Component"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 135298 "HistoryFlowPage"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Kuziki"
+      classrelation 135426 // <generalisation>
+	relation 135426 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 135426 // <generalisation>
+	  b parent class_ref 134402 // AbstractStaticsPage
+      end
+
+      operation 152066 "doToString"
+	protected explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 152194 "doGetWidget"
+	protected explicit_return_type "Component"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 135426 "HistoryFlowPanel"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Kuziki"
+      classrelation 135554 // <generalisation>
+	relation 135554 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 135554 // <generalisation>
+	  b parent class_ref 135042 // JPanel
+      end
+
+      classrelation 135682 // fhis (<unidirectional association>)
+	relation 135682 --->
+	  a role_name "fhis" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135682 // fhis (<unidirectional association>)
+	  b parent class_ref 130434 // FlowHistoryInfo
+      end
+
+      attribute 137346 "tableModel"
+	private explicit_type "DefaultTableModel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 152322 "HistoryFlowPanel"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Creates new form HistoryFlowPanel "
+      end
+
+      operation 152450 "initComponents"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+	comment " This method is called from within the constructor to
+initialize the form.
+WARNING: Do NOT modify this code. The content of this method is
+always regenerated by the Form Editor.
+
+ <editor-fold defaultstate=\"collapsed\" desc=\"Generated Code\">//GEN-BEGIN:initComponents"
+      end
+
+      operation 152578 "FromYearLblActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " </editor-fold>//GEN-END:initComponents"
+      end
+
+      operation 152706 "FromMonthLblActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_FromYearLblActionPerformed"
+      end
+
+      operation 152834 "FromDayLblActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_FromMonthLblActionPerformed"
+      end
+
+      operation 152962 "ToYearLblActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_FromDayLblActionPerformed"
+      end
+
+      operation 153090 "ToMonthLblActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_ToYearLblActionPerformed"
+      end
+
+      operation 153218 "ToDayLblActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_ToMonthLblActionPerformed"
+      end
+
+      operation 153346 "CheckBtnActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_ToDayLblActionPerformed"
+      end
+
+      operation 153474 "ChargeLblActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_CheckBtnActionPerformed"
+      end
+
+      operation 153602 "tableshow"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_ChargeLblActionPerformed"
+      end
+
+      attribute 137474 "ChargeLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Variables declaration - do not modify//GEN-BEGIN:variables"
+      end
+
+      attribute 137602 "CheckBtn"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 137730 "ErrorLbl"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 137858 "FromDayLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 137986 "FromMonthLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 138114 "FromYearLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 138242 "HistoryTable"
+	private explicit_type "javax.swing.JTable"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 138370 "ToDayLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 138498 "ToMonthLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 138626 "ToYearLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 138754 "jLabel1"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 138882 "jLabel2"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 139010 "jLabel3"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 139138 "jScrollPane1"
+	private explicit_type "javax.swing.JScrollPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 139266 "jScrollPane2"
+	private explicit_type "javax.swing.JScrollPane"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 139394 "jTable1"
+	private explicit_type "javax.swing.JTable"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+    end
+
+    class 135554 "StaticsMain"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Reyoung"
+      classrelation 135810 // <generalisation>
+	relation 135810 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 135810 // <generalisation>
+	  b parent class_ref 134146 // JFrame
+      end
+
+      classrelation 135938 // StaticPages (<unidirectional association>)
+	relation 135938 --->
+	  stereotype "List"
+	  a role_name "StaticPages" init_value " null" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 135938 // StaticPages (<unidirectional association>)
+	  b parent class_ref 134530 // IStaticsPage
+      end
+
+      operation 153730 "RegistePage"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "c" explicit_type "Class"
+	nexceptions 2
+	  explicit_exception "InstantiationException"
+	  explicit_exception "IllegalAccessException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      attribute 139522 "m_widget"
+	private explicit_type "Component"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 153858 "Init"
+	class_operation protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 153986 "StaticsMain"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Creates new form StaticsMain "
+      end
+
+      operation 154114 "changeItem"
+	protected explicit_return_type "void"
+	nparams 1
+	  param inout name "ip" type class_ref 134530 // IStaticsPage
+	
+	preserve_java_body_indent final java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 154242 "initComponents"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+	comment " This method is called from within the constructor to
+initialize the form.
+WARNING: Do NOT modify this code. The content of this method is
+always regenerated by the Form Editor.
+
+ <editor-fold defaultstate=\"collapsed\" desc=\"Generated Code\">//GEN-BEGIN:initComponents"
+      end
+
+      operation 154370 "ui_comboBoxActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " </editor-fold>//GEN-END:initComponents"
+      end
+
+      operation 154498 "main"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "args" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0}[] ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_ui_comboBoxActionPerformed
+
+@param args the command line arguments"
+      end
+
+      attribute 139650 "jFrame1"
+	private explicit_type "javax.swing.JFrame"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Variables declaration - do not modify//GEN-BEGIN:variables"
+      end
+
+      attribute 139778 "ui_comboBox"
+	private explicit_type "javax.swing.JComboBox"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+    end
+
+    class 135682 "TestPage"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Reyoung"
+      classrelation 136066 // <generalisation>
+	relation 136066 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136066 // <generalisation>
+	  b parent class_ref 134402 // AbstractStaticsPage
+      end
+
+      operation 154626 "doGetWidget"
+	protected explicit_return_type "Component"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 154754 "doToString"
+	protected explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 135810 "TestPage2"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Reyoung"
+      classrelation 136194 // <generalisation>
+	relation 136194 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136194 // <generalisation>
+	  b parent class_ref 134402 // AbstractStaticsPage
+      end
+
+      operation 154882 "doToString"
+	protected explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 155010 "doGetWidget"
+	protected explicit_return_type "Component"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 135938 "TimeAttributePage"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Reyoung"
+      classrelation 136322 // <generalisation>
+	relation 136322 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136322 // <generalisation>
+	  b parent class_ref 134402 // AbstractStaticsPage
+      end
+
+      operation 155138 "doToString"
+	protected explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 155266 "doGetWidget"
+	protected explicit_return_type "Component"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 136066 "TimeAttributePanel"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Reyoung"
+      classrelation 136450 // <generalisation>
+	relation 136450 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136450 // <generalisation>
+	  b parent class_ref 135042 // JPanel
+      end
+
+      classrelation 136578 // <realization>
+	relation 136578 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136578 // <realization>
+	  b parent class_ref 131714 // ProcessCompleteListener
+      end
+
+      operation 155394 "TimeAttributePanel"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Creates new form TimeAttributePanel "
+      end
+
+      operation 155522 "initComponents"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+	comment " This method is called from within the constructor to
+initialize the form.
+WARNING: Do NOT modify this code. The content of this method is
+always regenerated by the Form Editor.
+
+ <editor-fold defaultstate=\"collapsed\" desc=\"Generated Code\">//GEN-BEGIN:initComponents"
+      end
+
+      operation 155650 "ui_checkBtnActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " </editor-fold>//GEN-END:initComponents"
+      end
+
+      attribute 139906 "FromDayLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "GEN-LAST:event_ui_checkBtnActionPerformed
+ Variables declaration - do not modify//GEN-BEGIN:variables"
+      end
+
+      attribute 140034 "FromMonthLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 140162 "FromYearLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 140290 "ToDayLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 140418 "ToMonthLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 140546 "ToYearLbl"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 140674 "jLabel1"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 140802 "jLabel2"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 140930 "ui_checkBtn"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 155778 "onProcessComplete"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "info" type class_ref 130562 // HistoryInfo
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " End of variables declaration//GEN-END:variables"
+      end
+    end
+
+    class 136194 "TimeSelectPanel"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      classrelation 136706 // <generalisation>
+	relation 136706 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136706 // <generalisation>
+	  b parent class_ref 135042 // JPanel
+      end
+
+      classrelation 136834 // info (<unidirectional association>)
+	relation 136834 --->
+	  a role_name "info" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136834 // info (<unidirectional association>)
+	  b parent class_ref 130946 // MostFlowedSiteHistoryInfo
+      end
+
+      attribute 141058 "dataset"
+	private explicit_type "CategoryDataset"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 141186 "chart"
+	private explicit_type "JFreeChart"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 155906 "TimeSelectPanel"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Creates new form TimeSelectage "
+      end
+
+      operation 156034 "initComponents"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"unchecked\")
+"
+	
+	
+	
+	comment " This method is called from within the constructor to
+initialize the form.
+WARNING: Do NOT modify this code. The content of this method is
+always regenerated by the Form Editor.
+
+ <editor-fold defaultstate=\"collapsed\" desc=\"Generated Code\">//GEN-BEGIN:initComponents"
+      end
+
+      operation 156162 "jButton1ActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " </editor-fold>//GEN-END:initComponents"
+      end
+
+      operation 156290 "chartshow"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_jButton1ActionPerformed"
+      end
+
+      operation 156418 "jTextField1ActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 156546 "jTextField3ActionPerformed"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "java.awt.event.ActionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "GEN-LAST:event_jTextField1ActionPerformed"
+      end
+
+      attribute 141314 "jButton1"
+	private explicit_type "javax.swing.JButton"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "GEN-LAST:event_jTextField3ActionPerformed
+ Variables declaration - do not modify//GEN-BEGIN:variables"
+      end
+
+      attribute 141442 "jLabel1"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 141570 "jLabel2"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 141698 "jLabel3"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 141826 "jLabel4"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 141954 "jLabel5"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142082 "jLabel6"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142210 "jLabel7"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142338 "jLabel8"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142466 "jLabel9"
+	private explicit_type "javax.swing.JLabel"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142594 "jTextField1"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142722 "jTextField2"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142850 "jTextField3"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142978 "jTextField4"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143106 "jTextField5"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143234 "jTextField6"
+	private explicit_type "javax.swing.JTextField"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 156674 "createChart"
+	public explicit_return_type "JFreeChart"
+	nparams 1
+	  param inout name "dataset" explicit_type "CategoryDataset"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " End of variables declaration//GEN-END:variables"
+      end
+
+      operation 156802 "createDataset"
+	public explicit_return_type "CategoryDataset"
+	nparams 1
+	  param inout name "info" type class_ref 130946 // MostFlowedSiteHistoryInfo
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 156930 "isNumeric"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param in name "str" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 136322 "TimeSeriesChartPanel"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+@author Administrator"
+      classrelation 136962 // <generalisation>
+	relation 136962 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136962 // <generalisation>
+	  b parent class_ref 133890 // JPanel
+      end
+
+      attribute 143362 "upload"
+	private explicit_type "TimeSeries"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Time series for total memory used. "
+      end
+
+      attribute 143490 "upinn"
+	private explicit_type "TimeSeries"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143618 "upout"
+	private explicit_type "TimeSeries"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143746 "down"
+	private explicit_type "TimeSeries"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment " Time series for free memory. "
+      end
+
+      attribute 143874 "dninn"
+	private explicit_type "TimeSeries"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 144002 "dnout"
+	private explicit_type "TimeSeries"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 157058 "TimeSeriesChartPanel"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "historyCount" explicit_type "int"
+	  param inout name "det" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Creates a new application.
+
+@param historyCount the history count (in milliseconds)."
+      end
+
+      operation 157186 "addUploadObservation"
+	private explicit_return_type "void"
+	nparams 1
+	  param in name "y" explicit_type "double"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 157314 "addUpinnObservation"
+	private explicit_return_type "void"
+	nparams 1
+	  param in name "y" explicit_type "double"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 157442 "addUpoutObservation"
+	private explicit_return_type "void"
+	nparams 1
+	  param in name "y" explicit_type "double"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 157570 "addDownloadObservation"
+	private explicit_return_type "void"
+	nparams 1
+	  param in name "y" explicit_type "double"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Adds an observation to the ’free memory’ time series.
+
+@param y the free memory."
+      end
+
+      operation 157698 "addDowninnObservation"
+	private explicit_return_type "void"
+	nparams 1
+	  param in name "y" explicit_type "double"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 157826 "addDownoutObservation"
+	private explicit_return_type "void"
+	nparams 1
+	  param in name "y" explicit_type "double"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      class 136450 "DataGenerator"
+	visibility package 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	
+	classrelation 137090 // <generalisation>
+	  relation 137090 ---|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 137090 // <generalisation>
+	    b parent class_ref 136578 // Timer
+	end
+
+	classrelation 137218 // <realization>
+	  relation 137218 -_-|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 137218 // <realization>
+	    b parent class_ref 128770 // IPacketPoolEventListener
+	end
+
+	operation 157954 "DataGenerator"
+	  package explicit_return_type ""
+	  nparams 1
+	    param in name "interval" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	  comment "Constructor.
+
+@param interval the interval (in milliseconds)"
+	end
+
+	operation 158082 "onPoolRefresh"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param inout name "e" type class_ref 128898 // IPacketPoolEvent
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	  comment "Adds a new free/total memory reading to the dataset.
+
+@param event the action event.
+
+        public void actionPerformed(ActionEvent event) {
+            long f = Runtime.getRuntime().freeMemory();
+            long t = Runtime.getRuntime().totalMemory();
+            addUploadObservation(t);
+            addDownloadObservation(f);
+        }"
+	end
+
+	operation 158210 "isEnable"
+	  public explicit_return_type "boolean"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 158338 "isConcern"
+	  public explicit_return_type "boolean"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+    end
+
+    classdiagram 128770 "CD"
+      draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A4
+    end
+  end
+
+  deploymentview 128770 "Statics"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 133378 "IStaticsPage"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.awt.Component;
+import javax.swing.JFrame;
+${definition}"
+      associated_classes
+	class_ref 134530 // IStaticsPage
+      end
+      comment "This file is written by reyoung, reyoung@126.com."
+    end
+
+    artifact 133506 "AbstractStaticsPage"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.awt.Component;
+import javax.swing.JFrame;
+${definition}"
+      associated_classes
+	class_ref 134402 // AbstractStaticsPage
+      end
+      comment "This file is written by reyoung, reyoung@126.com."
+    end
+
+    artifact 133634 "AnalysisChartPage"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.awt.Component;
+${definition}"
+      associated_classes
+	class_ref 134658 // AnalysisChartPage
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 133762 "DataCompressPage"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.awt.Component;
+import java.awt.Label;
+${definition}"
+      associated_classes
+	class_ref 134786 // DataCompressPage
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 133890 "DataCompressPanel"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import Logic.History.HistoryCompressThread;
+import java.util.Date;
+${definition}"
+      associated_classes
+	class_ref 134914 // DataCompressPanel
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor.
+
+
+DataCompressPanel.java
+
+Created on 2011-5-25, 20:57:36"
+    end
+
+    artifact 134018 "DynamicFlowChartPage"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.awt.Component;
+${definition}"
+      associated_classes
+	class_ref 135170 // DynamicFlowChartPage
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 134146 "HistoryFlowPage"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.awt.Component;
+import java.awt.Label;
+${definition}"
+      associated_classes
+	class_ref 135298 // HistoryFlowPage
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+
+    artifact 134274 "HistoryFlowPanel"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import Database.Flow;
+import Logic.History.FlowHistoryInfo;
+import Logic.History.HistoryInfo;
+import Logic.History.ProcessCompleteListener;
+import Logic.History.ProcessThread;
+import java.util.Date;
+import javax.swing.JDialog;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+${definition}"
+      associated_classes
+	class_ref 135426 // HistoryFlowPanel
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor.
+
+
+HistoryFlowPanel.java
+
+Created on 2011-5-24, 16:15:15"
+    end
+
+    artifact 134402 "StaticsMain"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.awt.Component;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+${definition}"
+      associated_classes
+	class_ref 135554 // StaticsMain
+      end
+      comment "This file is written by reyoung, reyoung@126.com.
+
+
+StaticsMain.java
+
+Created on 2011-5-21, 12:54:43"
+    end
+
+    artifact 134530 "TestPage"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import Logic.History.HistoryInfo;
+import Logic.History.MostVisitedSiteHistoryInfo;
+import Logic.History.ProcessCompleteListener;
+import Logic.History.ProcessThread;
+import java.awt.Component;
+import java.awt.Label;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+${definition}"
+      associated_classes
+	class_ref 135682 // TestPage
+      end
+      comment "This file is written by reyoung, reyoung@126.com."
+    end
+
+    artifact 134658 "TestPage2"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.awt.Component;
+import java.awt.Label;
+${definition}"
+      associated_classes
+	class_ref 135810 // TestPage2
+      end
+      comment "This file is written by reyoung, reyoung@126.com."
+    end
+
+    artifact 134786 "TimeAttributePage"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.awt.Component;
+${definition}"
+      associated_classes
+	class_ref 135938 // TimeAttributePage
+      end
+      comment "This file is written by reyoung, reyoung@126.com."
+    end
+
+    artifact 134914 "TimeAttributePanel"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import Logic.History.HistoryInfo;
+import Logic.History.ProcessCompleteListener;
+import Logic.History.ProcessThread;
+import Logic.History.TimeAttributeHistoryInfo;
+import java.awt.Dialog;
+import java.util.Date;
+import javax.swing.JDialog;
+import sun.nio.cs.HistoricallyNamedCharset;
+import org.jfree.chart.plot.Plot;
+${definition}"
+      associated_classes
+	class_ref 136066 // TimeAttributePanel
+      end
+      comment "This file is written by reyoung, reyoung@126.com.
+
+
+TimeAttributePanel.java
+
+Created on 2011-5-26, 16:21:47"
+    end
+
+    artifact 135042 "TimeSelectPanel"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import Logic.History.FlowHistoryInfo;
+import Logic.History.HistoryInfo;
+import Logic.History.MostFlowedSiteHistoryInfo;
+import Logic.History.ProcessCompleteListener;
+import Logic.History.ProcessThread;
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.util.Date;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.util.StringUtils;
+${definition}"
+      associated_classes
+	class_ref 136194 // TimeSelectPanel
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor.
+
+
+TimeSelectage.java
+
+Created on 2011-5-24, 16:52:22"
+    end
+
+    artifact 135170 "TimeSeriesChartPanel"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import Logic.PacketPool.IPacketPoolEvent;
+import Logic.PacketPool.IPacketPoolEventListener;
+import Logic.PacketPool.PacketPool;
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.time.Millisecond;
+import org.jfree.data.time.Second;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.ui.RectangleInsets;
+${definition}"
+      associated_classes
+	class_ref 136322 // TimeSeriesChartPanel
+      end
+      comment "To change this template, choose Tools | Templates
+and open the template in the editor."
+    end
+  end
+end

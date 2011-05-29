@@ -1,0 +1,33 @@
+class CernetReader
+!!!132866.java!!!	CernetReader(in fileName : String)
+        this.m_fileName = fileName;
+        m_cernetAttributeList = new ArrayList<CernetAttribute<String, String>>();
+        File file = new File(fileName);
+        List list = new ArrayList();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line = null;
+            //因为不知道有几行数据，所以先存入list集合中
+            while ((line = br.readLine()) != null) {
+                list.add(line);
+            }
+            br.close();
+        } catch (IOException e) {
+        }
+        for (int i = 0; i < list.size(); i++) {
+            CernetAttribute<String, String> ca = new CernetAttribute<String, String>();
+            String changedString = list.get(i).toString();
+            String[] strData = null;
+            StringTokenizer strtoken = new StringTokenizer(changedString, " ");
+            strData = new String[strtoken.countTokens()];
+            int j = 0;
+            while (strtoken.hasMoreTokens()) {
+                strData[j] = strtoken.nextToken().trim();
+                j++;
+            }
+            ca.ip = strData[0];
+            ca.mask = strData[2];
+            m_cernetAttributeList.add(ca);
+        }
+!!!132994.java!!!	getCernetAttribute() : CernetAttribute
+        return m_cernetAttributeList;

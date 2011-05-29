@@ -1,0 +1,7 @@
+class TestPage
+!!!154626.java!!!	doGetWidget() : Component
+
+        Label l = new Label("Hello world");
+        return l;
+!!!154754.java!!!	doToString() : String
+        return "Test";

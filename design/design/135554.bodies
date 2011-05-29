@@ -1,0 +1,101 @@
+class StaticsMain
+!!!153730.java!!!	RegistePage(inout c : Class) : void
+        IStaticsPage page = (IStaticsPage) c.newInstance();
+        assert (page != null);
+        StaticPages.add(page);
+!!!153858.java!!!	Init() : void
+        if (StaticPages == null) {
+            StaticPages = new ArrayList<IStaticsPage>();
+            try {
+//                RegistePage(TestPage.class);
+//                RegistePage(TestPage2.class);
+                RegistePage(TimeAttributePage.class);
+                RegistePage(DynamicFlowChartPage.class);
+                RegistePage(AnalysisChartPage.class);
+                RegistePage(HistoryFlowPage.class);
+                RegistePage(DataCompressPage.class);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(StaticsMain.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(StaticsMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+!!!153986.java!!!	StaticsMain()
+        Init();
+        initComponents();
+        for (IStaticsPage p : StaticPages) {
+            this.ui_comboBox.addItem(p);
+        }
+        this.ui_comboBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                IStaticsPage ip = (IStaticsPage) e.getItem();
+                changeItem(ip);
+            }
+        });
+        this.changeItem((IStaticsPage) ui_comboBox.getSelectedItem());
+!!!154114.java!!!	changeItem(inout ip : IStaticsPage) : void
+        if (ip != null) {
+            if (m_widget != null) {
+                m_widget.setVisible(false);
+                StaticsMain.this.remove(m_widget);
+            }
+            m_widget = ip.getWidget();
+            StaticsMain.this.add(m_widget);
+            m_widget.setLocation(20, 60);
+            m_widget.setSize(480, 400);
+            m_widget.setVisible(true);
+            this.pack();
+        }
+!!!154242.java!!!	initComponents() : void
+
+        jFrame1 = new javax.swing.JFrame();
+        ui_comboBox = new javax.swing.JComboBox();
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        ui_comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ui_comboBoxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(314, Short.MAX_VALUE)
+                .addComponent(ui_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ui_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(457, Short.MAX_VALUE))
+        );
+
+        pack();
+!!!154370.java!!!	ui_comboBoxActionPerformed(inout evt : java.awt.event.ActionEvent) : void
+//GEN-FIRST:event_ui_comboBoxActionPerformed
+        // TODO add your handling code here:
+!!!154498.java!!!	main(inout args : String) : void
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
+            public void run() {
+                new StaticsMain().setVisible(true);
+            }
+        });
