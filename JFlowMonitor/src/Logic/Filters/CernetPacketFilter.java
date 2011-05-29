@@ -31,6 +31,7 @@ public class CernetPacketFilter extends AbstractPacketFilter {
     public boolean check(IPacket packet) {
         boolean isInCernet = false;
         int destAddress = packet.getDestAddress();
+        int sourceAddress = packet.getSourceAddress();
         int cernetAddress = 0;
         int cernerMask = 0;
         List<CernetAttribute<String, String>> cernetDataList = cernetReader.getCernetAttribute();
@@ -38,7 +39,8 @@ public class CernetPacketFilter extends AbstractPacketFilter {
             CernetAttribute<String, String> c = cernetDataList.get(i);
             cernetAddress = ipToInt(c.ip);
             cernerMask = ipToInt(c.mask);
-            if ((cernetAddress & cernerMask) == (destAddress & cernerMask)){
+            if ((cernetAddress & cernerMask) == (destAddress & cernerMask) &&
+                    (cernetAddress & cernerMask) == (sourceAddress & cernerMask)){
                 isInCernet = true;
                 break;
             }

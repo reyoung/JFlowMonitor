@@ -4,47 +4,30 @@
  */
 
 /*
- * TimeSelectage.java
+ * MostVisitedPanel.java
  *
- * Created on 2011-5-24, 16:52:22
+ * Created on 2011-5-26, 10:24:43
  */
+
 package Presentation.Statics;
 
 import Logic.History.HistoryInfo;
 import Logic.History.MostFlowedSiteHistoryInfo;
+import Logic.History.MostVisitedSiteHistoryInfo;
 import Logic.History.ProcessCompleteListener;
 import Logic.History.ProcessThread;
-import java.awt.Color;
-import java.awt.GradientPaint;
 import java.util.Date;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.axis.CategoryLabelPositions;
-import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
  * @author Administrator
  */
-public class TimeSelectPanel extends javax.swing.JPanel {
+public class MostVisitedPanel extends javax.swing.JPanel {
 
-    private MostFlowedSiteHistoryInfo info;
-
-    private CategoryDataset dataset;
-    private JFreeChart chart;
-
-    /** Creates new form TimeSelectage */
-    public TimeSelectPanel() {
-
+    /** Creates new form MostVisitedPanel */
+    private MostVisitedSiteHistoryInfo siteinfo;
+    public MostVisitedPanel() {
         initComponents();
-
     }
 
     /** This method is called from within the constructor to
@@ -63,15 +46,17 @@ public class TimeSelectPanel extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setPreferredSize(new java.awt.Dimension(480, 400));
 
@@ -89,21 +74,21 @@ public class TimeSelectPanel extends javax.swing.JPanel {
 
         jTextField3.setText("10");
 
-        jLabel5.setText("To:");
+        jTextField6.setText("30");
 
-        jLabel6.setText("Year");
-
-        jTextField4.setText("2011");
+        jLabel8.setText("Day");
 
         jTextField5.setText("05");
 
         jLabel7.setText("Month");
 
-        jLabel8.setText("Day");
+        jTextField4.setText("2011");
 
-        jTextField6.setText("30");
+        jLabel6.setText("Year");
 
-        jButton1.setText("Flow of Site");
+        jLabel5.setText("To:");
+
+        jButton1.setText("Most Visited");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -112,16 +97,21 @@ public class TimeSelectPanel extends javax.swing.JPanel {
 
         jLabel9.setText(" ");
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5)
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel6)
@@ -152,13 +142,11 @@ public class TimeSelectPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField6)))
-                        .addGap(6, 6, 6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(121, 121, 121)
-                                .addComponent(jLabel9))
+                            .addComponent(jLabel9)
                             .addComponent(jButton1))))
-                .addGap(151, 151, 151))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +173,9 @@ public class TimeSelectPanel extends javax.swing.JPanel {
                     .addComponent(jLabel8)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -215,24 +205,28 @@ public class TimeSelectPanel extends javax.swing.JPanel {
 //        System.out.println(from);
 //        System.out.println(to);
 
-        info = new MostFlowedSiteHistoryInfo(from, to, 20);
+        siteinfo = new MostVisitedSiteHistoryInfo(from, to, 20);
         ProcessThread pt = new ProcessThread(new ProcessCompleteListener() {
 
             public void onProcessComplete(HistoryInfo info) {
-                chartshow();
+                labelshow();
             }
-        }, info);
+        }, siteinfo);
         pt.start();
     }//GEN-LAST:event_jButton1ActionPerformed
-    private void chartshow() {
-        dataset = createDataset(info);
-        chart = createChart(dataset);
-        ChartPanel chartPanel = new ChartPanel(chart);
-        add(chartPanel);
-        chartPanel.setLocation(20, 160);
-        chartPanel.setSize(440, 290);
+
+    private void labelshow(){
+        String ss="Visits descending:\n";
+        int N=siteinfo.MostVisitedSite.size();
+        for (int i = N - 1; i >= 0; i--) {
+            ss+=siteinfo.MostVisitedSite.get(i);
+            ss+="\n";
+            System.out.println(siteinfo.MostVisitedSite.get(i));
+
+        }
+        jTextArea1.setText(ss);
+
     }
- 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -244,6 +238,8 @@ public class TimeSelectPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -251,80 +247,7 @@ public class TimeSelectPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
-
-    public JFreeChart createChart(CategoryDataset dataset) {
-// create the chart...
-        JFreeChart chart = ChartFactory.createBarChart(
-                "Flow Analysis", // chart title
-                "Category", // domain axis label
-                "Flow(kb)", // range axis label
-                dataset, // data
-                PlotOrientation.VERTICAL, // orientation
-                true, // include legend
-                true, // tooltips?
-                false // URLs?
-                );
-// NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
-// set the background color for the chart...
-        chart.setBackgroundPaint(Color.white);
-// get a reference to the plot for further customisation...
-        CategoryPlot plot = chart.getCategoryPlot();
-        plot.setBackgroundPaint(Color.lightGray);
-        plot.setDomainGridlinePaint(Color.white);
-        plot.setDomainGridlinesVisible(true);
-        plot.setRangeGridlinePaint(Color.white);
-// set the range axis to display integers only...
-        final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
-        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-// disable bar outlines...
-        BarRenderer renderer = (BarRenderer) plot.getRenderer();
-        renderer.setDrawBarOutline(false);
-// set up gradient paints for series...
-        GradientPaint gp0 = new GradientPaint(
-                0.0f, 0.0f, Color.blue,
-                0.0f, 0.0f, new Color(0, 0, 64));
-        GradientPaint gp1 = new GradientPaint(
-                0.0f, 0.0f, Color.green,
-                0.0f, 0.0f, new Color(0, 64, 0));
-        GradientPaint gp2 = new GradientPaint(
-                0.0f, 0.0f, Color.red,
-                0.0f, 0.0f, new Color(64, 0, 0));
-        renderer.setSeriesPaint(0, gp0);
-        renderer.setSeriesPaint(1, gp1);
-        renderer.setSeriesPaint(2, gp2);
-        CategoryAxis domainAxis = plot.getDomainAxis();
-        domainAxis.setCategoryLabelPositions(
-                CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 6.0));
-// OPTIONAL CUSTOMISATION COMPLETED.
-        return chart;
-    }
-
-    public CategoryDataset createDataset(MostFlowedSiteHistoryInfo info) {
-// row keys...
-        String series1 = "Flow";
-// column keys...
-
-
-
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-//        System.out.println("create dataset");
-        int N;
-        if (info.Sites.size() > 10) {
-            N = 10;
-        } else {
-            N = info.Sites.size();
-        }
-        for (int i = N - 1; i >= 0; i--) {
-//            System.out.println("start insert!");
-            dataset.addValue(info.SiteFolws.get(i), series1, info.Sites.get(i));
-//            System.out.println(info.SiteFolws.get(i));
-//            dataset.addValue(1,series1,series1);
-        }
-//        System.out.println("data insert finish");
-        return dataset;
-    }
-
-    public static boolean isNumeric(String str) {
+  public static boolean isNumeric(String str) {
         for (int i = str.length(); --i >= 0;) {
             if (!Character.isDigit(str.charAt(i))) {
                 return false;
