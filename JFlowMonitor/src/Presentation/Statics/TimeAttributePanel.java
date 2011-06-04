@@ -7,7 +7,6 @@
  *
  * Created on 2011-5-26, 16:21:47
  */
-
 package Presentation.Statics;
 
 import Logic.History.HistoryInfo;
@@ -15,10 +14,23 @@ import Logic.History.ProcessCompleteListener;
 import Logic.History.ProcessThread;
 import Logic.History.TimeAttributeHistoryInfo;
 import java.awt.Dialog;
+import java.awt.Point;
 import java.util.Date;
+import java.util.Locale;
 import javax.swing.JDialog;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
 import sun.nio.cs.HistoricallyNamedCharset;
 import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.PolarPlot;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.DefaultXYDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
 /**
  *
  * @author Reyoung
@@ -48,6 +60,7 @@ public class TimeAttributePanel extends javax.swing.JPanel implements ProcessCom
         FromMonthLbl = new javax.swing.JTextField();
         FromDayLbl = new javax.swing.JTextField();
         ui_checkBtn = new javax.swing.JButton();
+        ui_resultPanel = new javax.swing.JPanel();
 
         ToDayLbl.setText("1");
 
@@ -72,32 +85,46 @@ public class TimeAttributePanel extends javax.swing.JPanel implements ProcessCom
             }
         });
 
+        javax.swing.GroupLayout ui_resultPanelLayout = new javax.swing.GroupLayout(ui_resultPanel);
+        ui_resultPanel.setLayout(ui_resultPanelLayout);
+        ui_resultPanelLayout.setHorizontalGroup(
+            ui_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 373, Short.MAX_VALUE)
+        );
+        ui_resultPanelLayout.setVerticalGroup(
+            ui_resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 194, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ui_resultPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(FromYearLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(FromYearLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(FromMonthLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(ToYearLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ToMonthLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(FromMonthLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(ToYearLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ToMonthLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(ToDayLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
-                        .addComponent(ui_checkBtn))
-                    .addComponent(FromDayLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(ToDayLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(100, 100, 100)
+                                .addComponent(ui_checkBtn))
+                            .addComponent(FromDayLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
@@ -116,7 +143,9 @@ public class TimeAttributePanel extends javax.swing.JPanel implements ProcessCom
                     .addComponent(ToMonthLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ToDayLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ui_checkBtn))
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ui_resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -127,22 +156,20 @@ public class TimeAttributePanel extends javax.swing.JPanel implements ProcessCom
         String td_s = this.ToDayLbl.getText();
         String tm_s = this.ToMonthLbl.getText();
         String ty_s = this.ToYearLbl.getText();
-        try{
+        try {
             int fd = Integer.parseInt(fd_s);
             int fm = Integer.parseInt(fm_s);
             int fy = Integer.parseInt(fy_s);
             int td = Integer.parseInt(td_s);
             int tm = Integer.parseInt(tm_s);
             int ty = Integer.parseInt(ty_s);
-            Date from = new Date(fy-1900,fm-1,fd);
-            Date to = new Date(ty-1900,tm-1,fd);
-            ProcessThread p = new ProcessThread(this,new TimeAttributeHistoryInfo(from, to));
+            Date from = new Date(fy - 1900, fm - 1, fd);
+            Date to = new Date(ty - 1900, tm - 1, fd);
+            ProcessThread p = new ProcessThread(this, new TimeAttributeHistoryInfo(from, to));
             p.start();
-        }catch(Exception e){
+        } catch (Exception e) {
         }
     }//GEN-LAST:event_ui_checkBtnActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField FromDayLbl;
     private javax.swing.JTextField FromMonthLbl;
@@ -153,9 +180,41 @@ public class TimeAttributePanel extends javax.swing.JPanel implements ProcessCom
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton ui_checkBtn;
+    private javax.swing.JPanel ui_resultPanel;
     // End of variables declaration//GEN-END:variables
 
     public void onProcessComplete(HistoryInfo info) {
-    }
+        if (info instanceof TimeAttributeHistoryInfo) {
+            TimeAttributeHistoryInfo tinfo = (TimeAttributeHistoryInfo) info;
 
+            XYSeries ser = new XYSeries("Bytes of Time");
+            for (int i = 0; i < tinfo.TimeBytes.length; ++i) {
+                ser.add(i, tinfo.TimeBytes[i]);
+            }
+            XYSeriesCollection dataset = new XYSeriesCollection(ser);
+            JFreeChart chart = ChartFactory.createXYLineChart(
+                    "Time Attribute", //  chart  title
+                    "Byte", //  x  axis  label
+                    "Time", //  y  axis  label
+                    dataset, //  data
+                    PlotOrientation.VERTICAL,
+                    true, //  include  legend
+                    true, //  tooltips
+                    false //  urls
+                    );
+            if(ui_resultPanel!=null){
+                Point loc = ui_resultPanel.getLocation();
+                int w = ui_resultPanel.getWidth();
+                int h = ui_resultPanel.getHeight();
+                ChartPanel cp = new ChartPanel(chart);
+                cp.setLocation(loc);
+                cp.setSize(w, h);
+                ui_resultPanel.setVisible(false);
+                this.remove(ui_resultPanel);
+                ui_resultPanel = cp;
+            }
+            this.add(ui_resultPanel);
+            ui_resultPanel.setVisible(true);
+        }
+    }
 }

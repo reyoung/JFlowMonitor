@@ -225,7 +225,6 @@ public class MostVisitedPanel extends javax.swing.JPanel {
 
         }
         jTextArea1.setText(ss);
-
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
